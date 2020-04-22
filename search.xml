@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>hexo</title>
+    <url>/2020/04/22/hexo/hexo/</url>
+    <content><![CDATA[<h1 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h1><p><a href="https://blog.csdn.net/wugenqiang/article/details/88609066" target="_blank" rel="noopener">参考文章</a></p>
+<p>对于想要通过点击目录来进行展开与收缩的，需要进行下面的操作，把</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;文章目录默认展开</span><br><span class="line">.post-toc .nav .nav-child &#123; display: block; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>里面的<code>.nav-child</code>去掉即可通过点击来实现目录的展开与收缩。</p>
+<a id="more"></a>
+
+<h1 id="新建菜单以及添加菜单图标"><a href="#新建菜单以及添加菜单图标" class="headerlink" title="新建菜单以及添加菜单图标"></a>新建菜单以及添加菜单图标</h1><p><a href="http://theme-next.iissnan.com/getting-started.html#menu-settings" target="_blank" rel="noopener">next官网</a></p>
+<p>在官网中查看主题设定-&gt;菜单那部分，当我们新添加一个菜单是(比如我要添加阅读)，在<code>next</code>的配置文件中(<code>_config.yml</code>)里面找到下面的配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  tags: &#x2F;tags&#x2F; || tags</span><br><span class="line">  categories: &#x2F;categories&#x2F; || th</span><br><span class="line">  archives: &#x2F;archives&#x2F; || archive</span><br><span class="line">  book: &#x2F;book || book #这里是新添加的菜单</span><br><span class="line"></span><br><span class="line"># Enable&#x2F;Disable menu icons.</span><br><span class="line">menu_icons:</span><br><span class="line">  enable: tru</span><br><span class="line">  book: book（这里是图标）</span><br></pre></td></tr></table></figure>
+
+<p>然后在开启的对应的语言文件中，比如我使用的是中文，那么就是在<code>zh-Hans.yml</code>文件中找到<code>menu</code>：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">首页</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">归档</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">分类</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">标签</span></span><br><span class="line">  <span class="attr">search:</span> <span class="string">搜索</span></span><br><span class="line">  <span class="attr">book:</span> <span class="string">阅读</span></span><br></pre></td></tr></table></figure>
+
+<p>后面的book那一栏是后来添加的。需要注意的是在上面的第一个配置文件中所写的<code>book</code>是<a href="http://fontawesome.io/" target="_blank" rel="noopener">Font Awesome</a>中<code>icon</code>的名称，这样才可以在我们自己的页面显示出图标。</p>
+<h1 id="添加社交功能之邮箱"><a href="#添加社交功能之邮箱" class="headerlink" title="添加社交功能之邮箱"></a>添加社交功能之邮箱</h1><p>在next主题配置文件搜索social:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:1744709138@qq.com</span> <span class="string">||</span> <span class="string">envelope</span></span><br></pre></td></tr></table></figure>
+
+<p>这里只是显示了邮箱，这些原来都是注释掉的，自己去掉前面的注释即可，需要注意的是邮箱前面的<code>mailto</code>是必须要保留的，还有最后面的<code>envelope</code>则是图标名字，也是不能修改的。</p>
+<h1 id="友情链接的配置"><a href="#友情链接的配置" class="headerlink" title="友情链接的配置"></a>友情链接的配置</h1><p>在<code>next</code>主题配置文件中查找标签<code>links</code>并进行如下配置:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># title</span></span><br><span class="line"><span class="attr">links_title:</span> <span class="string">Links</span></span><br><span class="line"><span class="attr">links:</span></span><br><span class="line">  <span class="attr">MacTalk:</span> <span class="string">http://macshuo.com/</span></span><br><span class="line">  <span class="attr">Title:</span> <span class="string">http://example.com/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="实现聊天功能"><a href="#实现聊天功能" class="headerlink" title="实现聊天功能"></a>实现聊天功能</h1><p><a href="https://hoxis.github.io/hexo-next-daovoice.html" target="_blank" rel="noopener">查看转载文章</a></p>
+<h1 id="添加近期文章展示"><a href="#添加近期文章展示" class="headerlink" title="添加近期文章展示"></a>添加近期文章展示</h1><p><a href="https://blog.csdn.net/wugenqiang/article/details/88581218" target="_blank" rel="noopener">查看转载文章</a></p>
+<h1 id="显示文章的更新时间"><a href="#显示文章的更新时间" class="headerlink" title="显示文章的更新时间"></a>显示文章的更新时间</h1><p>在主题的配置文件中找到<code>updated_at</code>，然后将其值修改为<code>true</code>即可(这种方式应该是适用于5以后的版本)</p>
+<p>对于以前的方式可以看这篇<a href="https://blog.csdn.net/ganzhilin520/article/details/79053399" target="_blank" rel="noopener">别人写的文章</a></p>
+<h1 id="字数统计与阅读时长"><a href="#字数统计与阅读时长" class="headerlink" title="字数统计与阅读时长"></a>字数统计与阅读时长</h1><p><a href="https://www.cnblogs.com/php-linux/p/8418518.html" target="_blank" rel="noopener">查看转载文章</a></p>
+<h1 id="添加版权信息"><a href="#添加版权信息" class="headerlink" title="添加版权信息"></a>添加版权信息</h1><p>在站点配置文件搜索<code>post_copyright</code>，将<code>enable</code>修改为<code>true</code>，添加<code>author</code>即可。</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_copyright:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">CC</span> <span class="string">BY-NC-SA</span> <span class="number">3.0</span></span><br><span class="line">  <span class="attr">license_url:</span> <span class="string">https://creativecommons.org/licenses/by-nc-sa/3.0/</span></span><br><span class="line">  <span class="attr">author:</span> <span class="string">咖啡杯里的茶</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="修改文章底部的标签"><a href="#修改文章底部的标签" class="headerlink" title="修改文章底部的标签"></a>修改文章底部的标签</h1><p>修改模板 <code>/themes/next/layout/_macro/post.swig</code>，搜索 <code>rel=&quot;tag&quot;&gt;#</code>，将 # 换成<code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code></p>
+<h1 id="修改博客的背景图"><a href="#修改博客的背景图" class="headerlink" title="修改博客的背景图"></a>修改博客的背景图</h1><p>在<code>themes-&gt;next-&gt;source-&gt;css-&gt;_custom-&gt;custom.styl</code>添加如下的代码:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">//背景图</span><br><span class="line"><span class="selector-tag">body</span> &#123; </span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(https://i.loli.net/<span class="number">2019</span>/<span class="number">05</span>/<span class="number">02</span>/<span class="number">5</span>ccab829cdad9.jpg);</span><br><span class="line">    background-attachment: fixed; // 不随屏幕滚动而滚动fixed,scroll,inherit</span><br><span class="line">    background-repeat: no-repeat; // 如果背景图不够屏幕大小则重复铺，改为no-repeat则表示不重复铺</span><br><span class="line">    background-size: cover; // contain等比例铺满屏幕 //cover拉伸铺满</span><br><span class="line">    background-position: bottom;//x,y轴调整</span><br><span class="line">    +<span class="selector-tag">mobile</span>()&#123;</span><br><span class="line">      //background-position: 0% -20%;https://i.loli.net/2019/05/02/5ccab829cdad9.jpg</span><br><span class="line">      //https://i.loli.net/2018/12/29/5c270fc2bfcad.png</span><br><span class="line">      background-image: url(https://i.loli.net/2019/05/02/5ccab829cdad9.jpg);</span><br><span class="line">      <span class="selector-tag">background-size</span>: <span class="selector-tag">cover</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面几个有<code>url</code>的地方换成自己想要使用的背景图的图片的外链地址即可。</p>
+<h1 id="将文章归类到新建的菜单中"><a href="#将文章归类到新建的菜单中" class="headerlink" title="将文章归类到新建的菜单中"></a>将文章归类到新建的菜单中</h1><p>比如自己已经添加了新的菜单<code>book</code>，现在想要将新建的文章归类到<code>book</code>这个菜单下做法如下：</p>
+<p>在menu下如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">    home: / || home</span><br><span class="line">    tags: /tags/ || tags</span><br><span class="line">    categories: /categories/ || th</span><br><span class="line">    archives: /archives/ || archive</span><br><span class="line">    book: categories/book || book</span><br></pre></td></tr></table></figure>
+
+<p>最后一个book是我自己新建的分类。然后再写文章时添加如下头部信息:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">title: abc</span><br><span class="line">categories:</span><br><span class="line">  - book</span><br></pre></td></tr></table></figure>
+
+<p>这样当你点击<code>book</code>那个菜单时就会先显示<code>abc</code>这篇文章。</p>
+<p><a href="https://www.cnblogs.com/codebook/p/10312965.html" target="_blank" rel="noopener">参考链接</a></p>
+<h1 id="显示图片"><a href="#显示图片" class="headerlink" title="显示图片"></a>显示图片</h1><p><a href="https://www.jianshu.com/p/ea78bdd0551f" target="_blank" rel="noopener">显示图片</a></p>
+<h1 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h1><p><a href="https://blog.csdn.net/qq_40265501/article/details/80030627" target="_blank" rel="noopener">添加搜索</a></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>githubPag自定义域名以及两台电脑使用hexo</title>
+    <url>/2020/04/22/hexo/githubPags/</url>
+    <content><![CDATA[<h1 id="githubPag自定义域名"><a href="#githubPag自定义域名" class="headerlink" title="githubPag自定义域名"></a>githubPag自定义域名</h1><p><a href="https://blog.csdn.net/heimu24/article/details/81159099" target="_blank" rel="noopener">查看文章</a></p>
+<a id="more"></a>
+
+<h1 id="多台电脑使用hexo"><a href="#多台电脑使用hexo" class="headerlink" title="多台电脑使用hexo"></a>多台电脑使用hexo</h1><h2 id="不修改主题"><a href="#不修改主题" class="headerlink" title="不修改主题"></a>不修改主题</h2><p><a href="https://blog.csdn.net/ShmilyCoder/article/details/79916973" target="_blank" rel="noopener">查看文章</a></p>
+<p>需要注意的是如果后续只是写博客而没有修改主题等文件的话只需使用hexo分支来操作即可。</p>
+<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><p>如果需要修改主题的话依然是需要在搭建博客的电脑上搭建博客的那个目录(<code>hexo</code>)，使用两台电脑来写博客时都是使用的是后来创建的分支，此时修改主题则是在博客搭建目录里面去修改，修改完之后直接在博客搭建目录使用<code>git bash</code>，然后通过<code>hexo clean</code>， <code>hexo d -g</code>, 将修改的主题发布出去，但是此时需要注意的是当我们发布之后再去访问自己的博客发现文章可能会少很多，这很正常，因为我们后来写的博客都是在创建的分支上面去写的，最开始创建博客的那个目录并没有维护起来，此时看到的博客其实是最开始创建博客的那个目录里面的文章，所以此时只需要将修改的那部分主题文件拷贝到我们的分支目录对应位置，然后提交并且在在分支目录里面重新<code>hexo clean</code>， <code>hexo d -g</code>一次就可以了。以后只要不修改主题文件就都是在分支上操作了，只要需要修改主题文件时才需要在最开始创建博客的那个目录去操作然后拷贝到分支上并提交。</p>
+<p><font color="green">我们创建博客的那个目录并不是一个<code>repository</code>，所以在那个目录是不能使用git命令的，只是我们将其余github进行了关联而已，所以在那里面只能使用hexo命令。</font></p>
+<p><font color="red">经过测试，不是非要在创建博客的那台上脑上该样式才有作用，实际上在另外的一台电脑上直接修改样式也是有效果的。</font></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java中有疑惑的问题</title>
+    <url>/2020/04/22/java/base/java%E4%B8%AD%E6%9C%89%E7%96%91%E6%83%91%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="java中为什么只有值传递-没有引用传递"><a href="#java中为什么只有值传递-没有引用传递" class="headerlink" title="java中为什么只有值传递,没有引用传递"></a>java中为什么只有值传递,没有引用传递</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/object-oriented/why-pass-by-reference" target="_blank" rel="noopener">参考地址</a></p>
+<h1 id="为什么java中byte类型的取值范围是-128到127"><a href="#为什么java中byte类型的取值范围是-128到127" class="headerlink" title="为什么java中byte类型的取值范围是-128到127"></a>为什么<code>java</code>中<code>byte</code>类型的取值范围是-128到127</h1><p><a href="https://blog.csdn.net/qq_23418393/article/details/57421688" target="_blank" rel="noopener">参考地址</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态代理和使用jdk自带的HSDB查看被代理的类的代码</title>
+    <url>/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><p><a href="https://gitee.com/Gwei11/code/tree/master/javabase/proxy/proxy-demo" target="_blank" rel="noopener">动态代理示例代码</a></p>
+<h1 id="概念理解"><a href="#概念理解" class="headerlink" title="概念理解"></a>概念理解</h1><p>所谓的代理模式简单理解就是对原有的功能增强的一种模式。代理模式有三个角色：    </p>
+<ul>
+<li>接口(<code>Subject</code>)   </li>
+<li>委托类(<code>RealSubject</code>),该类也是真正实现功能的类    </li>
+<li>代理类(<code>ProxySubject</code>)这个代理类对我们的委托类进行增强处理 </li>
+</ul>
+<a id="more"></a>
+
+<h1 id="动态代理分类"><a href="#动态代理分类" class="headerlink" title="动态代理分类"></a>动态代理分类</h1><h2 id="jdk动态代理"><a href="#jdk动态代理" class="headerlink" title="jdk动态代理"></a>jdk动态代理</h2><p><code>jdk</code>动态代理的的核心是主要是有两个类</p>
+<ul>
+<li><code>Proxy</code>类的<code>newProxyInstance</code>方法</li>
+<li><code>InvocationHandler</code> 接口</li>
+</ul>
+<h3 id="jdk动态代理案例"><a href="#jdk动态代理案例" class="headerlink" title="jdk动态代理案例"></a><code>jdk</code>动态代理案例</h3><ul>
+<li>一个接口</li>
+<li>该接口的实现类</li>
+<li>一个实现了<code>InvocationHandler</code> 接口的处理类</li>
+</ul>
+<p><strong>接口</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dynamicProxy;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">NeedProxyInterface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实现类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dynamicProxy;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NeedProxyInterfaceImpl</span> <span class="keyword">implements</span> <span class="title">NeedProxyInterface</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实现了<code>InvocationHandler</code> 接口的处理类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dynamicProxy;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    NeedProxyInterface needProxyInterface = <span class="keyword">new</span> NeedProxyInterfaceImpl();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="number">111</span>);</span><br><span class="line">        <span class="keyword">return</span> method.invoke(needProxyInterface, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dynamicProxy;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicProxyMain</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        NeedProxyInterface object =</span><br><span class="line">               (NeedProxyInterface)Proxy.newProxyInstance(NeedProxyInterface<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>(),</span></span><br><span class="line">                new Class[]&#123;NeedProxyInterface.class&#125;, new MyInvocationHandler());</span><br><span class="line">        object.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以根据下面介绍的使用方式使用<code>HSDL</code>工具生成代理类文件，生成的文件内容如下：</p>
+<p><strong>代理类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sun.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dynamicProxy.NeedProxyInterface;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.UndeclaredThrowableException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> $<span class="title">Proxy0</span> <span class="keyword">extends</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">NeedProxyInterface</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m1;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m4;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m2;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m3;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m0;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> $Proxy0(InvocationHandler var1) &#123;</span><br><span class="line">        <span class="keyword">super</span>(var1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            m1 = Class.forName(<span class="string">"java.lang.Object"</span>).getMethod(<span class="string">"equals"</span>, Class.forName(<span class="string">"java.lang.Object"</span>));</span><br><span class="line">            m4 = Class.forName(<span class="string">"com.dynamicProxy.NeedProxyInterface"</span>).getMethod(<span class="string">"sayHello"</span>);</span><br><span class="line">            m2 = Class.forName(<span class="string">"java.lang.Object"</span>).getMethod(<span class="string">"toString"</span>);</span><br><span class="line">            m3 = Class.forName(<span class="string">"com.dynamicProxy.NeedProxyInterface"</span>).getMethod(<span class="string">"add"</span>, Integer.TYPE, Integer.TYPE);</span><br><span class="line">            m0 = Class.forName(<span class="string">"java.lang.Object"</span>).getMethod(<span class="string">"hashCode"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException var2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchMethodError(var2.getMessage());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoClassDefFoundError(var3.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> var1, <span class="keyword">int</span> var2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (Integer)<span class="keyword">super</span>.h.invoke(<span class="keyword">this</span>, m3, <span class="keyword">new</span> Object[]&#123;var1, var2&#125;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | Error var4) &#123;</span><br><span class="line">            <span class="keyword">throw</span> var4;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable var5) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UndeclaredThrowableException(var5);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object var1)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (Boolean)<span class="keyword">super</span>.h.invoke(<span class="keyword">this</span>, m1, <span class="keyword">new</span> Object[]&#123;var1&#125;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | Error var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> var3;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable var4) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UndeclaredThrowableException(var4);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (String)<span class="keyword">super</span>.h.invoke(<span class="keyword">this</span>, m2, (Object[])<span class="keyword">null</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | Error var2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> var2;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UndeclaredThrowableException(var3);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (Integer)<span class="keyword">super</span>.h.invoke(<span class="keyword">this</span>, m0, (Object[])<span class="keyword">null</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | Error var2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> var2;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UndeclaredThrowableException(var3);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">super</span>.h.invoke(<span class="keyword">this</span>, m4, (Object[])<span class="keyword">null</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | Error var2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> var2;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable var3) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UndeclaredThrowableException(var3);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="原理图"><a href="#原理图" class="headerlink" title="原理图"></a>原理图</h3><p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422211307163.png" alt="image-20200422211307163"></p>
+<p>其实我们之所以不懂代理，是因为这个代理类生成后是在内存中的，如果我们能看到这样的一个类的代码就不会觉得难，所以可以使用上面所说的<code>HSDL</code>工具将代理类下载下来就比较容易看懂。</p>
+<h1 id="使用HSDL工具查看代理类代码"><a href="#使用HSDL工具查看代理类代码" class="headerlink" title="使用HSDL工具查看代理类代码"></a>使用HSDL工具查看代理类代码</h1><h2 id="找到jdk当中的sa-jdi-jar的位置"><a href="#找到jdk当中的sa-jdi-jar的位置" class="headerlink" title="找到jdk当中的sa-jdi.jar的位置"></a>找到<code>jdk</code>当中的<code>sa-jdi.jar</code>的位置</h2><p>比如在我的电脑上这个<code>jar</code>包的位置</p>
+<p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422210719406.png" alt="image-20200422210719406"></p>
+<h2 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h2><p>执行如下所示的命令</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">D:\&gt;java -classpath <span class="string">"D:\installpackage\programme\java\jdk1.8\lib\sa-jdi.jar"</span> sun.jvm.hotspot.HSDB</span><br></pre></td></tr></table></figure>
+
+<p>执行完成之后会出现一个窗口</p>
+<p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422210835780.png" alt="image-20200422210835780"></p>
+<h2 id="运行jsp命令找到进程ID"><a href="#运行jsp命令找到进程ID" class="headerlink" title="运行jsp命令找到进程ID"></a>运行jsp命令找到进程ID</h2><p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422210909216.png" alt="image-20200422210909216"></p>
+<p>将这里找到的进程ID输入到上面第一步的位置，然后进行如下截图所示操作：</p>
+<p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422210922005.png" alt="image-20200422210922005"></p>
+<p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422210937056.png" alt="image-20200422210937056"></p>
+<p>如上图所示，因为案例中<code>cglib</code>代理的是<code>Producer</code>，所以这里我们搜索<code>Producer</code>，可以看到下面有一个类就是<code>Producer</code>，还有一个是<code>cglib</code>的代理类，我们点击那个<code>cglib</code>的代理类</p>
+<p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422211017916.png" alt="image-20200422211017916"></p>
+<p>点击之后会出现上图所示界面，点击<code>create.class file</code>即可</p>
+<p><img src="/2020/04/22/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/image-20200422211044414.png" alt="image-20200422211044414"></p>
+<p>我们可以根据这个代理类的名称来找到生成的这个代理类在哪里（<strong>默认的位置和我们运行cmd的路径有关，比如上面我是在D盘根目录中运行的cmd命令，所以创建的代理类的位置就是在D盘根目录然后加上这个类的包路径</strong>）。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>proxy</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>proxy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java中自动拆装箱和缓存机制</title>
+    <url>/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="自动拆装箱"><a href="#自动拆装箱" class="headerlink" title="自动拆装箱"></a>自动拆装箱</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> automaticpacking;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 自动装箱</span></span><br><span class="line">        Integer i = <span class="number">100</span>;</span><br><span class="line">        <span class="comment">// 自动拆箱</span></span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="两种方式查看自动拆装箱的代码"><a href="#两种方式查看自动拆装箱的代码" class="headerlink" title="两种方式查看自动拆装箱的代码"></a>两种方式查看自动拆装箱的代码</h2><h3 id="反编译法"><a href="#反编译法" class="headerlink" title="反编译法"></a>反编译法</h3><p>将上面的代码使用<code>javap</code>命令反编译一下：</p>
+<p><img src="/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/image-20200422224048061.png" alt="image-20200422224048061"></p>
+<p>可以看到其实自动拆装箱是通过<code>Integer.valueOf()</code>和<code>Integer.intValue()</code></p>
+<h3 id="调试法"><a href="#调试法" class="headerlink" title="调试法"></a>调试法</h3><p>上面是通过反编译的形式可以知道底层调用的代码是什么，其实中<code>idea</code>中还有一种方式是断点调试</p>
+<p><img src="/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/image-20200422225116752.png" alt="image-20200422225116752"></p>
+<p>可以看到上面的图片，可以点击<code>force step into</code>来进入代码。</p>
+<h4 id="step-into-和-force-step-into的区别"><a href="#step-into-和-force-step-into的区别" class="headerlink" title="step into 和 force step into的区别"></a><code>step into</code> 和 <code>force step into</code>的区别</h4><ul>
+<li><code>step into</code>可以进入自己写的方法内部去调试</li>
+<li><code>force step into</code>可以进入任何方法内部进行调试，由于这里我们是要进入<code>jdk</code>的包内部代码进行调试，所以需要使用<code>force step into</code></li>
+</ul>
+<h1 id="Integer类型的缓存问题"><a href="#Integer类型的缓存问题" class="headerlink" title="Integer类型的缓存问题"></a>Integer类型的缓存问题</h1><p>看下面的代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> automaticpacking;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Integer i = <span class="number">100</span>;</span><br><span class="line">        Integer j = <span class="number">100</span>;</span><br><span class="line">        Integer i2 = <span class="number">200</span>;</span><br><span class="line">        Integer j2 = <span class="number">200</span>;</span><br><span class="line">        <span class="keyword">int</span> i3 = <span class="number">300</span>;</span><br><span class="line">        <span class="keyword">int</span> j3 = <span class="number">300</span>;</span><br><span class="line">        System.out.println(i == j); <span class="comment">// true</span></span><br><span class="line">        System.out.println(i2 == j2); <span class="comment">// false</span></span><br><span class="line">        System.out.println(i3 == j3); <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码输出个结果是不是有点奇怪， 第二个结果和第三个结果还是比较号理解的</p>
+<ul>
+<li>基本类型的比较肯定比较值就可以咯。所以输出结果为<code>true</code>没有疑问</li>
+<li>包装类型为什么第一个是<code>true</code>，第二个是<code>false</code>呢</li>
+</ul>
+<h2 id="Integer类型缓存值"><a href="#Integer类型缓存值" class="headerlink" title="Integer类型缓存值"></a>Integer类型缓存值</h2><p>我们通过调试法看下 <code>Integer i = 100</code>这句代码是如何执行的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">      <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>看源码就知道 <code>IntegerCache.low</code>固定为-128</li>
+<li><code>IntegerCache.high</code>是可以配置的，看下源码注释<code>-XX:AutoBoxCacheMax=&lt;size&gt;</code>，所以可以通过这个参数类配置最大值。</li>
+</ul>
+<h2 id="包装类型的比较的坑"><a href="#包装类型的比较的坑" class="headerlink" title="包装类型的比较的坑"></a>包装类型的比较的坑</h2><p>上面只是分析了<code>Integer</code>类型，其实还有其他包装类型也是一样的有缓存的值，所以对于包装类型有一点需要知道，<strong>包装类型的比较最好都通过<code>equals</code>方法来进行比较</strong></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java中boolean类型属性定义为什么不要使用is开头</title>
+    <url>/2020/04/23/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/</url>
+    <content><![CDATA[<h1 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/success-isSuccess-and-bollean-Bollean" target="_blank" rel="noopener">参考地址</a></p>
+<a id="more"></a>
+
+<h1 id="boolean和Boolean类型属性不使用is开头"><a href="#boolean和Boolean类型属性不使用is开头" class="headerlink" title="boolean和Boolean类型属性不使用is开头"></a>boolean和Boolean类型属性不使用is开头</h1><p>看下面的代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> setterproperty;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BooleanProperty</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Boolean isAaa;</span><br><span class="line">    <span class="keyword">private</span> Boolean bbb;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isCcc;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ddd;</span><br><span class="line">    <span class="keyword">private</span> String isEee;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIsEee</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isEee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIsEee</span><span class="params">(String isEee)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isEee = isEee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getAaa</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isAaa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAaa</span><span class="params">(Boolean aaa)</span> </span>&#123;</span><br><span class="line">        isAaa = aaa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getBbb</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bbb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBbb</span><span class="params">(Boolean bbb)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bbb = bbb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCcc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isCcc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCcc</span><span class="params">(<span class="keyword">boolean</span> ccc)</span> </span>&#123;</span><br><span class="line">        isCcc = ccc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ddd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDdd</span><span class="params">(<span class="keyword">boolean</span> ddd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ddd = ddd;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码定义了<strong>三类</strong>， <strong>五个</strong>属性，并且生成了<code>set</code>和<code>get</code>方法</p>
+<ul>
+<li><code>Boolean</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头（包装类）</li>
+<li><code>boolean</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头（基本类型）</li>
+<li><code>string</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头</li>
+</ul>
+<p>上面的<code>set</code>和<code>get</code>方法是<code>idea</code>自动生成的，可以看到对于<code>Boolean</code>以及<code>boolean</code>类型的属性，如果是以<code>is</code>开头的，那么在生成<code>set</code>方法的时候不是在前面加上<code>set</code>，而是直接使用<code>is</code>开头，对于其他类型的值没有影响。</p>
+<h1 id="Boolean和boolean的区别"><a href="#Boolean和boolean的区别" class="headerlink" title="Boolean和boolean的区别"></a>Boolean和boolean的区别</h1><p>看一下阿里巴巴<code>java</code>开发手册中对于基本类型和包装类型的使用标准</p>
+<p><img src="/2020/04/23/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/640.jpeg" alt="img"></p>
+<p>其实也很容易理解，因为基本数据类型都是有默认值的，但是包装数据类型没有默认值。所以程序如果使用基本类型，那么有可能不是我们想要的结果，但是由于有默认值，程序并没有抛出异常，但是结果不对（对于结果不对时不应该使用默认值计算，而是应该我们自己处理）。若使用包装类型，当程序返回<code>null</code>的时候就说明此时结果已经是不对的，需要我们自己去处理。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java中的集合</title>
+    <url>/2020/04/23/java/base/java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+</search>
