@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,jvm," />
 
 
 
@@ -81,7 +81,7 @@
 
 <meta name="description" content="类加载 将java源代码经过编译器编译器class字节码文件  java文件和class文件都是在本次磁盘中   将字节码文件加载进内存，并且在内存中创建对象的class对象，这个过程称之为类的加载   一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的java程序才可以使用它。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java&#x2F;jvm&#x2F;类加载器">
+<meta property="og:title" content="类加载器">
 <meta property="og:url" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/index.html">
 <meta property="og:site_name" content="咖啡杯里的茶">
 <meta property="og:description" content="类加载 将java源代码经过编译器编译器class字节码文件  java文件和class文件都是在本次磁盘中   将字节码文件加载进内存，并且在内存中创建对象的class对象，这个过程称之为类的加载   一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的java程序才可以使用它。">
@@ -96,8 +96,10 @@
 <meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144304571.png">
 <meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144534613.png">
 <meta property="article:published_time" content="2020-04-23T15:09:25.667Z">
-<meta property="article:modified_time" content="2020-04-23T15:11:17.073Z">
+<meta property="article:modified_time" content="2020-04-23T15:13:21.198Z">
 <meta property="article:author" content="咖啡杯的里茶">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png">
 
@@ -135,7 +137,7 @@
 
 
 
-  <title>java/jvm/类加载器 | 咖啡杯里的茶</title>
+  <title>类加载器 | 咖啡杯里的茶</title>
   
 
 
@@ -323,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java/jvm/类加载器</h1>
+          <h1 class="post-title" itemprop="name headline">类加载器</h1>
         
 
         <div class="post-meta">
@@ -351,12 +353,45 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-23T23:11:17+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-23T23:13:21+08:00">
                 2020-04-23
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -580,6 +615,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/jvm/" rel="tag"><i class="fa fa-tag"></i> jvm</a>
+          
+        </div>
       
 
       

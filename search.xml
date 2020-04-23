@@ -600,7 +600,7 @@
       </tags>
   </entry>
   <entry>
-    <title>java/jvm/类加载器</title>
+    <title>类加载器</title>
     <url>/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
     <content><![CDATA[<h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><ul>
 <li><p>将<code>java</code>源代码经过编译器编译器<code>class</code>字节码文件</p>
@@ -753,5 +753,13 @@
 <p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144534613.png" alt="image-20200301144534613"></p>
 <p>对于使用<code>SPI</code>机制使用到的类是  <code>ServiceLoader</code>。</p>
 ]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>jvm</tag>
+      </tags>
   </entry>
 </search>
