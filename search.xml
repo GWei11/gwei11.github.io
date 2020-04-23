@@ -599,4 +599,159 @@
         <tag>jvm</tag>
       </tags>
   </entry>
+  <entry>
+    <title>java/jvm/类加载器</title>
+    <url>/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><ul>
+<li><p>将<code>java</code>源代码经过编译器编译器<code>class</code>字节码文件</p>
+<ul>
+<li><code>java</code>文件和<code>class</code>文件都是在本次磁盘中</li>
+</ul>
+</li>
+<li><p>将字节码文件加载进内存，并且在内存中创建对象的<code>class</code>对象，这个过程称之为类的加载</p>
+<p>  一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的<code>java</code>程序才可以使用它。</p>
+</li>
+</ul>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png" alt="image-20200301102806401"></p>
+<a id="more"></a>
+
+<h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><p>类的加载是由类加载器完成的，类加载器可以分为两种</p>
+<ul>
+<li>第一种是<code>java</code>虚拟机自带的类加载器<ul>
+<li>根类加载器(<code>Bootstrap</code>)</li>
+<li>扩展类加载器(<code>Extension</code>)</li>
+<li>系统了加载器</li>
+</ul>
+</li>
+<li>第二种是用户自定义的类加载器<ul>
+<li>自定义类加载器是<code>java.lang.ClassLoader</code>的子类实例</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301095942835.png" alt="image-20200301095942835"></p>
+<h2 id="根类加载器"><a href="#根类加载器" class="headerlink" title="根类加载器"></a>根类加载器</h2><ul>
+<li>根类加载器是最底层的类加载器，是虚拟机的一部分，没有父类，也没有继承<code>java.lang.ClassLoader</code></li>
+<li>主要负责<code>&lt;JAVA_HOME&gt;/jre/lib</code>下的核心类库</li>
+<li>处于安全考虑，根类加载器只能加载<code>java</code>、<code>javax</code>、<code>sun</code>开头的类</li>
+</ul>
+<h2 id="扩展类加载器"><a href="#扩展类加载器" class="headerlink" title="扩展类加载器"></a>扩展类加载器</h2><ul>
+<li>扩展类加载器是指由原<code>SUN</code>公司实现的<code>sun.misc.Launcher</code>类</li>
+<li>该类加载器是由<code>java</code>语言编写，父类加载器是根类加载器</li>
+<li>负责加载<code>&lt;JAVA_HOME&gt;/jre/lib/ext</code>目录下的类库或者系统变量<code>“java.ext.dirs”</code>指定的目录下的类库。</li>
+</ul>
+<h2 id="系统类加载器"><a href="#系统类加载器" class="headerlink" title="系统类加载器"></a>系统类加载器</h2><ul>
+<li>系统类加载器也称之为应用类加载器，也是纯<code>java</code>类</li>
+<li>系统类加载器的父类加载器是扩展类加载器</li>
+<li>负责加载<code>classpath</code>环境变量或系统属性<code>java.class.path</code>所指定的目录中加载类</li>
+<li>应用类加载器是用户自定义的类加载器的默认父加载器，一般情形下，该类加载器是程序中默认的类加载器，可以通过<code>ClassLoader.getSystemClassLoader()</code>直接获取</li>
+</ul>
+<h1 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h1><ul>
+<li>除了虚拟机自带的根类加载器之外，其余的类家在重庆都有自己唯一的父加载器</li>
+<li>当需要使用类加载器加载一个类时，该<code>classLoder</code>会先委托自己的父家在重庆去加载这个类，如果父类加载器可以加载，则由父类加载器去加载。否则才是<code>classLoader</code>自己去加载这个类</li>
+<li>双亲委派机制的父子关系和面向对象程序设计中的继承关系是不一样的，而是通过使用组合模式来复用父类加载器。</li>
+</ul>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301111621578.png" alt="image-20200301111621578"></p>
+<h2 id="双亲委派模式的好处"><a href="#双亲委派模式的好处" class="headerlink" title="双亲委派模式的好处"></a>双亲委派模式的好处</h2><ul>
+<li>可以避免类的重复加载，当父类加载器已经加载了该类时，就没有必要让子<code>ClassLoader</code>再去加载一次</li>
+<li>考虑到安全因素，<code>java</code>核心<code>api</code>中定义的类型不会被随意替换<ul>
+<li>比如自己定义了一个<code>java.lang.Object</code>的类，通过双亲委托模式传递到启动类加载器，启动类加载器在核心<code>api</code>中发现了这个名字的类，发现已经被加载，这样就不会重新加载，而是直接返回已经加载过的<code>Object.class</code>，这样就可以防止核心<code>api</code>被随意篡改。</li>
+</ul>
+</li>
+</ul>
+<p><strong>测试代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="number">111</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码的包名是<code>java.lang</code>，由于<code>java</code>的核心<code>api</code>的包名也是这个，所以运行上面的成出现下面的错误</p>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301112618193.png" alt="image-20200301112618193"></p>
+<h1 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h1><p><code>ClassLoader</code>中主要看这个方法</p>
+<h2 id="loadClass"><a href="#loadClass" class="headerlink" title="loadClass"></a>loadClass</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">        <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">            <span class="comment">// 首先检查该类是否已经被加载过</span></span><br><span class="line">            Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">          <span class="comment">// 还没加载的类才会继续加载</span></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                  <span class="comment">// 如果有父类加载器就让父类去加载</span></span><br><span class="line">                    <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                      <span class="comment">// 没有父类就使用根类加载器去加载</span></span><br><span class="line">                        c = findBootstrapClassOrNull(name);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                    <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                    <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">               		<span class="comment">// 如果父类加载器或根类加载器都没有加载到，就使用自己的类加载器去加载</span></span><br><span class="line">                    <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                    c = findClass(name)</span><br><span class="line">                    <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">                resolveClass(c);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>laodClass</code>方法中体现了双亲委托模式的逻辑<ul>
+<li>首先让父类加载器加载</li>
+<li>父类加载器没有加载到就让根类加载器加载</li>
+<li>父类或根类加载器都没有加载到的时候就使用自己的类加载器加载</li>
+</ul>
+</li>
+</ul>
+<h2 id="findClass"><a href="#findClass" class="headerlink" title="findClass"></a>findClass</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(name);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>findClass</code>默认是一个错误的空实现，<strong>这也是我们自定义类加载器时需要重写的方法。</strong></p>
+<h2 id="defineCLass"><a href="#defineCLass" class="headerlink" title="defineCLass"></a>defineCLass</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> Class&lt;?&gt; defineClass(String name, <span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len,</span><br><span class="line">                                         ProtectionDomain protectionDomain)</span><br><span class="line">        <span class="keyword">throws</span> ClassFormatError &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该方法是用来将<code>byte[]</code>字节解析成虚拟机能够识别的<code>class</code>对象，<code>defineClass</code>通常和<code>findClass</code>方法一起使用，在自定义类加载器时，会直接覆盖<code>CLassLoader</code>的<code>findCLass</code>方法获取想要加载类的字节码，然后调用<code>defineCLass</code>方法生成<code>Class</code>对象。</p>
+<h2 id="resolveCLass"><a href="#resolveCLass" class="headerlink" title="resolveCLass"></a>resolveCLass</h2><p>连接指定的类，类加载器可以使用此方法来连接类。</p>
+<h1 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h1><p>在<code>java.net</code>包中。<code>jdk</code>提供了一个类加载器<code>URLClassLoader</code>，该类扩展了<code>ClassLoader</code>，能够从本地或网络</p>
+<p>上指定的位置加载类，我们也可以使用该类作为自定义的类加载器使用。</p>
+<p>其构造器中只要需要传入<code>URL</code>地址</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">URLClassLoader</span><span class="params">(URL[] urls)</span> </span>&#123;&#125;<span class="comment">// 使用默认的父类构造器</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">URLClassLoader</span><span class="params">(URL[] urls, ClassLoader parent)</span> </span>&#123;&#125; <span class="comment">// 也可以自己指定构造器</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>测试案例</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example.loader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.net.URLClassLoader;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestURLClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 加载本地的类</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOne</span> <span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"d:/"</span>);</span><br><span class="line">        URI uri = file.toURI();</span><br><span class="line">        URL url = uri.toURL();</span><br><span class="line">        URLClassLoader urlClassLoader = <span class="keyword">new</span> URLClassLoader(<span class="keyword">new</span> URL[]&#123;url&#125;);</span><br><span class="line">        Class&lt;?&gt; aClass = urlClassLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        aClass.newInstance();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 加载网络上的类</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTwo</span> <span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        URL url = <span class="keyword">new</span> URL(<span class="string">"http://localhost:8080/examples/"</span>);</span><br><span class="line">        URLClassLoader urlClassLoader = <span class="keyword">new</span> URLClassLoader(<span class="keyword">new</span> URL[]&#123;url&#125;);</span><br><span class="line">        Class&lt;?&gt; aClass = urlClassLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        aClass.newInstance();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>加载本地的类</strong></p>
+<p>在我的本地<code>d</code>盘根目录中有一个 <code>TestClassLoader.java</code>文件，文件内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClassLoader</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TestClassLoader</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"new Instance"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时使用<code>javac</code>命令来编译一下：</p>
+<p><code>javac -d . TestClassLoader.java</code></p>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131544718.png" alt="image-20200301131544718"></p>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131633046.png" alt="image-20200301131633046"></p>
+<ul>
+<li><code>-d</code>选项是指定编译到哪里去的位置</li>
+<li><code>.</code>点是指当前目录</li>
+</ul>
+<p>执行加载本地的类的代码会输出  <code>new Instance</code></p>
+<h1 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a>自定义类加载器</h1><p>上面已经说过，想要自定义类加载器，有如下几个固定步骤</p>
+<ul>
+<li>自定义的类需要继承<code>ClassLoader</code>抽象类</li>
+<li>重写<code>findCLass</code>方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example.loader;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 被加载的类所在的目录</span></span><br><span class="line">    <span class="keyword">private</span> String directory;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyClassLoader</span><span class="params">(String directory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.directory = directory;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyClassLoader</span><span class="params">(ClassLoader parent, String directory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(parent);</span><br><span class="line">        <span class="keyword">this</span>.directory = directory;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义类加载器需要重写该方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ClassNotFoundException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        InputStream in = <span class="keyword">null</span>;</span><br><span class="line">        ByteArrayOutputStream baos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//    将类名转换为目录</span></span><br><span class="line">            String file = directory + File.separator + name.replace(<span class="string">"."</span>, File.separator) + <span class="string">".class"</span>;</span><br><span class="line">            <span class="comment">// 构建输入流</span></span><br><span class="line">            in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            <span class="comment">// 构建字节输出流</span></span><br><span class="line">            baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">            <span class="comment">// 定义缓冲区</span></span><br><span class="line">            <span class="keyword">byte</span> buf[] = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> len = -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> ((len = in.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 往输出流中输入数据</span></span><br><span class="line">                baos.write(buf, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//读取到的字节码二进制数据</span></span><br><span class="line">            <span class="keyword">byte</span> data[] = baos.toByteArray();</span><br><span class="line">            <span class="keyword">return</span> defineClass(name, data, <span class="number">0</span>, data.length);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    in.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (baos != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    baos.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">// main方法测试</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyClassLoader myClassLoader = <span class="keyword">new</span> MyClassLoader(<span class="string">"d:/"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass = myClassLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        System.out.println(aClass.newInstance());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="热部署类加载器"><a href="#热部署类加载器" class="headerlink" title="热部署类加载器"></a>热部署类加载器</h1><p><strong>所谓的热部署就是让同一个<code>class</code>可以被不同的类加载器加载即可。</strong></p>
+<p>当我们使用<code>loadClass</code>方法加载类时，会采用双亲委托模式。</p>
+<ul>
+<li>如果一个类已经被加载，加一次加载该类时就会从缓存中取，不会重新加载</li>
+<li>如果同一个<code>class</code>被同一个类加载器加载多次，则会报错</li>
+</ul>
+<p>而<code>ClassLoader</code>中实现委托机制的代码主要在<code>loadClass</code>方法，而真正实现加载的则是<code>findClass</code>方法，所以我们只需要不调用<code>loadClass</code>方法而直接调用<code>findClass</code>就可以实现同一个类被不同的类加载器加载。</p>
+<p><strong>案例代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example.loader;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderDemo2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyClassLoader classLoader = <span class="keyword">new</span> MyClassLoader(<span class="string">"D:/"</span>);</span><br><span class="line">        MyClassLoader classLoader1 = <span class="keyword">new</span> MyClassLoader(classLoader,<span class="string">"D:/"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass = classLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass1 = classLoader1.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        System.out.println(aClass.hashCode()); <span class="comment">// 1364335809</span></span><br><span class="line">        System.out.println(aClass1.hashCode());<span class="comment">// 1364335809</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyClassLoader classLoader = <span class="keyword">new</span> MyClassLoader(<span class="string">"D:/"</span>);</span><br><span class="line">        MyClassLoader classLoader1 = <span class="keyword">new</span> MyClassLoader(classLoader,<span class="string">"D:/"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass = classLoader.findClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass1 = classLoader1.findClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        System.out.println(aClass.hashCode()); <span class="comment">// 233530418</span></span><br><span class="line">        System.out.println(aClass1.hashCode()); <span class="comment">// 683287027</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了上面自定义类加载器的代码。</p>
+<ul>
+<li>第一个测试案例中两个<code>class</code>的<code>hashCode</code>是一致的，说明类加载器的双亲委托机制起了作用</li>
+<li>第二个测试案例中虽然第一个类加载器也是第二类加载器的父类加载器，但是两个类的<code>hashCode</code>并不是一样的，这说明，这两个类加载器都起了作用，这是因为这里没有使用<code>loadClass</code>方法，所以双亲委托机制的代码就没有起到作用。</li>
+</ul>
+<h1 id="线程上下文类加载器"><a href="#线程上下文类加载器" class="headerlink" title="线程上下文类加载器"></a>线程上下文类加载器</h1><p>对于使用<code>JDBC</code>的时候我们都知道，第一步就是要注册驱动,对于<code>mysql</code>而言如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301142454190.png" alt="image-20200301142454190"></p>
+<p>但是实际上即使我们没有写这样的一句代码，其余的代码也是可以正常执行的。那来看一下<code>DriverManager</code>类的代码：</p>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301143318867.png" alt="image-20200301143318867"></p>
+<p>在第2步里面有两种方式来注册该驱动</p>
+<p><strong>来看2.1中实现类加载的方式</strong></p>
+<p><code>2.1</code>的代码跟到第4步的时候可以看到下面这样的一段代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;S&gt; <span class="function">ServiceLoader&lt;S&gt; <span class="title">load</span><span class="params">(Class&lt;S&gt; service)</span> </span>&#123;</span><br><span class="line">        ClassLoader cl = Thread.currentThread().getContextClassLoader();</span><br><span class="line">        <span class="keyword">return</span> ServiceLoader.load(service, cl);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到 <code>Thread.currentThread().getContextClassLoader()</code>，也就是获取<strong>线程上下文类类加载器</strong>，在线程启动的时候应用类加载器会默认赋值给当前线程，所以<code>getContextClassLoader</code>方法默认情况下获取的也是应用类加载器。</p>
+<p><strong>看2.2的代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (String aDriver : driversList) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                println(<span class="string">"DriverManager.Initialize: loading "</span> + aDriver);</span><br><span class="line">                Class.forName(aDriver, <span class="keyword">true</span>,</span><br><span class="line">                        ClassLoader.getSystemClassLoader());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">                println(<span class="string">"DriverManager.Initialize: load failed: "</span> + ex);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里面使用到了<code>Class.forName(aDriver, true,  ClassLoader.getSystemClassLoader())</code></p>
+<p>对于<code>ClassLoader.getSystemClassLoader()</code>方法获取的是<strong>系统应用类加载器</strong>，所以这里其实是破坏了双亲委托模式，因为<code>DriverManager</code>是启动项加载器来加载的(也就是根类加载器)，而在<code>DriverManager</code>中使用系统类加载器去加载数据库驱动包的类。</p>
+<p>还有一个点需要注意，在2.2代码中使用到了<code>aDriver</code>这个变量，该变量来源</p>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144304571.png" alt="image-20200301144304571"></p>
+<p>也就是从<code>jdbc.drivers</code>文件中去加载，其余这里是使用到了<code>SPI</code>机制</p>
+<h2 id="SPI机制"><a href="#SPI机制" class="headerlink" title="SPI机制"></a>SPI机制</h2><blockquote>
+<p><code>SPI</code> ，全称为 <code>Service Provider Interface</code>，是一种服务发现机制。它通过在<code>ClassPath</code>路径下的<code>META-INF/services</code>文件夹查找文件，自动加载文件里所定义的类.</p>
+</blockquote>
+<p>可以看一下<code>Mysql</code>驱动包里面确实有有这样的一个文件</p>
+<p><img src="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144534613.png" alt="image-20200301144534613"></p>
+<p>对于使用<code>SPI</code>机制使用到的类是  <code>ServiceLoader</code>。</p>
+]]></content>
+  </entry>
 </search>
