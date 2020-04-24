@@ -77,10 +77,127 @@
       </tags>
   </entry>
   <entry>
+    <title>java中boolean类型属性定义为什么不要使用is开头</title>
+    <url>/2020/04/23/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/</url>
+    <content><![CDATA[<h1 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/success-isSuccess-and-bollean-Bollean" target="_blank" rel="noopener">参考地址</a></p>
+<a id="more"></a>
+
+<h1 id="boolean和Boolean类型属性不使用is开头"><a href="#boolean和Boolean类型属性不使用is开头" class="headerlink" title="boolean和Boolean类型属性不使用is开头"></a>boolean和Boolean类型属性不使用is开头</h1><p>看下面的代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> setterproperty;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BooleanProperty</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Boolean isAaa;</span><br><span class="line">    <span class="keyword">private</span> Boolean bbb;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isCcc;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ddd;</span><br><span class="line">    <span class="keyword">private</span> String isEee;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIsEee</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isEee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIsEee</span><span class="params">(String isEee)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isEee = isEee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getAaa</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isAaa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAaa</span><span class="params">(Boolean aaa)</span> </span>&#123;</span><br><span class="line">        isAaa = aaa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getBbb</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bbb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBbb</span><span class="params">(Boolean bbb)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bbb = bbb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCcc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isCcc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCcc</span><span class="params">(<span class="keyword">boolean</span> ccc)</span> </span>&#123;</span><br><span class="line">        isCcc = ccc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ddd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDdd</span><span class="params">(<span class="keyword">boolean</span> ddd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ddd = ddd;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码定义了<strong>三类</strong>， <strong>五个</strong>属性，并且生成了<code>set</code>和<code>get</code>方法</p>
+<ul>
+<li><code>Boolean</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头（包装类）</li>
+<li><code>boolean</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头（基本类型）</li>
+<li><code>string</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头</li>
+</ul>
+<p>上面的<code>set</code>和<code>get</code>方法是<code>idea</code>自动生成的，可以看到对于<code>Boolean</code>以及<code>boolean</code>类型的属性，如果是以<code>is</code>开头的，那么在生成<code>set</code>方法的时候不是在前面加上<code>set</code>，而是直接使用<code>is</code>开头，对于其他类型的值没有影响。</p>
+<h1 id="Boolean和boolean的区别"><a href="#Boolean和boolean的区别" class="headerlink" title="Boolean和boolean的区别"></a>Boolean和boolean的区别</h1><p>看一下阿里巴巴<code>java</code>开发手册中对于基本类型和包装类型的使用标准</p>
+<p><img src="/2020/04/23/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/640.jpeg" alt="img"></p>
+<p>其实也很容易理解，因为基本数据类型都是有默认值的，但是包装数据类型没有默认值。所以程序如果使用基本类型，那么有可能不是我们想要的结果，但是由于有默认值，程序并没有抛出异常，但是结果不对（对于结果不对时不应该使用默认值计算，而是应该我们自己处理）。若使用包装类型，当程序返回<code>null</code>的时候就说明此时结果已经是不对的，需要我们自己去处理。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java中有疑惑的问题</title>
     <url>/2020/04/22/java/base/java%E4%B8%AD%E6%9C%89%E7%96%91%E6%83%91%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="java中为什么只有值传递-没有引用传递"><a href="#java中为什么只有值传递-没有引用传递" class="headerlink" title="java中为什么只有值传递,没有引用传递"></a>java中为什么只有值传递,没有引用传递</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/object-oriented/why-pass-by-reference" target="_blank" rel="noopener">参考地址</a></p>
 <h1 id="为什么java中byte类型的取值范围是-128到127"><a href="#为什么java中byte类型的取值范围是-128到127" class="headerlink" title="为什么java中byte类型的取值范围是-128到127"></a>为什么<code>java</code>中<code>byte</code>类型的取值范围是-128到127</h1><p><a href="https://blog.csdn.net/qq_23418393/article/details/57421688" target="_blank" rel="noopener">参考地址</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java内存模型</title>
+    <url>/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<h1 id="java内存模型-java-memory-mode"><a href="#java内存模型-java-memory-mode" class="headerlink" title="java内存模型(java memory mode)"></a>java内存模型(java memory mode)</h1><p><code>java</code>内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而<code>java</code>内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。</p>
+<p><a href="https://gwei11.gitee.io/2020/04/23/java/jvm/jvm/#more" target="_blank" rel="noopener">jvm</a></p>
+<a id="more"></a>
+
+<h2 id="什么是java内存模型-JMM规范"><a href="#什么是java内存模型-JMM规范" class="headerlink" title="什么是java内存模型(JMM规范)"></a>什么是<code>java</code>内存模型(JMM规范)</h2><p><code>jvm</code>将内存组织结构主要划分为两个部分</p>
+<ul>
+<li>主内存</li>
+<li>工作内存</li>
+</ul>
+<h3 id="主内存"><a href="#主内存" class="headerlink" title="主内存"></a>主内存</h3><ul>
+<li>主要包含本地方法区和堆</li>
+<li>所有变量都要存储在主内存中，这些变量对于所有线程都是共享的</li>
+</ul>
+<h3 id="工作内存"><a href="#工作内存" class="headerlink" title="工作内存"></a>工作内存</h3><ul>
+<li>每一个线程都是自己独立工作的地方，也就是工作内存</li>
+<li>工作内存中保存的是主内存中某些变量的拷贝，线程堆变量的所有操作都必须在工作内存中进行，不能直接操作主内存</li>
+<li><strong>如果是基本数据类型，那么直接分配到工作内存，如果是引用类型，引用的地址存在在工作空间中，但是具体的对象是存在在堆中(也就是主内存中)，是可以共享的</strong></li>
+</ul>
+<p><img src="/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png" alt="什么是java内存模型"></p>
+<p>看上图，之所以存在<code>java</code>内存模型一说是因为<code>java</code>虚拟机的工作机制。当有多个线程的时候，每一个线程可以操作的数据有两种类型</p>
+<ul>
+<li>线程私有的数据，也就是这个数据就算改变了也不会影响其余线程，比如说局部变量就是线程私有的数据</li>
+<li>线程共享的数据，这样的数据多个线程都可以访问，就会出现线程安全的问题</li>
+</ul>
+<p>因为线程操作的数据有不同类型，所以在<code>java</code>中一个线程去操作数据的时候不是在主内存中直接操作，其实还有一个属于线程自己的内存(工作内存)，当操作线程私有的数据比较好理解，直接在工作内存中完成就可以咯，如果是操作共享的数据，那么就在主内存中拿一份数据到自己工作内存中操作，操作完了再将数据给到主内存中。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>jvm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java中的集合</title>
+    <url>/2020/04/23/java/base/java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java中自动拆装箱和缓存机制</title>
+    <url>/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="自动拆装箱"><a href="#自动拆装箱" class="headerlink" title="自动拆装箱"></a>自动拆装箱</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> automaticpacking;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 自动装箱</span></span><br><span class="line">        Integer i = <span class="number">100</span>;</span><br><span class="line">        <span class="comment">// 自动拆箱</span></span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="两种方式查看自动拆装箱的代码"><a href="#两种方式查看自动拆装箱的代码" class="headerlink" title="两种方式查看自动拆装箱的代码"></a>两种方式查看自动拆装箱的代码</h2><h3 id="反编译法"><a href="#反编译法" class="headerlink" title="反编译法"></a>反编译法</h3><p>将上面的代码使用<code>javap</code>命令反编译一下：</p>
+<p><img src="/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/image-20200422224048061.png" alt="image-20200422224048061"></p>
+<p>可以看到其实自动拆装箱是通过<code>Integer.valueOf()</code>和<code>Integer.intValue()</code></p>
+<h3 id="调试法"><a href="#调试法" class="headerlink" title="调试法"></a>调试法</h3><p>上面是通过反编译的形式可以知道底层调用的代码是什么，其实中<code>idea</code>中还有一种方式是断点调试</p>
+<p><img src="/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/image-20200422225116752.png" alt="image-20200422225116752"></p>
+<p>可以看到上面的图片，可以点击<code>force step into</code>来进入代码。</p>
+<h4 id="step-into-和-force-step-into的区别"><a href="#step-into-和-force-step-into的区别" class="headerlink" title="step into 和 force step into的区别"></a><code>step into</code> 和 <code>force step into</code>的区别</h4><ul>
+<li><code>step into</code>可以进入自己写的方法内部去调试</li>
+<li><code>force step into</code>可以进入任何方法内部进行调试，由于这里我们是要进入<code>jdk</code>的包内部代码进行调试，所以需要使用<code>force step into</code></li>
+</ul>
+<h1 id="Integer类型的缓存问题"><a href="#Integer类型的缓存问题" class="headerlink" title="Integer类型的缓存问题"></a>Integer类型的缓存问题</h1><p>看下面的代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> automaticpacking;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Integer i = <span class="number">100</span>;</span><br><span class="line">        Integer j = <span class="number">100</span>;</span><br><span class="line">        Integer i2 = <span class="number">200</span>;</span><br><span class="line">        Integer j2 = <span class="number">200</span>;</span><br><span class="line">        <span class="keyword">int</span> i3 = <span class="number">300</span>;</span><br><span class="line">        <span class="keyword">int</span> j3 = <span class="number">300</span>;</span><br><span class="line">        System.out.println(i == j); <span class="comment">// true</span></span><br><span class="line">        System.out.println(i2 == j2); <span class="comment">// false</span></span><br><span class="line">        System.out.println(i3 == j3); <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码输出个结果是不是有点奇怪， 第二个结果和第三个结果还是比较号理解的</p>
+<ul>
+<li>基本类型的比较肯定比较值就可以咯。所以输出结果为<code>true</code>没有疑问</li>
+<li>包装类型为什么第一个是<code>true</code>，第二个是<code>false</code>呢</li>
+</ul>
+<h2 id="Integer类型缓存值"><a href="#Integer类型缓存值" class="headerlink" title="Integer类型缓存值"></a>Integer类型缓存值</h2><p>我们通过调试法看下 <code>Integer i = 100</code>这句代码是如何执行的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">      <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>看源码就知道 <code>IntegerCache.low</code>固定为-128</li>
+<li><code>IntegerCache.high</code>是可以配置的，看下源码注释<code>-XX:AutoBoxCacheMax=&lt;size&gt;</code>，所以可以通过这个参数类配置最大值。</li>
+</ul>
+<h2 id="包装类型的比较的坑"><a href="#包装类型的比较的坑" class="headerlink" title="包装类型的比较的坑"></a>包装类型的比较的坑</h2><p>上面只是分析了<code>Integer</code>类型，其实还有其他包装类型也是一样的有缓存的值，所以对于包装类型有一点需要知道，<strong>包装类型的比较最好都通过<code>equals</code>方法来进行比较</strong></p>
 ]]></content>
       <categories>
         <category>java</category>
@@ -155,123 +272,6 @@
       <tags>
         <tag>java</tag>
         <tag>proxy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中自动拆装箱和缓存机制</title>
-    <url>/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="自动拆装箱"><a href="#自动拆装箱" class="headerlink" title="自动拆装箱"></a>自动拆装箱</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> automaticpacking;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 自动装箱</span></span><br><span class="line">        Integer i = <span class="number">100</span>;</span><br><span class="line">        <span class="comment">// 自动拆箱</span></span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h2 id="两种方式查看自动拆装箱的代码"><a href="#两种方式查看自动拆装箱的代码" class="headerlink" title="两种方式查看自动拆装箱的代码"></a>两种方式查看自动拆装箱的代码</h2><h3 id="反编译法"><a href="#反编译法" class="headerlink" title="反编译法"></a>反编译法</h3><p>将上面的代码使用<code>javap</code>命令反编译一下：</p>
-<p><img src="/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/image-20200422224048061.png" alt="image-20200422224048061"></p>
-<p>可以看到其实自动拆装箱是通过<code>Integer.valueOf()</code>和<code>Integer.intValue()</code></p>
-<h3 id="调试法"><a href="#调试法" class="headerlink" title="调试法"></a>调试法</h3><p>上面是通过反编译的形式可以知道底层调用的代码是什么，其实中<code>idea</code>中还有一种方式是断点调试</p>
-<p><img src="/2020/04/22/java/base/java%E4%B8%AD%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/image-20200422225116752.png" alt="image-20200422225116752"></p>
-<p>可以看到上面的图片，可以点击<code>force step into</code>来进入代码。</p>
-<h4 id="step-into-和-force-step-into的区别"><a href="#step-into-和-force-step-into的区别" class="headerlink" title="step into 和 force step into的区别"></a><code>step into</code> 和 <code>force step into</code>的区别</h4><ul>
-<li><code>step into</code>可以进入自己写的方法内部去调试</li>
-<li><code>force step into</code>可以进入任何方法内部进行调试，由于这里我们是要进入<code>jdk</code>的包内部代码进行调试，所以需要使用<code>force step into</code></li>
-</ul>
-<h1 id="Integer类型的缓存问题"><a href="#Integer类型的缓存问题" class="headerlink" title="Integer类型的缓存问题"></a>Integer类型的缓存问题</h1><p>看下面的代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> automaticpacking;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntPackage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Integer i = <span class="number">100</span>;</span><br><span class="line">        Integer j = <span class="number">100</span>;</span><br><span class="line">        Integer i2 = <span class="number">200</span>;</span><br><span class="line">        Integer j2 = <span class="number">200</span>;</span><br><span class="line">        <span class="keyword">int</span> i3 = <span class="number">300</span>;</span><br><span class="line">        <span class="keyword">int</span> j3 = <span class="number">300</span>;</span><br><span class="line">        System.out.println(i == j); <span class="comment">// true</span></span><br><span class="line">        System.out.println(i2 == j2); <span class="comment">// false</span></span><br><span class="line">        System.out.println(i3 == j3); <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码输出个结果是不是有点奇怪， 第二个结果和第三个结果还是比较号理解的</p>
-<ul>
-<li>基本类型的比较肯定比较值就可以咯。所以输出结果为<code>true</code>没有疑问</li>
-<li>包装类型为什么第一个是<code>true</code>，第二个是<code>false</code>呢</li>
-</ul>
-<h2 id="Integer类型缓存值"><a href="#Integer类型缓存值" class="headerlink" title="Integer类型缓存值"></a>Integer类型缓存值</h2><p>我们通过调试法看下 <code>Integer i = 100</code>这句代码是如何执行的。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">      <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>看源码就知道 <code>IntegerCache.low</code>固定为-128</li>
-<li><code>IntegerCache.high</code>是可以配置的，看下源码注释<code>-XX:AutoBoxCacheMax=&lt;size&gt;</code>，所以可以通过这个参数类配置最大值。</li>
-</ul>
-<h2 id="包装类型的比较的坑"><a href="#包装类型的比较的坑" class="headerlink" title="包装类型的比较的坑"></a>包装类型的比较的坑</h2><p>上面只是分析了<code>Integer</code>类型，其实还有其他包装类型也是一样的有缓存的值，所以对于包装类型有一点需要知道，<strong>包装类型的比较最好都通过<code>equals</code>方法来进行比较</strong></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中boolean类型属性定义为什么不要使用is开头</title>
-    <url>/2020/04/23/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/</url>
-    <content><![CDATA[<h1 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/success-isSuccess-and-bollean-Bollean" target="_blank" rel="noopener">参考地址</a></p>
-<a id="more"></a>
-
-<h1 id="boolean和Boolean类型属性不使用is开头"><a href="#boolean和Boolean类型属性不使用is开头" class="headerlink" title="boolean和Boolean类型属性不使用is开头"></a>boolean和Boolean类型属性不使用is开头</h1><p>看下面的代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> setterproperty;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BooleanProperty</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Boolean isAaa;</span><br><span class="line">    <span class="keyword">private</span> Boolean bbb;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isCcc;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ddd;</span><br><span class="line">    <span class="keyword">private</span> String isEee;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIsEee</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isEee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIsEee</span><span class="params">(String isEee)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isEee = isEee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getAaa</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isAaa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAaa</span><span class="params">(Boolean aaa)</span> </span>&#123;</span><br><span class="line">        isAaa = aaa;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">getBbb</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bbb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBbb</span><span class="params">(Boolean bbb)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bbb = bbb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCcc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isCcc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCcc</span><span class="params">(<span class="keyword">boolean</span> ccc)</span> </span>&#123;</span><br><span class="line">        isCcc = ccc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ddd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDdd</span><span class="params">(<span class="keyword">boolean</span> ddd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ddd = ddd;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码定义了<strong>三类</strong>， <strong>五个</strong>属性，并且生成了<code>set</code>和<code>get</code>方法</p>
-<ul>
-<li><code>Boolean</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头（包装类）</li>
-<li><code>boolean</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头（基本类型）</li>
-<li><code>string</code>类型，属性分别带有<code>is</code>开头和不带有<code>is</code>开头</li>
-</ul>
-<p>上面的<code>set</code>和<code>get</code>方法是<code>idea</code>自动生成的，可以看到对于<code>Boolean</code>以及<code>boolean</code>类型的属性，如果是以<code>is</code>开头的，那么在生成<code>set</code>方法的时候不是在前面加上<code>set</code>，而是直接使用<code>is</code>开头，对于其他类型的值没有影响。</p>
-<h1 id="Boolean和boolean的区别"><a href="#Boolean和boolean的区别" class="headerlink" title="Boolean和boolean的区别"></a>Boolean和boolean的区别</h1><p>看一下阿里巴巴<code>java</code>开发手册中对于基本类型和包装类型的使用标准</p>
-<p><img src="/2020/04/23/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/640.jpeg" alt="img"></p>
-<p>其实也很容易理解，因为基本数据类型都是有默认值的，但是包装数据类型没有默认值。所以程序如果使用基本类型，那么有可能不是我们想要的结果，但是由于有默认值，程序并没有抛出异常，但是结果不对（对于结果不对时不应该使用默认值计算，而是应该我们自己处理）。若使用包装类型，当程序返回<code>null</code>的时候就说明此时结果已经是不对的，需要我们自己去处理。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中的集合</title>
-    <url>/2020/04/23/java/base/java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java内存模型</title>
-    <url>/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<h1 id="java内存模型-java-memory-mode"><a href="#java内存模型-java-memory-mode" class="headerlink" title="java内存模型(java memory mode)"></a>java内存模型(java memory mode)</h1><p><code>java</code>内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而<code>java</code>内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。</p>
-<p><a href="https://gwei11.gitee.io/2020/04/23/java/jvm/jvm/#more" target="_blank" rel="noopener">jvm</a></p>
-<a id="more"></a>
-
-<h2 id="什么是java内存模型-JMM规范"><a href="#什么是java内存模型-JMM规范" class="headerlink" title="什么是java内存模型(JMM规范)"></a>什么是<code>java</code>内存模型(JMM规范)</h2><p><code>jvm</code>将内存组织结构主要划分为两个部分</p>
-<ul>
-<li>主内存</li>
-<li>工作内存</li>
-</ul>
-<h3 id="主内存"><a href="#主内存" class="headerlink" title="主内存"></a>主内存</h3><ul>
-<li>主要包含本地方法区和堆</li>
-<li>所有变量都要存储在主内存中，这些变量对于所有线程都是共享的</li>
-</ul>
-<h3 id="工作内存"><a href="#工作内存" class="headerlink" title="工作内存"></a>工作内存</h3><ul>
-<li>每一个线程都是自己独立工作的地方，也就是工作内存</li>
-<li>工作内存中保存的是主内存中某些变量的拷贝，线程堆变量的所有操作都必须在工作内存中进行，不能直接操作主内存</li>
-<li><strong>如果是基本数据类型，那么直接分配到工作内存，如果是引用类型，引用的地址存在在工作空间中，但是具体的对象是存在在堆中(也就是主内存中)，是可以共享的</strong></li>
-</ul>
-<p><img src="/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png" alt="什么是java内存模型"></p>
-<p>看上图，之所以存在<code>java</code>内存模型一说是因为<code>java</code>虚拟机的工作机制。当有多个线程的时候，每一个线程可以操作的数据有两种类型</p>
-<ul>
-<li>线程私有的数据，也就是这个数据就算改变了也不会影响其余线程，比如说局部变量就是线程私有的数据</li>
-<li>线程共享的数据，这样的数据多个线程都可以访问，就会出现线程安全的问题</li>
-</ul>
-<p>因为线程操作的数据有不同类型，所以在<code>java</code>中一个线程去操作数据的时候不是在主内存中直接操作，其实还有一个属于线程自己的内存(工作内存)，当操作线程私有的数据比较好理解，直接在工作内存中完成就可以咯，如果是操作共享的数据，那么就在主内存中拿一份数据到自己工作内存中操作，操作完了再将数据给到主内存中。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>jvm</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>jvm</tag>
       </tags>
   </entry>
   <entry>
