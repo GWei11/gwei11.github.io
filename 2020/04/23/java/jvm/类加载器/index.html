@@ -82,26 +82,26 @@
 <meta name="description" content="类加载 将java源代码经过编译器编译器class字节码文件  java文件和class文件都是在本次磁盘中   将字节码文件加载进内存，并且在内存中创建对象的class对象，这个过程称之为类的加载   一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的java程序才可以使用它。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="类加载器">
-<meta property="og:url" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/index.html">
+<meta property="og:url" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/index.html">
 <meta property="og:site_name" content="咖啡杯里的茶">
 <meta property="og:description" content="类加载 将java源代码经过编译器编译器class字节码文件  java文件和class文件都是在本次磁盘中   将字节码文件加载进内存，并且在内存中创建对象的class对象，这个过程称之为类的加载   一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的java程序才可以使用它。">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301095942835.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301111621578.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301112618193.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131544718.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131633046.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301142454190.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301143318867.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144304571.png">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144534613.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301095942835.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301111621578.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301112618193.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131544718.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131633046.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301142454190.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301143318867.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144304571.png">
+<meta property="og:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144534613.png">
 <meta property="article:published_time" content="2020-04-23T15:09:25.667Z">
 <meta property="article:modified_time" content="2020-04-23T15:13:21.198Z">
 <meta property="article:author" content="咖啡杯的里茶">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png">
+<meta name="twitter:image" content="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png">
 
 
 
@@ -131,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/23/java/jvm/类加载器/"/>
+  <link rel="canonical" href="http://gwei11.gitee.io/2020/04/23/java/jvm/类加载器/"/>
 
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://gwei11.gitee.io/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="咖啡杯的里茶">
