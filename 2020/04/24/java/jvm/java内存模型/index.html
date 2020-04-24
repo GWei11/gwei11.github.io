@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java,多线程," />
+  <meta name="keywords" content="java,jvm," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="java内存模型我们经常说java内存模型，其实java内存模型是一套规范，这一套规范定义了程序中访问数据的规则。在java内存模型中设计到的两个或多个内存的概念如下图所示：">
+<meta name="description" content="java内存模型java内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而java内存结构就是根据这一套规范来来进行划分的。可以先看另一篇文章。 jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java内存模型">
-<meta property="og:url" content="http://yoursite.com/2020/04/23/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="咖啡杯里的茶">
-<meta property="og:description" content="java内存模型我们经常说java内存模型，其实java内存模型是一套规范，这一套规范定义了程序中访问数据的规则。在java内存模型中设计到的两个或多个内存的概念如下图所示：">
-<meta property="og:image" content="http://yoursite.com/2020/04/23/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png">
-<meta property="article:published_time" content="2020-04-23T15:21:23.305Z">
-<meta property="article:modified_time" content="2020-04-23T23:45:17.707Z">
+<meta property="og:description" content="java内存模型java内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而java内存结构就是根据这一套规范来来进行划分的。可以先看另一篇文章。 jvm">
+<meta property="og:image" content="http://yoursite.com/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png">
+<meta property="article:published_time" content="2020-04-23T23:53:17.548Z">
+<meta property="article:modified_time" content="2020-04-24T00:12:27.567Z">
 <meta property="article:author" content="咖啡杯的里茶">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/04/23/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/23/java/jvm/java内存模型/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/24/java/jvm/java内存模型/"/>
 
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="咖啡杯的里茶">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-23T23:21:23+08:00">
-                2020-04-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-24T07:53:17+08:00">
+                2020-04-24
               </time>
             
 
@@ -344,7 +344,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-24T07:45:17+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-24T08:12:27+08:00">
                 2020-04-24
               </time>
             
@@ -374,8 +374,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">多线程</span>
+                  <a href="/categories/java/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
                   </a>
                 </span>
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  77
+                  548
                 </span>
               
 
@@ -442,11 +442,32 @@
       
 
       
-        <h1 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h1><p>我们经常说<code>java</code>内存模型，<strong>其实<code>java</code>内存模型是一套规范</strong>，这一套规范定义了程序中访问数据的规则。在<code>java</code>内存模型中设计到的两个或多个内存的概念如下图所示：</p>
-<p><img src="/2020/04/23/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png" alt="image-20200423233046759"></p>
+        <h1 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h1><p><code>java</code>内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而<code>java</code>内存结构就是根据这一套规范来来进行划分的。可以先看另一篇文章。</p>
+<p><a href="https://gwei11.gitee.io/2020/04/23/java/jvm/jvm/#more" target="_blank" rel="noopener">jvm</a></p>
 <a id="more"></a>
 
-<h2 id="主内存"><a href="#主内存" class="headerlink" title="主内存"></a>主内存</h2><h2 id="工作内存"><a href="#工作内存" class="headerlink" title="工作内存"></a>工作内存</h2>
+<h2 id="什么是java内存模型"><a href="#什么是java内存模型" class="headerlink" title="什么是java内存模型"></a>什么是<code>java</code>内存模型</h2><p><code>jvm</code>将内存组织结构主要划分为两个部分</p>
+<ul>
+<li>主内存</li>
+<li>工作内存</li>
+</ul>
+<h3 id="主内存"><a href="#主内存" class="headerlink" title="主内存"></a>主内存</h3><ul>
+<li>主要包含本地方法区和堆</li>
+<li>所有变量都要存储在主内存中，这些变量对于所有线程都是共享的</li>
+</ul>
+<h3 id="工作内存"><a href="#工作内存" class="headerlink" title="工作内存"></a>工作内存</h3><ul>
+<li>每一个线程都是自己独立工作的地方，也就是工作内存</li>
+<li>工作内存中保存的是主内存中某些变量的拷贝，线程堆变量的所有操作都必须在工作内存中进行，不能直接操作主内存</li>
+<li><strong>如果是基本数据类型，那么直接分配到工作内存，如果是引用类型，引用的地址存在在工作空间中，但是具体的对象是存在在堆中(也就是主内存中)，是可以共享的</strong></li>
+</ul>
+<p><img src="/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png" alt="什么是java内存模型"></p>
+<p>看上图，之所以存在<code>java</code>内存模型一说是因为<code>java</code>虚拟机的工作机制。当有多个线程的时候，每一个线程可以操作的数据有两种类型</p>
+<ul>
+<li>线程私有的数据，也就是这个数据就算改变了也不会影响其余线程，比如说局部变量就是线程私有的数据</li>
+<li>线程共享的数据，这样的数据多个线程都可以访问，就会出现线程安全的问题</li>
+</ul>
+<p>因为线程操作的数据有不同类型，所以在<code>java</code>中一个线程去操作数据的时候不是在主内存中直接操作，其实还有一个属于线程自己的内存(工作内存)，当操作线程私有的数据比较好理解，直接在工作内存中完成就可以咯，如果是操作共享的数据，那么就在主内存中拿一份数据到自己工作内存中操作，操作完了再将数据给到主内存中。</p>
+
       
     </div>
     
@@ -465,7 +486,7 @@
           
             <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
-            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 多线程</a>
+            <a href="/tags/jvm/" rel="tag"><i class="fa fa-tag"></i> jvm</a>
           
         </div>
       
@@ -478,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/23/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="next" title="类加载器">
-                <i class="fa fa-chevron-left"></i> 类加载器
+              <a href="/2020/04/23/java/jvm/jvm/" rel="next" title="jvm">
+                <i class="fa fa-chevron-left"></i> jvm
               </a>
             
           </div>
@@ -574,7 +595,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -585,7 +606,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -618,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java内存模型"><span class="nav-number">1.</span> <span class="nav-text">java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主内存"><span class="nav-number">1.1.</span> <span class="nav-text">主内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作内存"><span class="nav-number">1.2.</span> <span class="nav-text">工作内存</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java内存模型"><span class="nav-number">1.</span> <span class="nav-text">java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是java内存模型"><span class="nav-number">1.1.</span> <span class="nav-text">什么是java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主内存"><span class="nav-number">1.1.1.</span> <span class="nav-text">主内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作内存"><span class="nav-number">1.1.2.</span> <span class="nav-text">工作内存</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -652,7 +673,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.4k</span>
+    <span title="Site words total count">13.9k</span>
   
 </div>
 
