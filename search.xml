@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>githubPag自定义域名以及两台电脑使用hexo</title>
+    <url>/2020/04/22/hexo/githubPags/</url>
+    <content><![CDATA[<h1 id="githubPag自定义域名"><a href="#githubPag自定义域名" class="headerlink" title="githubPag自定义域名"></a>githubPag自定义域名</h1><p><a href="https://blog.csdn.net/heimu24/article/details/81159099" target="_blank" rel="noopener">查看文章</a></p>
+<a id="more"></a>
+
+<h1 id="多台电脑使用hexo"><a href="#多台电脑使用hexo" class="headerlink" title="多台电脑使用hexo"></a>多台电脑使用hexo</h1><h2 id="不修改主题"><a href="#不修改主题" class="headerlink" title="不修改主题"></a>不修改主题</h2><p><a href="https://blog.csdn.net/ShmilyCoder/article/details/79916973" target="_blank" rel="noopener">查看文章</a></p>
+<p>需要注意的是如果后续只是写博客而没有修改主题等文件的话只需使用hexo分支来操作即可。</p>
+<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><p>如果需要修改主题的话依然是需要在搭建博客的电脑上搭建博客的那个目录(<code>hexo</code>)，使用两台电脑来写博客时都是使用的是后来创建的分支，此时修改主题则是在博客搭建目录里面去修改，修改完之后直接在博客搭建目录使用<code>git bash</code>，然后通过<code>hexo clean</code>， <code>hexo d -g</code>, 将修改的主题发布出去，但是此时需要注意的是当我们发布之后再去访问自己的博客发现文章可能会少很多，这很正常，因为我们后来写的博客都是在创建的分支上面去写的，最开始创建博客的那个目录并没有维护起来，此时看到的博客其实是最开始创建博客的那个目录里面的文章，所以此时只需要将修改的那部分主题文件拷贝到我们的分支目录对应位置，然后提交并且在在分支目录里面重新<code>hexo clean</code>， <code>hexo d -g</code>一次就可以了。以后只要不修改主题文件就都是在分支上操作了，只要需要修改主题文件时才需要在最开始创建博客的那个目录去操作然后拷贝到分支上并提交。</p>
+<p><font color="green">我们创建博客的那个目录并不是一个<code>repository</code>，所以在那个目录是不能使用git命令的，只是我们将其余github进行了关联而已，所以在那里面只能使用hexo命令。</font></p>
+<p><font color="red">经过测试，不是非要在创建博客的那台上脑上该样式才有作用，实际上在另外的一台电脑上直接修改样式也是有效果的。</font></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo</title>
     <url>/2020/04/22/hexo/hexo/</url>
     <content><![CDATA[<h1 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h1><p><a href="https://blog.csdn.net/wugenqiang/article/details/88609066" target="_blank" rel="noopener">参考文章</a></p>
@@ -62,22 +81,27 @@
       </tags>
   </entry>
   <entry>
-    <title>githubPag自定义域名以及两台电脑使用hexo</title>
-    <url>/2020/04/22/hexo/githubPags/</url>
-    <content><![CDATA[<h1 id="githubPag自定义域名"><a href="#githubPag自定义域名" class="headerlink" title="githubPag自定义域名"></a>githubPag自定义域名</h1><p><a href="https://blog.csdn.net/heimu24/article/details/81159099" target="_blank" rel="noopener">查看文章</a></p>
-<a id="more"></a>
-
-<h1 id="多台电脑使用hexo"><a href="#多台电脑使用hexo" class="headerlink" title="多台电脑使用hexo"></a>多台电脑使用hexo</h1><h2 id="不修改主题"><a href="#不修改主题" class="headerlink" title="不修改主题"></a>不修改主题</h2><p><a href="https://blog.csdn.net/ShmilyCoder/article/details/79916973" target="_blank" rel="noopener">查看文章</a></p>
-<p>需要注意的是如果后续只是写博客而没有修改主题等文件的话只需使用hexo分支来操作即可。</p>
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><p>如果需要修改主题的话依然是需要在搭建博客的电脑上搭建博客的那个目录(<code>hexo</code>)，使用两台电脑来写博客时都是使用的是后来创建的分支，此时修改主题则是在博客搭建目录里面去修改，修改完之后直接在博客搭建目录使用<code>git bash</code>，然后通过<code>hexo clean</code>， <code>hexo d -g</code>, 将修改的主题发布出去，但是此时需要注意的是当我们发布之后再去访问自己的博客发现文章可能会少很多，这很正常，因为我们后来写的博客都是在创建的分支上面去写的，最开始创建博客的那个目录并没有维护起来，此时看到的博客其实是最开始创建博客的那个目录里面的文章，所以此时只需要将修改的那部分主题文件拷贝到我们的分支目录对应位置，然后提交并且在在分支目录里面重新<code>hexo clean</code>， <code>hexo d -g</code>一次就可以了。以后只要不修改主题文件就都是在分支上操作了，只要需要修改主题文件时才需要在最开始创建博客的那个目录去操作然后拷贝到分支上并提交。</p>
-<p><font color="green">我们创建博客的那个目录并不是一个<code>repository</code>，所以在那个目录是不能使用git命令的，只是我们将其余github进行了关联而已，所以在那里面只能使用hexo命令。</font></p>
-<p><font color="red">经过测试，不是非要在创建博客的那台上脑上该样式才有作用，实际上在另外的一台电脑上直接修改样式也是有效果的。</font></p>
+    <title>java中有疑惑的问题</title>
+    <url>/2020/04/22/java/base/java%E4%B8%AD%E6%9C%89%E7%96%91%E6%83%91%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="java中为什么只有值传递-没有引用传递"><a href="#java中为什么只有值传递-没有引用传递" class="headerlink" title="java中为什么只有值传递,没有引用传递"></a>java中为什么只有值传递,没有引用传递</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/object-oriented/why-pass-by-reference" target="_blank" rel="noopener">参考地址</a></p>
+<h1 id="为什么java中byte类型的取值范围是-128到127"><a href="#为什么java中byte类型的取值范围是-128到127" class="headerlink" title="为什么java中byte类型的取值范围是-128到127"></a>为什么<code>java</code>中<code>byte</code>类型的取值范围是-128到127</h1><p><a href="https://blog.csdn.net/qq_23418393/article/details/57421688" target="_blank" rel="noopener">参考地址</a></p>
 ]]></content>
       <categories>
-        <category>博客</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java中的集合</title>
+    <url>/2020/04/23/java/base/java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -100,68 +124,6 @@
 <p><img src="/2020/04/23/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/640.jpeg" alt="img"></p>
 <p>其实也很容易理解，因为基本数据类型都是有默认值的，但是包装数据类型没有默认值。所以程序如果使用基本类型，那么有可能不是我们想要的结果，但是由于有默认值，程序并没有抛出异常，但是结果不对（对于结果不对时不应该使用默认值计算，而是应该我们自己处理）。若使用包装类型，当程序返回<code>null</code>的时候就说明此时结果已经是不对的，需要我们自己去处理。</p>
 ]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中有疑惑的问题</title>
-    <url>/2020/04/22/java/base/java%E4%B8%AD%E6%9C%89%E7%96%91%E6%83%91%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="java中为什么只有值传递-没有引用传递"><a href="#java中为什么只有值传递-没有引用传递" class="headerlink" title="java中为什么只有值传递,没有引用传递"></a>java中为什么只有值传递,没有引用传递</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/object-oriented/why-pass-by-reference" target="_blank" rel="noopener">参考地址</a></p>
-<h1 id="为什么java中byte类型的取值范围是-128到127"><a href="#为什么java中byte类型的取值范围是-128到127" class="headerlink" title="为什么java中byte类型的取值范围是-128到127"></a>为什么<code>java</code>中<code>byte</code>类型的取值范围是-128到127</h1><p><a href="https://blog.csdn.net/qq_23418393/article/details/57421688" target="_blank" rel="noopener">参考地址</a></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java内存模型</title>
-    <url>/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<h1 id="java内存模型-java-memory-mode"><a href="#java内存模型-java-memory-mode" class="headerlink" title="java内存模型(java memory mode)"></a>java内存模型(java memory mode)</h1><p><code>java</code>内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而<code>java</code>内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。</p>
-<p><a href="https://gwei11.gitee.io/2020/04/23/java/jvm/jvm/#more" target="_blank" rel="noopener">jvm</a></p>
-<a id="more"></a>
-
-<h2 id="什么是java内存模型-JMM规范"><a href="#什么是java内存模型-JMM规范" class="headerlink" title="什么是java内存模型(JMM规范)"></a>什么是<code>java</code>内存模型(JMM规范)</h2><p><code>jvm</code>将内存组织结构主要划分为两个部分</p>
-<ul>
-<li>主内存</li>
-<li>工作内存</li>
-</ul>
-<h3 id="主内存"><a href="#主内存" class="headerlink" title="主内存"></a>主内存</h3><ul>
-<li>主要包含本地方法区和堆</li>
-<li>所有变量都要存储在主内存中，这些变量对于所有线程都是共享的</li>
-</ul>
-<h3 id="工作内存"><a href="#工作内存" class="headerlink" title="工作内存"></a>工作内存</h3><ul>
-<li>每一个线程都是自己独立工作的地方，也就是工作内存</li>
-<li>工作内存中保存的是主内存中某些变量的拷贝，线程堆变量的所有操作都必须在工作内存中进行，不能直接操作主内存</li>
-<li><strong>如果是基本数据类型，那么直接分配到工作内存，如果是引用类型，引用的地址存在在工作空间中，但是具体的对象是存在在堆中(也就是主内存中)，是可以共享的</strong></li>
-</ul>
-<p><img src="/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png" alt="什么是java内存模型"></p>
-<p>看上图，之所以存在<code>java</code>内存模型一说是因为<code>java</code>虚拟机的工作机制。当有多个线程的时候，每一个线程可以操作的数据有两种类型</p>
-<ul>
-<li>线程私有的数据，也就是这个数据就算改变了也不会影响其余线程，比如说局部变量就是线程私有的数据</li>
-<li>线程共享的数据，这样的数据多个线程都可以访问，就会出现线程安全的问题</li>
-</ul>
-<p>因为线程操作的数据有不同类型，所以在<code>java</code>中一个线程去操作数据的时候不是在主内存中直接操作，其实还有一个属于线程自己的内存(工作内存)，当操作线程私有的数据比较好理解，直接在工作内存中完成就可以咯，如果是操作共享的数据，那么就在主内存中拿一份数据到自己工作内存中操作，操作完了再将数据给到主内存中。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>jvm</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>jvm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中的集合</title>
-    <url>/2020/04/23/java/base/java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88/</url>
-    <content><![CDATA[]]></content>
       <categories>
         <category>java</category>
       </categories>
@@ -208,6 +170,44 @@
       </categories>
       <tags>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java内存模型</title>
+    <url>/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<h1 id="java内存模型-java-memory-mode"><a href="#java内存模型-java-memory-mode" class="headerlink" title="java内存模型(java memory mode)"></a>java内存模型(java memory mode)</h1><p><code>java</code>内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而<code>java</code>内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。</p>
+<p><a href="https://gwei11.gitee.io/2020/04/23/java/jvm/jvm/#more" target="_blank" rel="noopener">jvm</a></p>
+<a id="more"></a>
+
+<h2 id="什么是java内存模型-JMM规范"><a href="#什么是java内存模型-JMM规范" class="headerlink" title="什么是java内存模型(JMM规范)"></a>什么是<code>java</code>内存模型(JMM规范)</h2><p><code>jvm</code>将内存组织结构主要划分为两个部分</p>
+<ul>
+<li>主内存</li>
+<li>工作内存</li>
+</ul>
+<h3 id="主内存"><a href="#主内存" class="headerlink" title="主内存"></a>主内存</h3><ul>
+<li>主要包含本地方法区和堆</li>
+<li>所有变量都要存储在主内存中，这些变量对于所有线程都是共享的</li>
+</ul>
+<h3 id="工作内存"><a href="#工作内存" class="headerlink" title="工作内存"></a>工作内存</h3><ul>
+<li>每一个线程都是自己独立工作的地方，也就是工作内存</li>
+<li>工作内存中保存的是主内存中某些变量的拷贝，线程堆变量的所有操作都必须在工作内存中进行，不能直接操作主内存</li>
+<li><strong>如果是基本数据类型，那么直接分配到工作内存，如果是引用类型，引用的地址存在在工作空间中，但是具体的对象是存在在堆中(也就是主内存中)，是可以共享的</strong></li>
+</ul>
+<p><img src="/2020/04/24/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png" alt="什么是java内存模型"></p>
+<p>看上图，之所以存在<code>java</code>内存模型一说是因为<code>java</code>虚拟机的工作机制。当有多个线程的时候，每一个线程可以操作的数据有两种类型</p>
+<ul>
+<li>线程私有的数据，也就是这个数据就算改变了也不会影响其余线程，比如说局部变量就是线程私有的数据</li>
+<li>线程共享的数据，这样的数据多个线程都可以访问，就会出现线程安全的问题</li>
+</ul>
+<p>因为线程操作的数据有不同类型，所以在<code>java</code>中一个线程去操作数据的时候不是在主内存中直接操作，其实还有一个属于线程自己的内存(工作内存)，当操作线程私有的数据比较好理解，直接在工作内存中完成就可以咯，如果是操作共享的数据，那么就在主内存中拿一份数据到自己工作内存中操作，操作完了再将数据给到主内存中。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>jvm</tag>
       </tags>
   </entry>
   <entry>
