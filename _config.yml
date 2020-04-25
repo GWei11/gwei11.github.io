@@ -105,5 +105,5 @@ search:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/GWei11/GWei11.github.io.git     # https://gitee.com/Gwei11/GWei11.git
+  repo: git@github.com:GWei11/GWei11.github.io.git     # https://gitee.com/Gwei11/GWei11.git
   branch: master
