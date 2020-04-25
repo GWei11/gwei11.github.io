@@ -49,6 +49,10 @@
 <p><a href="https://www.cnblogs.com/codebook/p/10312965.html" target="_blank" rel="noopener">参考链接</a></p>
 <h1 id="显示图片"><a href="#显示图片" class="headerlink" title="显示图片"></a>显示图片</h1><p><a href="https://www.jianshu.com/p/ea78bdd0551f" target="_blank" rel="noopener">显示图片</a></p>
 <h1 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h1><p><a href="https://blog.csdn.net/qq_40265501/article/details/80030627" target="_blank" rel="noopener">添加搜索</a></p>
+<h1 id="添加打赏功能"><a href="#添加打赏功能" class="headerlink" title="添加打赏功能"></a>添加打赏功能</h1><p>在<code>next</code>主题的配置文件文件中加上下面的代码</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！</span><br><span class="line">wechatpay: /images/微信支付.jpg</span><br><span class="line">alipay: /images/支付宝支付.jpg</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>wechatpay</code>和<code>alipay</code>对应的是微信支付收款码和支付宝支付收款码的图片地址，我这里是存放在 <code>主题\source\images\</code>下面</p>
 ]]></content>
       <categories>
         <category>博客</category>

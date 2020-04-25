@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="咖啡杯里的茶">
 <meta property="og:description" content="文章目录默认展开参考文章 对于想要通过点击目录来进行展开与收缩的，需要进行下面的操作，把 12&#x2F;&#x2F;文章目录默认展开.post-toc .nav .nav-child &amp;#123; display: block; &amp;#125;  里面的.nav-child去掉即可通过点击来实现目录的展开与收缩。">
 <meta property="article:published_time" content="2020-04-22T12:25:08.996Z">
-<meta property="article:modified_time" content="2020-04-22T23:26:11.382Z">
+<meta property="article:modified_time" content="2020-04-25T01:20:53.024Z">
 <meta property="article:author" content="咖啡杯的里茶">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-23T07:26:11+08:00">
-                2020-04-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-25T09:20:53+08:00">
+                2020-04-25
               </time>
             
           </span>
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  984
+                  1.1k
                 </span>
               
 
@@ -474,6 +474,10 @@
 <p><a href="https://www.cnblogs.com/codebook/p/10312965.html" target="_blank" rel="noopener">参考链接</a></p>
 <h1 id="显示图片"><a href="#显示图片" class="headerlink" title="显示图片"></a>显示图片</h1><p><a href="https://www.jianshu.com/p/ea78bdd0551f" target="_blank" rel="noopener">显示图片</a></p>
 <h1 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h1><p><a href="https://blog.csdn.net/qq_40265501/article/details/80030627" target="_blank" rel="noopener">添加搜索</a></p>
+<h1 id="添加打赏功能"><a href="#添加打赏功能" class="headerlink" title="添加打赏功能"></a>添加打赏功能</h1><p>在<code>next</code>主题的配置文件文件中加上下面的代码</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！</span><br><span class="line">wechatpay: /images/微信支付.jpg</span><br><span class="line">alipay: /images/支付宝支付.jpg</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>wechatpay</code>和<code>alipay</code>对应的是微信支付收款码和支付宝支付收款码的图片地址，我这里是存放在 <code>主题\source\images\</code>下面</p>
 
       
     </div>
@@ -484,7 +488,54 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/微信支付.jpg" alt="咖啡杯的里茶 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/支付宝支付.jpg" alt="咖啡杯的里茶 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    咖啡杯的里茶
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://gwei11.gitee.io/2020/04/22/hexo/hexo/" title="hexo">http://gwei11.gitee.io/2020/04/22/hexo/hexo/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -648,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文章目录默认展开"><span class="nav-number">1.</span> <span class="nav-text">文章目录默认展开</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建菜单以及添加菜单图标"><span class="nav-number">2.</span> <span class="nav-text">新建菜单以及添加菜单图标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加社交功能之邮箱"><span class="nav-number">3.</span> <span class="nav-text">添加社交功能之邮箱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#友情链接的配置"><span class="nav-number">4.</span> <span class="nav-text">友情链接的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现聊天功能"><span class="nav-number">5.</span> <span class="nav-text">实现聊天功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加近期文章展示"><span class="nav-number">6.</span> <span class="nav-text">添加近期文章展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示文章的更新时间"><span class="nav-number">7.</span> <span class="nav-text">显示文章的更新时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字数统计与阅读时长"><span class="nav-number">8.</span> <span class="nav-text">字数统计与阅读时长</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加版权信息"><span class="nav-number">9.</span> <span class="nav-text">添加版权信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改文章底部的标签"><span class="nav-number">10.</span> <span class="nav-text">修改文章底部的标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改博客的背景图"><span class="nav-number">11.</span> <span class="nav-text">修改博客的背景图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将文章归类到新建的菜单中"><span class="nav-number">12.</span> <span class="nav-text">将文章归类到新建的菜单中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示图片"><span class="nav-number">13.</span> <span class="nav-text">显示图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加搜索功能"><span class="nav-number">14.</span> <span class="nav-text">添加搜索功能</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文章目录默认展开"><span class="nav-number">1.</span> <span class="nav-text">文章目录默认展开</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建菜单以及添加菜单图标"><span class="nav-number">2.</span> <span class="nav-text">新建菜单以及添加菜单图标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加社交功能之邮箱"><span class="nav-number">3.</span> <span class="nav-text">添加社交功能之邮箱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#友情链接的配置"><span class="nav-number">4.</span> <span class="nav-text">友情链接的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现聊天功能"><span class="nav-number">5.</span> <span class="nav-text">实现聊天功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加近期文章展示"><span class="nav-number">6.</span> <span class="nav-text">添加近期文章展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示文章的更新时间"><span class="nav-number">7.</span> <span class="nav-text">显示文章的更新时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字数统计与阅读时长"><span class="nav-number">8.</span> <span class="nav-text">字数统计与阅读时长</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加版权信息"><span class="nav-number">9.</span> <span class="nav-text">添加版权信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改文章底部的标签"><span class="nav-number">10.</span> <span class="nav-text">修改文章底部的标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改博客的背景图"><span class="nav-number">11.</span> <span class="nav-text">修改博客的背景图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将文章归类到新建的菜单中"><span class="nav-number">12.</span> <span class="nav-text">将文章归类到新建的菜单中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示图片"><span class="nav-number">13.</span> <span class="nav-text">显示图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加搜索功能"><span class="nav-number">14.</span> <span class="nav-text">添加搜索功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加打赏功能"><span class="nav-number">15.</span> <span class="nav-text">添加打赏功能</span></a></li></ol></div>
             
 
           </div>
@@ -682,7 +733,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.9k</span>
+    <span title="Site words total count">14k</span>
   
 </div>
 
