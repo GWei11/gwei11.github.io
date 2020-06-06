@@ -258,7 +258,7 @@
 <h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><p>上面是通过内部类来实现的，还有一种方式是通过枚举来实现，代码如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testsingleton;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumSingletonDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EnumSingletonDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//延迟加载</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">enum</span> EnumHolder &#123;</span><br><span class="line">        INSTANCE;</span><br><span class="line">        <span class="keyword">private</span> EnumSingletonDemo instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        EnumHolder() &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> EnumSingletonDemo();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> EnumSingletonDemo <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">//懒加载</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EnumSingletonDemo <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EnumHolder.INSTANCE.getInstance();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(EnumSingletonDemo.getInstance());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>如果不熟悉枚举的同学，请前往<a href="[https://www.personalstudy.ltd/2020/05/30/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/](https://www.personalstudy.ltd/2020/05/30/java/枚举/枚举/)">枚举</a>。</p>
+<p>如果不熟悉枚举的同学，<a href="https://www.personalstudy.ltd/2020/05/30/java/枚举/枚举/">枚举</a></p>
 ]]></content>
       <categories>
         <category>java</category>
@@ -2332,6 +2332,26 @@
       <tags>
         <tag>tools</tag>
         <tag>maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何下载spring官方文档</title>
+    <url>/2020/06/06/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>首先进入<code>spring</code>官网，从官网中进入<code>spring</code>的<code>github</code>地址</p>
+<p><img src="/2020/06/06/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606171950949.png" alt="image-20200606171950949"></p>
+<p>点击上面截图中的连接后，继续找到下图的位置</p>
+<p><img src="/2020/06/06/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172101929.png" alt="image-20200606172101929"></p>
+<p><img src="/2020/06/06/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172238097.png" alt="image-20200606172238097"></p>
+<p><img src="/2020/06/06/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172315653.png" alt="image-20200606172315653"></p>
+<p>在这里面找到自己需要的版本去下载<code>document</code>即可。</p>
+]]></content>
+      <categories>
+        <category>tools</category>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+        <tag>spring</tag>
       </tags>
   </entry>
 </search>
