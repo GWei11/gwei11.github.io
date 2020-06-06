@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T22:59:39+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T23:08:41+08:00">
                 2020-06-06
               </time>
             
@@ -451,33 +451,15 @@
 
       
         
-          
-            <h1 id="idea中不能创建jsp文件解决方式"><a href="#idea中不能创建jsp文件解决方式" class="headerlink" title="idea中不能创建jsp文件解决方式"></a>idea中不能创建jsp文件解决方式</h1><p>在<code>idea</code>中对于一个<code>web</code>项目有时候在<code>webapp/WEB-INF</code>下右键创建<code>jsp</code>文件时并没有该选项。如图所示：</p>
+          <h1 id="idea中不能创建jsp文件解决方式"><a href="#idea中不能创建jsp文件解决方式" class="headerlink" title="idea中不能创建jsp文件解决方式"></a>idea中不能创建jsp文件解决方式</h1><p>在<code>idea</code>中对于一个<code>web</code>项目有时候在<code>webapp/WEB-INF</code>下右键创建<code>jsp</code>文件时并没有该选项。如图所示：</p>
 <p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/1582116203351.png" alt="1582116203351"></p>
-<p>实际上<code>idea</code>工具是可以创建<code>jsp</code>文件的，之所以不能创建出来是因为没有正确设置，设置方式如下：</p>
-<p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/1582116427213.png" alt="1582116427213"></p>
-<p>然后将<code>Web Resource directory path</code>设置到<code>webapp</code>目录那一级。</p>
-<p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/1582116490022.png" alt="1582116490022"></p>
-<p>此时再去新增<code>jsp</code>文件</p>
-<p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/1582116582608.png" alt="1582116582608"></p>
-<p>可以看到<code>webapp</code>那个目录其实已经换了图标，并且其下面的所有目录都可以新增<code>jsp</code>文件了。</p>
-<h1 id="idea中将代码抽取中一个单独的方法"><a href="#idea中将代码抽取中一个单独的方法" class="headerlink" title="idea中将代码抽取中一个单独的方法"></a>idea中将代码抽取中一个单独的方法</h1><ul>
-<li>首先选中需要抽取的代码，然后如下图所示进行操作</li>
-</ul>
-<p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/image-20200303091909902.png" alt="image-20200303091909902"></p>
-<p>也可以进行右键后选择<code>Refactor-&gt;Extract</code>进行操作</p>
-<h1 id="idea实现自动编译"><a href="#idea实现自动编译" class="headerlink" title="idea实现自动编译"></a>idea实现自动编译</h1><p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/image-20200304204529707.png" alt="image-20200304204529707"></p>
-<p>此时会发现项目会即时编译，如果出现错误下面的图中位置会有提示</p>
-<p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/image-20200304204622116.png" alt="image-20200304204622116"></p>
-<h1 id="springBean的autowire的报错问题"><a href="#springBean的autowire的报错问题" class="headerlink" title="springBean的autowire的报错问题"></a>springBean的autowire的报错问题</h1><p>使用下面的配置即可。</p>
-<p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/image-20200304204916822.png" alt="image-20200304204916822"></p>
-<h1 id="idea中使用eclipse的格式化插件"><a href="#idea中使用eclipse的格式化插件" class="headerlink" title="idea中使用eclipse的格式化插件"></a>idea中使用eclipse的格式化插件</h1><p>下载插件的<a href="https://blog.csdn.net/java_lifeng/article/details/90754099" target="_blank" rel="noopener">地址</a>，就是搜索<code>eclipse code formatter</code>即可，下载完之后配置地址如下</p>
-<p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/image-20200316204323402.png" alt="image-20200316204323402"></p>
-<h1 id="idea中使用gradle编译spring源码很慢的问题解决方式"><a href="#idea中使用gradle编译spring源码很慢的问题解决方式" class="headerlink" title="idea中使用gradle编译spring源码很慢的问题解决方式"></a>idea中使用gradle编译spring源码很慢的问题解决方式</h1><p><a href="https://blog.csdn.net/AARON0797/article/details/104424462" target="_blank" rel="noopener">参考地址</a></p>
-<h1 id="idea解决控制台中文乱码问题"><a href="#idea解决控制台中文乱码问题" class="headerlink" title="idea解决控制台中文乱码问题"></a>idea解决控制台中文乱码问题</h1><p><a href="https://blog.csdn.net/qq_39136928/article/details/81240894" target="_blank" rel="noopener">参考地址</a></p>
-<h1 id="idea配置"><a href="#idea配置" class="headerlink" title="idea配置"></a>idea配置</h1><h2 id="idea去掉编辑区的竖线，打开方法分割线"><a href="#idea去掉编辑区的竖线，打开方法分割线" class="headerlink" title="idea去掉编辑区的竖线，打开方法分割线"></a>idea去掉编辑区的竖线，打开方法分割线</h2><p><img src="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/image-20200531104309971.png" alt="image-20200531104309971"></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -998,7 +980,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T23:02:38+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T23:09:16+08:00">
                 2020-06-06
               </time>
             
@@ -1108,23 +1090,15 @@
 
       
         
-          
-            <h1 id="设置项目未运行时自动编译"><a href="#设置项目未运行时自动编译" class="headerlink" title="设置项目未运行时自动编译"></a>设置项目未运行时自动编译</h1><p><img src="/tools/idea/tools/idea/idea%E4%B8%ADspringMVC%E9%A1%B9%E7%9B%AE%E7%83%AD%E9%83%A8%E7%BD%B2/image-20200308080024577.png" alt="image-20200308080024577"></p>
+          <h1 id="设置项目未运行时自动编译"><a href="#设置项目未运行时自动编译" class="headerlink" title="设置项目未运行时自动编译"></a>设置项目未运行时自动编译</h1><p><img src="/tools/idea/tools/idea/idea%E4%B8%ADspringMVC%E9%A1%B9%E7%9B%AE%E7%83%AD%E9%83%A8%E7%BD%B2/image-20200308080024577.png" alt="image-20200308080024577"></p>
 <p>勾上标红的部分。</p>
-<h1 id="设置项目运行时自动编译"><a href="#设置项目运行时自动编译" class="headerlink" title="设置项目运行时自动编译"></a>设置项目运行时自动编译</h1><p>按下快捷键<code>ctrl+shift+alt+/</code>选择<code>Registry</code></p>
-<p><img src="/tools/idea/tools/idea/idea%E4%B8%ADspringMVC%E9%A1%B9%E7%9B%AE%E7%83%AD%E9%83%A8%E7%BD%B2/image-20200308080213753.png" alt="image-20200308080213753"></p>
-<h1 id="设置tomcat"><a href="#设置tomcat" class="headerlink" title="设置tomcat"></a>设置tomcat</h1><p>部署的时候选择带有<code>exploded</code>的那个<code>war</code>包</p>
-<blockquote>
-<ol>
-<li>war模式：将WEB工程以包的形式上传到服务器 ；</li>
-<li>war exploded模式：将WEB工程以当前文件夹的位置关系上传到服务器(这个包可以认为是没有压缩的)</li>
-</ol>
-</blockquote>
-<p><img src="/tools/idea/tools/idea/idea%E4%B8%ADspringMVC%E9%A1%B9%E7%9B%AE%E7%83%AD%E9%83%A8%E7%BD%B2/image-20200308080812456.png" alt="image-20200308080812456"></p>
-<p>然后如图所示，需要将标红的两个位置都修改成<code>update classes and resources</code>，如果上一步部署的时候选择的是不带有<code>exploded</code>，那么这里<code>On update action</code>是不会有<code>Update classes and resources</code>这个选择的。</p>
-<h1 id="以debug模式启动"><a href="#以debug模式启动" class="headerlink" title="以debug模式启动"></a>以debug模式启动</h1><p>经过亲自使用，发现上面的都配置以后，如果没有以<code>debug</code>模式启动的话，那些<code>jsp，js</code>等资源确实是可以自动更新，但是<code>java</code>文件修改后没有自动更新，所以需要以<code>debug</code>模式启动，不过尝试的结果是不仅仅要以<code>debug</code>模式启动，还需要在修改的地方去打上断点，以调试的模式走过修改部分的代码才起了作用。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/tools/idea/tools/idea/idea%E4%B8%ADspringMVC%E9%A1%B9%E7%9B%AE%E7%83%AD%E9%83%A8%E7%BD%B2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1218,7 +1192,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T23:03:38+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T23:09:51+08:00">
                 2020-06-06
               </time>
             
@@ -1328,23 +1302,220 @@
 
       
         
-          
-            <h1 id="idea中对于web项目的配置"><a href="#idea中对于web项目的配置" class="headerlink" title="idea中对于web项目的配置"></a>idea中对于web项目的配置</h1><p>对于一个<code>web</code>项目需要配置<code>facets</code>，如下图所示</p>
+          <h1 id="idea中对于web项目的配置"><a href="#idea中对于web项目的配置" class="headerlink" title="idea中对于web项目的配置"></a>idea中对于web项目的配置</h1><p>对于一个<code>web</code>项目需要配置<code>facets</code>，如下图所示</p>
 <p><img src="/tools/idea/tools/idea/idea%E4%B8%ADweb%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84%E9%97%AE%E9%A2%98/image-20200307125001685.png" alt="image-20200307125001685"></p>
-<p><code>facets</code>是<code>idea</code>中的配置，</p>
-<p>还有一个是<code>Artifacts</code>,这个是<code>maven</code>中的概念，如果想要将项目部署到<code>tomcat</code>中就需要<code>Artifacts</code></p>
-<p><img src="/tools/idea/tools/idea/idea%E4%B8%ADweb%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84%E9%97%AE%E9%A2%98/image-20200307125225987.png" alt="image-20200307125225987"></p>
-<p><img src="idea%E4%B8%ADweb%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84%E9%97%AE%E9%A2%98.images/image-20200307125259694.png" alt="image-20200307125259694"></p>
-<p>在选择的时候可以看到有两个可以选择，其中一个是含有<code>exploded</code>，另外一个没有，那么他们有什么区别呢，其实可以认为不带有<code>exploded</code>就是压缩 的，而带有<code>exploded</code>是 没有压缩的文件。</p>
-<blockquote>
-<ol>
-<li>war模式：将WEB工程以包的形式上传到服务器 ；</li>
-<li>war exploded模式：将WEB工程以当前文件夹的位置关系上传到服务器(这个包可以认为是没有压缩的)</li>
-</ol>
-</blockquote>
-<p>而对于<code>Artifacts</code>如果没有添加我们也是可以自己添加的。如下图所示。</p>
-<p><img src="/tools/idea/tools/idea/idea%E4%B8%ADweb%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84%E9%97%AE%E9%A2%98/image-20200307125641865.png" alt="image-20200307125641865"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/tools/idea/tools/idea/idea%E4%B8%ADweb%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="咖啡杯的里茶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咖啡杯里的茶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" itemprop="url">线程池</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T19:56:44+08:00">
+                2020-06-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T22:13:01+08:00">
+                2020-06-06
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">多线程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="java/多线程/java/多线程/线程池/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  0
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
           
         
       
@@ -1816,7 +1987,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="咖啡杯的里茶">
@@ -1835,7 +2006,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" itemprop="url">线程池</a></h1>
+                <a class="post-title-link" href="/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/" itemprop="url">枚举</a></h1>
         
 
         <div class="post-meta">
@@ -1893,8 +2064,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">多线程</span>
+                  <a href="/categories/java/%E6%9E%9A%E4%B8%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">枚举</span>
                   </a>
                 </span>
 
@@ -1911,9 +2082,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/#comments" itemprop="discussionUrl">
+                <a href="/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="java/多线程/java/多线程/线程池/" itemprop="commentCount"></span>
+                        data-disqus-identifier="java/枚举/java/枚举/枚举/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1935,7 +2106,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  1.6k
                 </span>
               
 
@@ -1951,7 +2122,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  7
                 </span>
               
             </div>
@@ -1973,9 +2144,16 @@
 
       
         
-          
-            
-          
+          <h1 id="基本的枚举定义"><a href="#基本的枚举定义" class="headerlink" title="基本的枚举定义"></a>基本的枚举定义</h1><p><code>enum</code> 的全称为 <code>enumeration</code>， 是 <code>JDK 1.5</code>  中引入的新特性，存放在 <code>java.lang</code> 包中。</p>
+<p>定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumMain &#123;</span><br><span class="line">	MON, TUE, WED, THU, FRI, SAT, SUN;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2183,219 +2361,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/java/%E5%BC%82%E5%B8%B8/java/%E5%BC%82%E5%B8%B8/final%E5%92%8Cfinally%E5%92%8Cfinalize%E8%AE%B2%E8%A7%A3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="咖啡杯的里茶">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="咖啡杯里的茶">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/" itemprop="url">枚举</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T19:56:44+08:00">
-                2020-06-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T22:13:01+08:00">
-                2020-06-06
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/%E6%9E%9A%E4%B8%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">枚举</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="java/枚举/java/枚举/枚举/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.6k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="基本的枚举定义"><a href="#基本的枚举定义" class="headerlink" title="基本的枚举定义"></a>基本的枚举定义</h1><p><code>enum</code> 的全称为 <code>enumeration</code>， 是 <code>JDK 1.5</code>  中引入的新特性，存放在 <code>java.lang</code> 包中。</p>
-<p>定义：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumMain &#123;</span><br><span class="line">	MON, TUE, WED, THU, FRI, SAT, SUN;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
