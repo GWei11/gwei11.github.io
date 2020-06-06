@@ -1,10 +1,12 @@
 ---
 title: maven使用手册
 categories:
-	- [tools, maven]
+  - - tools
+    - maven
 tags:
-	- tools
-	- maven
+  - tools
+  - maven
+abbrlink: a6b5c90f
 ---
 
 # `maven`配置默认的jdk版本

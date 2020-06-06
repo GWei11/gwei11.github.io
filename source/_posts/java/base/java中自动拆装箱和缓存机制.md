@@ -1,9 +1,10 @@
 ---
 title: java中自动拆装箱和缓存机制
 categories:
-	- java
+  - java
 tags:
-	- java
+  - java
+abbrlink: d766527a
 ---
 
 # 自动拆装箱

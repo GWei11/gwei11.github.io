@@ -1,10 +1,12 @@
 ---
 title: final和finally和finalize
 categories:
-	- [java, 异常]
+  - - java
+    - 异常
 tags:
-	- java
-	- 异常
+  - java
+  - 异常
+abbrlink: feb6d824
 ---
 
 要想区分这几个关键字的不同之处，就需要弄清楚每一个关键字的本来含义，也就是说为什么想要设置这样的一个关键字，只能搞清楚了一个关键字的本来含义才能明白他们的本质区别。

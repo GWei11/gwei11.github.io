@@ -1,10 +1,12 @@
 ---
 title: java内存模型
 categories:
-	- [java, jvm]
+  - - java
+    - jvm
 tags:
-	- java
-	- jvm
+  - java
+  - jvm
+abbrlink: 86d8e3c1
 ---
 
 # 主要内容

@@ -1,10 +1,12 @@
 ---
 title: join方法详解
 categories:
-	- [java, 多线程]
+  - - java
+    - 多线程
 tags:
-	- java
-	- 多线程
+  - java
+  - 多线程
+abbrlink: c0259f40
 ---
 
 # join的使用

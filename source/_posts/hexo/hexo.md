@@ -1,9 +1,10 @@
 ---
 title: hexo
-categories: 
-	- 博客
+categories:
+  - 博客
 tags:
-	- hexo
+  - hexo
+abbrlink: ab21860c
 ---
 # 文章目录默认展开
 

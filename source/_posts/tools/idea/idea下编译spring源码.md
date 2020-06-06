@@ -1,10 +1,12 @@
 ---
 title: idea下编译spring源码
 category:
-	- [tools, idea]
+  - - tools
+    - idea
 tags:
-	- tools
-	- idea
+  - tools
+  - idea
+abbrlink: b202e3b0
 ---
 
 步骤

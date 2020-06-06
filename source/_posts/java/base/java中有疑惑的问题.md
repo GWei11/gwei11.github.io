@@ -1,9 +1,10 @@
 ---
 title: java中有疑惑的问题
 categories:
-	- java
+  - java
 tags:
-	- java
+  - java
+abbrlink: 71c775
 ---
 
 # java中为什么只有值传递,没有引用传递

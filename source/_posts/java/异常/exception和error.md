@@ -1,10 +1,12 @@
 ---
 title: exception和error
 categories:
-	- [java, 异常]
+  - - java
+    - 异常
 tags:
-	- java
-	- 异常
+  - java
+  - 异常
+abbrlink: fa6a1011
 ---
 
 

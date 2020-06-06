@@ -1,10 +1,12 @@
 ---
-title: idea工具
+title: idea使用手册
 categories:
-	- [tools, idea]
+  - - tools
+    - idea
 tags:
-	- tools
-	- idea
+  - tools
+  - idea
+abbrlink: '583e9182'
 ---
 
 
@@ -15,15 +17,17 @@ tags:
 
 在`idea`中对于一个`web`项目有时候在`webapp/WEB-INF`下右键创建`jsp`文件时并没有该选项。如图所示：
 
-![1582116203351](idea使用手册.assets/1582116203351.png)
+![1582116203351](./idea使用手册/1582116203351.png)
+
+<!--more-->
 
 实际上`idea`工具是可以创建`jsp`文件的，之所以不能创建出来是因为没有正确设置，设置方式如下：
 
-![1582116427213](idea使用手册.assets/1582116427213.png)
+![1582116427213](./idea使用手册/1582116427213.png)
 
 然后将`Web Resource directory path`设置到`webapp`目录那一级。
 
-![1582116490022](idea使用手册.assets/1582116490022.png)
+![1582116490022](./idea使用手册/1582116490022.png)
 
 此时再去新增`jsp`文件
 
@@ -37,7 +41,7 @@ tags:
 
 * 首先选中需要抽取的代码，然后如下图所示进行操作
 
-![image-20200303091909902](idea使用手册.images/image-20200303091909902.png)
+![image-20200303091909902](./idea使用手册/image-20200303091909902.png)
 
 也可以进行右键后选择`Refactor->Extract`进行操作
 
@@ -45,17 +49,17 @@ tags:
 
 # idea实现自动编译
 
-![image-20200304204529707](idea使用手册.images/image-20200304204529707.png)
+![image-20200304204529707](./idea使用手册/image-20200304204529707.png)
 
 此时会发现项目会即时编译，如果出现错误下面的图中位置会有提示
 
-![image-20200304204622116](idea使用手册.images/image-20200304204622116.png)
+![image-20200304204622116](./idea使用手册/image-20200304204622116.png)
 
 # springBean的autowire的报错问题
 
 使用下面的配置即可。
 
-![image-20200304204916822](idea使用手册.images/image-20200304204916822.png)
+![image-20200304204916822](./idea使用手册/image-20200304204916822.png)
 
 
 
@@ -63,7 +67,7 @@ tags:
 
 下载插件的[地址](https://blog.csdn.net/java_lifeng/article/details/90754099)，就是搜索`eclipse code formatter`即可，下载完之后配置地址如下
 
-![image-20200316204323402](idea使用手册.images/image-20200316204323402.png)
+![image-20200316204323402](./idea使用手册/image-20200316204323402.png)
 
 
 

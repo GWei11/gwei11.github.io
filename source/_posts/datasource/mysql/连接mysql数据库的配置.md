@@ -1,10 +1,12 @@
 ---
 title: 连接mysql数据库的配置
 categories:
-	- [datasource, mysql]
+  - - datasource
+    - mysql
 tags:
-	- datasource
-	- mysql
+  - datasource
+  - mysql
+abbrlink: 949bf2aa
 ---
 
 ```properties

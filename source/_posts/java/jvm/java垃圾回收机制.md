@@ -1,10 +1,12 @@
 ---
 title: java垃圾回收机制
 categories:
-	- [java, jvm]
+  - - java
+    - jvm
 tags:
-	- java
-	- jvm
+  - java
+  - jvm
+abbrlink: 638ae112
 ---
 
 # 什么是jvm

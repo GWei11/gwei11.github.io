@@ -1,10 +1,12 @@
 ---
 title: synchronized关键字的用法
 categories:
-	- [java, 多线程]
+  - - java
+    - 多线程
 tags:
-	- java
-	- 多线程
+  - java
+  - 多线程
+abbrlink: 4f3e24e3
 ---
 
 对于`synchronized`我们都知道是同步代码的作用，使用了`synchronized`关键字后，就是对其修饰的方法或代码块进行加锁，这样就能保证同一时间只能有一个线程访问到被其修饰的方法或代码块。

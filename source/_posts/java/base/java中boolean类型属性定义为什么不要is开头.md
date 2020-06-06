@@ -1,9 +1,10 @@
 ---
 title: java中boolean类型属性定义为什么不要使用is开头
 categories:
-	- java
+  - java
 tags:
-	- java
+  - java
+abbrlink: e5fbeefe
 ---
 
 # 参考地址

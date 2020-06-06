@@ -1,10 +1,12 @@
 ---
 title: jvm的内存结构
 categories:
-	- [java, jvm]
+  - - java
+    - jvm
 tags:
-	- java
-	- jvm
+  - java
+  - jvm
+abbrlink: 1818dfe8
 ---
 
 # jvm的内存结构

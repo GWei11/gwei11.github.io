@@ -1,9 +1,10 @@
 ---
 title: githubPag自定义域名以及两台电脑使用hexo
 categories:
-	- 博客
+  - 博客
 tags:
-	- hexo
+  - hexo
+abbrlink: d835680a
 ---
 # githubPag自定义域名
 
