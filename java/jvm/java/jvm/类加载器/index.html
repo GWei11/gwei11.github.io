@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,jvm," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="类加载 将java源代码经过编译器编译器class字节码文件  java文件和class文件都是在本次磁盘中   将字节码文件加载进内存，并且在内存中创建对象的class对象，这个过程称之为类的加载   一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的java程序才可以使用它。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类加载器">
+<meta property="og:url" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/index.html">
+<meta property="og:site_name" content="咖啡杯里的茶">
+<meta property="og:description" content="类加载 将java源代码经过编译器编译器class字节码文件  java文件和class文件都是在本次磁盘中   将字节码文件加载进内存，并且在内存中创建对象的class对象，这个过程称之为类的加载   一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的java程序才可以使用它。">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301095942835.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301111621578.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301112618193.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131544718.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131633046.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301142454190.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301143318867.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144304571.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144534613.png">
+<meta property="article:published_time" content="2020-06-06T11:56:44.201Z">
+<meta property="article:modified_time" content="2020-06-06T14:13:01.482Z">
+<meta property="article:author" content="咖啡杯的里茶">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="jvm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.personalstudy.ltd/java/jvm/java/jvm/类加载器/"/>
+
+
+
+
+
+  <title>类加载器 | 咖啡杯里的茶</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">咖啡杯里的茶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="咖啡杯的里茶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咖啡杯里的茶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">类加载器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T19:56:44+08:00">
+                2020-06-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T22:13:01+08:00">
+                2020-06-06
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="java/jvm/java/jvm/类加载器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><ul>
+<li><p>将<code>java</code>源代码经过编译器编译器<code>class</code>字节码文件</p>
+<ul>
+<li><code>java</code>文件和<code>class</code>文件都是在本次磁盘中</li>
+</ul>
+</li>
+<li><p>将字节码文件加载进内存，并且在内存中创建对象的<code>class</code>对象，这个过程称之为类的加载</p>
+<p>  一个类的生命周期从类被加载、连接和初始化开始，只有在虚拟机内存中，我们的<code>java</code>程序才可以使用它。</p>
+</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301102806401.png" alt="image-20200301102806401"></p>
+<a id="more"></a>
+
+<h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><p>类的加载是由类加载器完成的，类加载器可以分为两种</p>
+<ul>
+<li>第一种是<code>java</code>虚拟机自带的类加载器<ul>
+<li>根类加载器(<code>Bootstrap</code>)</li>
+<li>扩展类加载器(<code>Extension</code>)</li>
+<li>系统了加载器</li>
+</ul>
+</li>
+<li>第二种是用户自定义的类加载器<ul>
+<li>自定义类加载器是<code>java.lang.ClassLoader</code>的子类实例</li>
+</ul>
+</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301095942835.png" alt="image-20200301095942835"></p>
+<h2 id="根类加载器"><a href="#根类加载器" class="headerlink" title="根类加载器"></a>根类加载器</h2><ul>
+<li>根类加载器是最底层的类加载器，是虚拟机的一部分，没有父类，也没有继承<code>java.lang.ClassLoader</code></li>
+<li>主要负责<code>&lt;JAVA_HOME&gt;/jre/lib</code>下的核心类库</li>
+<li>处于安全考虑，根类加载器只能加载<code>java</code>、<code>javax</code>、<code>sun</code>开头的类</li>
+</ul>
+<h2 id="扩展类加载器"><a href="#扩展类加载器" class="headerlink" title="扩展类加载器"></a>扩展类加载器</h2><ul>
+<li>扩展类加载器是指由原<code>SUN</code>公司实现的<code>sun.misc.Launcher</code>类</li>
+<li>该类加载器是由<code>java</code>语言编写，父类加载器是根类加载器</li>
+<li>负责加载<code>&lt;JAVA_HOME&gt;/jre/lib/ext</code>目录下的类库或者系统变量<code>“java.ext.dirs”</code>指定的目录下的类库。</li>
+</ul>
+<h2 id="系统类加载器"><a href="#系统类加载器" class="headerlink" title="系统类加载器"></a>系统类加载器</h2><ul>
+<li>系统类加载器也称之为应用类加载器，也是纯<code>java</code>类</li>
+<li>系统类加载器的父类加载器是扩展类加载器</li>
+<li>负责加载<code>classpath</code>环境变量或系统属性<code>java.class.path</code>所指定的目录中加载类</li>
+<li>应用类加载器是用户自定义的类加载器的默认父加载器，一般情形下，该类加载器是程序中默认的类加载器，可以通过<code>ClassLoader.getSystemClassLoader()</code>直接获取</li>
+</ul>
+<h1 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h1><ul>
+<li>除了虚拟机自带的根类加载器之外，其余的类家在重庆都有自己唯一的父加载器</li>
+<li>当需要使用类加载器加载一个类时，该<code>classLoder</code>会先委托自己的父家在重庆去加载这个类，如果父类加载器可以加载，则由父类加载器去加载。否则才是<code>classLoader</code>自己去加载这个类</li>
+<li>双亲委派机制的父子关系和面向对象程序设计中的继承关系是不一样的，而是通过使用组合模式来复用父类加载器。</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301111621578.png" alt="image-20200301111621578"></p>
+<h2 id="双亲委派模式的好处"><a href="#双亲委派模式的好处" class="headerlink" title="双亲委派模式的好处"></a>双亲委派模式的好处</h2><ul>
+<li>可以避免类的重复加载，当父类加载器已经加载了该类时，就没有必要让子<code>ClassLoader</code>再去加载一次</li>
+<li>考虑到安全因素，<code>java</code>核心<code>api</code>中定义的类型不会被随意替换<ul>
+<li>比如自己定义了一个<code>java.lang.Object</code>的类，通过双亲委托模式传递到启动类加载器，启动类加载器在核心<code>api</code>中发现了这个名字的类，发现已经被加载，这样就不会重新加载，而是直接返回已经加载过的<code>Object.class</code>，这样就可以防止核心<code>api</code>被随意篡改。</li>
+</ul>
+</li>
+</ul>
+<p><strong>测试代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="number">111</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码的包名是<code>java.lang</code>，由于<code>java</code>的核心<code>api</code>的包名也是这个，所以运行上面的成出现下面的错误</p>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301112618193.png" alt="image-20200301112618193"></p>
+<h1 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h1><p><code>ClassLoader</code>中主要看这个方法</p>
+<h2 id="loadClass"><a href="#loadClass" class="headerlink" title="loadClass"></a>loadClass</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">        <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">            <span class="comment">// 首先检查该类是否已经被加载过</span></span><br><span class="line">            Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">          <span class="comment">// 还没加载的类才会继续加载</span></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                  <span class="comment">// 如果有父类加载器就让父类去加载</span></span><br><span class="line">                    <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                      <span class="comment">// 没有父类就使用根类加载器去加载</span></span><br><span class="line">                        c = findBootstrapClassOrNull(name);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                    <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                    <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">               		<span class="comment">// 如果父类加载器或根类加载器都没有加载到，就使用自己的类加载器去加载</span></span><br><span class="line">                    <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                    c = findClass(name)</span><br><span class="line">                    <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">                resolveClass(c);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>laodClass</code>方法中体现了双亲委托模式的逻辑<ul>
+<li>首先让父类加载器加载</li>
+<li>父类加载器没有加载到就让根类加载器加载</li>
+<li>父类或根类加载器都没有加载到的时候就使用自己的类加载器加载</li>
+</ul>
+</li>
+</ul>
+<h2 id="findClass"><a href="#findClass" class="headerlink" title="findClass"></a>findClass</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(name);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>findClass</code>默认是一个错误的空实现，<strong>这也是我们自定义类加载器时需要重写的方法。</strong></p>
+<h2 id="defineCLass"><a href="#defineCLass" class="headerlink" title="defineCLass"></a>defineCLass</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> Class&lt;?&gt; defineClass(String name, <span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len,</span><br><span class="line">                                         ProtectionDomain protectionDomain)</span><br><span class="line">        <span class="keyword">throws</span> ClassFormatError &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该方法是用来将<code>byte[]</code>字节解析成虚拟机能够识别的<code>class</code>对象，<code>defineClass</code>通常和<code>findClass</code>方法一起使用，在自定义类加载器时，会直接覆盖<code>CLassLoader</code>的<code>findCLass</code>方法获取想要加载类的字节码，然后调用<code>defineCLass</code>方法生成<code>Class</code>对象。</p>
+<h2 id="resolveCLass"><a href="#resolveCLass" class="headerlink" title="resolveCLass"></a>resolveCLass</h2><p>连接指定的类，类加载器可以使用此方法来连接类。</p>
+<h1 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h1><p>在<code>java.net</code>包中。<code>jdk</code>提供了一个类加载器<code>URLClassLoader</code>，该类扩展了<code>ClassLoader</code>，能够从本地或网络</p>
+<p>上指定的位置加载类，我们也可以使用该类作为自定义的类加载器使用。</p>
+<p>其构造器中只要需要传入<code>URL</code>地址</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">URLClassLoader</span><span class="params">(URL[] urls)</span> </span>&#123;&#125;<span class="comment">// 使用默认的父类构造器</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">URLClassLoader</span><span class="params">(URL[] urls, ClassLoader parent)</span> </span>&#123;&#125; <span class="comment">// 也可以自己指定构造器</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>测试案例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> example.loader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.net.URLClassLoader;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestURLClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 加载本地的类</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOne</span> <span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"d:/"</span>);</span><br><span class="line">        URI uri = file.toURI();</span><br><span class="line">        URL url = uri.toURL();</span><br><span class="line">        URLClassLoader urlClassLoader = <span class="keyword">new</span> URLClassLoader(<span class="keyword">new</span> URL[]&#123;url&#125;);</span><br><span class="line">        Class&lt;?&gt; aClass = urlClassLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        aClass.newInstance();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 加载网络上的类</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTwo</span> <span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        URL url = <span class="keyword">new</span> URL(<span class="string">"http://localhost:8080/examples/"</span>);</span><br><span class="line">        URLClassLoader urlClassLoader = <span class="keyword">new</span> URLClassLoader(<span class="keyword">new</span> URL[]&#123;url&#125;);</span><br><span class="line">        Class&lt;?&gt; aClass = urlClassLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        aClass.newInstance();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>加载本地的类</strong></p>
+<p>在我的本地<code>d</code>盘根目录中有一个 <code>TestClassLoader.java</code>文件，文件内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClassLoader</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TestClassLoader</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"new Instance"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时使用<code>javac</code>命令来编译一下：</p>
+<p><code>javac -d . TestClassLoader.java</code></p>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131544718.png" alt="image-20200301131544718"></p>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301131633046.png" alt="image-20200301131633046"></p>
+<ul>
+<li><code>-d</code>选项是指定编译到哪里去的位置</li>
+<li><code>.</code>点是指当前目录</li>
+</ul>
+<p>执行加载本地的类的代码会输出  <code>new Instance</code></p>
+<h1 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a>自定义类加载器</h1><p>上面已经说过，想要自定义类加载器，有如下几个固定步骤</p>
+<ul>
+<li>自定义的类需要继承<code>ClassLoader</code>抽象类</li>
+<li>重写<code>findCLass</code>方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> example.loader;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 被加载的类所在的目录</span></span><br><span class="line">    <span class="keyword">private</span> String directory;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyClassLoader</span><span class="params">(String directory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.directory = directory;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyClassLoader</span><span class="params">(ClassLoader parent, String directory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(parent);</span><br><span class="line">        <span class="keyword">this</span>.directory = directory;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义类加载器需要重写该方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ClassNotFoundException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        InputStream in = <span class="keyword">null</span>;</span><br><span class="line">        ByteArrayOutputStream baos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//    将类名转换为目录</span></span><br><span class="line">            String file = directory + File.separator + name.replace(<span class="string">"."</span>, File.separator) + <span class="string">".class"</span>;</span><br><span class="line">            <span class="comment">// 构建输入流</span></span><br><span class="line">            in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            <span class="comment">// 构建字节输出流</span></span><br><span class="line">            baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">            <span class="comment">// 定义缓冲区</span></span><br><span class="line">            <span class="keyword">byte</span> buf[] = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> len = -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> ((len = in.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 往输出流中输入数据</span></span><br><span class="line">                baos.write(buf, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//读取到的字节码二进制数据</span></span><br><span class="line">            <span class="keyword">byte</span> data[] = baos.toByteArray();</span><br><span class="line">            <span class="keyword">return</span> defineClass(name, data, <span class="number">0</span>, data.length);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    in.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (baos != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    baos.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">// main方法测试</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyClassLoader myClassLoader = <span class="keyword">new</span> MyClassLoader(<span class="string">"d:/"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass = myClassLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        System.out.println(aClass.newInstance());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="热部署类加载器"><a href="#热部署类加载器" class="headerlink" title="热部署类加载器"></a>热部署类加载器</h1><p><strong>所谓的热部署就是让同一个<code>class</code>可以被不同的类加载器加载即可。</strong></p>
+<p>当我们使用<code>loadClass</code>方法加载类时，会采用双亲委托模式。</p>
+<ul>
+<li>如果一个类已经被加载，加一次加载该类时就会从缓存中取，不会重新加载</li>
+<li>如果同一个<code>class</code>被同一个类加载器加载多次，则会报错</li>
+</ul>
+<p>而<code>ClassLoader</code>中实现委托机制的代码主要在<code>loadClass</code>方法，而真正实现加载的则是<code>findClass</code>方法，所以我们只需要不调用<code>loadClass</code>方法而直接调用<code>findClass</code>就可以实现同一个类被不同的类加载器加载。</p>
+<p><strong>案例代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> example.loader;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderDemo2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyClassLoader classLoader = <span class="keyword">new</span> MyClassLoader(<span class="string">"D:/"</span>);</span><br><span class="line">        MyClassLoader classLoader1 = <span class="keyword">new</span> MyClassLoader(classLoader,<span class="string">"D:/"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass = classLoader.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass1 = classLoader1.loadClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        System.out.println(aClass.hashCode()); <span class="comment">// 1364335809</span></span><br><span class="line">        System.out.println(aClass1.hashCode());<span class="comment">// 1364335809</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyClassLoader classLoader = <span class="keyword">new</span> MyClassLoader(<span class="string">"D:/"</span>);</span><br><span class="line">        MyClassLoader classLoader1 = <span class="keyword">new</span> MyClassLoader(classLoader,<span class="string">"D:/"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass = classLoader.findClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        Class&lt;?&gt; aClass1 = classLoader1.findClass(<span class="string">"example.TestClassLoader"</span>);</span><br><span class="line">        System.out.println(aClass.hashCode()); <span class="comment">// 233530418</span></span><br><span class="line">        System.out.println(aClass1.hashCode()); <span class="comment">// 683287027</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了上面自定义类加载器的代码。</p>
+<ul>
+<li>第一个测试案例中两个<code>class</code>的<code>hashCode</code>是一致的，说明类加载器的双亲委托机制起了作用</li>
+<li>第二个测试案例中虽然第一个类加载器也是第二类加载器的父类加载器，但是两个类的<code>hashCode</code>并不是一样的，这说明，这两个类加载器都起了作用，这是因为这里没有使用<code>loadClass</code>方法，所以双亲委托机制的代码就没有起到作用。</li>
+</ul>
+<h1 id="线程上下文类加载器"><a href="#线程上下文类加载器" class="headerlink" title="线程上下文类加载器"></a>线程上下文类加载器</h1><p>对于使用<code>JDBC</code>的时候我们都知道，第一步就是要注册驱动,对于<code>mysql</code>而言如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301142454190.png" alt="image-20200301142454190"></p>
+<p>但是实际上即使我们没有写这样的一句代码，其余的代码也是可以正常执行的。那来看一下<code>DriverManager</code>类的代码：</p>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301143318867.png" alt="image-20200301143318867"></p>
+<p>在第2步里面有两种方式来注册该驱动</p>
+<p><strong>来看2.1中实现类加载的方式</strong></p>
+<p><code>2.1</code>的代码跟到第4步的时候可以看到下面这样的一段代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;S&gt; <span class="function">ServiceLoader&lt;S&gt; <span class="title">load</span><span class="params">(Class&lt;S&gt; service)</span> </span>&#123;</span><br><span class="line">        ClassLoader cl = Thread.currentThread().getContextClassLoader();</span><br><span class="line">        <span class="keyword">return</span> ServiceLoader.load(service, cl);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到 <code>Thread.currentThread().getContextClassLoader()</code>，也就是获取<strong>线程上下文类类加载器</strong>，在线程启动的时候应用类加载器会默认赋值给当前线程，所以<code>getContextClassLoader</code>方法默认情况下获取的也是应用类加载器。</p>
+<p><strong>看2.2的代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (String aDriver : driversList) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                println(<span class="string">"DriverManager.Initialize: loading "</span> + aDriver);</span><br><span class="line">                Class.forName(aDriver, <span class="keyword">true</span>,</span><br><span class="line">                        ClassLoader.getSystemClassLoader());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">                println(<span class="string">"DriverManager.Initialize: load failed: "</span> + ex);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里面使用到了<code>Class.forName(aDriver, true,  ClassLoader.getSystemClassLoader())</code></p>
+<p>对于<code>ClassLoader.getSystemClassLoader()</code>方法获取的是<strong>系统应用类加载器</strong>，所以这里其实是破坏了双亲委托模式，因为<code>DriverManager</code>是启动项加载器来加载的(也就是根类加载器)，而在<code>DriverManager</code>中使用系统类加载器去加载数据库驱动包的类。</p>
+<p>还有一个点需要注意，在2.2代码中使用到了<code>aDriver</code>这个变量，该变量来源</p>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144304571.png" alt="image-20200301144304571"></p>
+<p>也就是从<code>jdbc.drivers</code>文件中去加载，其余这里是使用到了<code>SPI</code>机制</p>
+<h2 id="SPI机制"><a href="#SPI机制" class="headerlink" title="SPI机制"></a>SPI机制</h2><blockquote>
+<p><code>SPI</code> ，全称为 <code>Service Provider Interface</code>，是一种服务发现机制。它通过在<code>ClassPath</code>路径下的<code>META-INF/services</code>文件夹查找文件，自动加载文件里所定义的类.</p>
+</blockquote>
+<p>可以看一下<code>Mysql</code>驱动包里面确实有有这样的一个文件</p>
+<p><img src="/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/image-20200301144534613.png" alt="image-20200301144534613"></p>
+<p>对于使用<code>SPI</code>机制使用到的类是  <code>ServiceLoader</code>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/微信支付.jpg" alt="咖啡杯的里茶 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/支付宝支付.jpg" alt="咖啡杯的里茶 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    咖啡杯的里茶
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" title="类加载器">http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/jvm/" rel="tag"><i class="fa fa-tag"></i> jvm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" rel="next" title="java垃圾回收机制">
+                <i class="fa fa-chevron-left"></i> java垃圾回收机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/java/jvm/java/jvm/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" rel="prev" title="对象的内存布局">
+                对象的内存布局 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">咖啡杯的里茶</p>
+              <p class="site-description motion-element" itemprop="description">不积跬步无以至千里</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类加载"><span class="nav-number">1.</span> <span class="nav-text">类加载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类加载器"><span class="nav-number">2.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#根类加载器"><span class="nav-number">2.1.</span> <span class="nav-text">根类加载器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展类加载器"><span class="nav-number">2.2.</span> <span class="nav-text">扩展类加载器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统类加载器"><span class="nav-number">2.3.</span> <span class="nav-text">系统类加载器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双亲委派机制"><span class="nav-number">3.</span> <span class="nav-text">双亲委派机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双亲委派模式的好处"><span class="nav-number">3.1.</span> <span class="nav-text">双亲委派模式的好处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ClassLoader"><span class="nav-number">4.</span> <span class="nav-text">ClassLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loadClass"><span class="nav-number">4.1.</span> <span class="nav-text">loadClass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#findClass"><span class="nav-number">4.2.</span> <span class="nav-text">findClass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#defineCLass"><span class="nav-number">4.3.</span> <span class="nav-text">defineCLass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#resolveCLass"><span class="nav-number">4.4.</span> <span class="nav-text">resolveCLass</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URLClassLoader"><span class="nav-number">5.</span> <span class="nav-text">URLClassLoader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义类加载器"><span class="nav-number">6.</span> <span class="nav-text">自定义类加载器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#热部署类加载器"><span class="nav-number">7.</span> <span class="nav-text">热部署类加载器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程上下文类加载器"><span class="nav-number">8.</span> <span class="nav-text">线程上下文类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SPI机制"><span class="nav-number">8.1.</span> <span class="nav-text">SPI机制</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咖啡杯的里茶</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">37.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://咖啡杯里的茶.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.personalstudy.ltd/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/';
+          this.page.identifier = 'java/jvm/java/jvm/类加载器/';
+          this.page.title = '类加载器';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://咖啡杯里的茶.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '8XkyNmWXOmKklNGNNf4hDun4-gzGzoHsz',
+        appKey: 'N6tHd8zrPJnfjBVavYgtBOLQ',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

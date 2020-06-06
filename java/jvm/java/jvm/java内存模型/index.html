@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,jvm," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主要内容java内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而java内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。 jvm 对于java内存模型我们主要需要了解以下几个内容：  硬件内存架构 线程和jvm java内存模型 java内存模型对并发编程的支持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java内存模型">
+<meta property="og:url" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="咖啡杯里的茶">
+<meta property="og:description" content="主要内容java内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而java内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。 jvm 对于java内存模型我们主要需要了解以下几个内容：  硬件内存架构 线程和jvm java内存模型 java内存模型对并发编程的支持">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163052739.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163335781.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425164144343.png">
+<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png">
+<meta property="article:published_time" content="2020-06-06T11:56:44.181Z">
+<meta property="article:modified_time" content="2020-06-06T14:13:01.480Z">
+<meta property="article:author" content="咖啡杯的里茶">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="jvm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163052739.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.personalstudy.ltd/java/jvm/java/jvm/java内存模型/"/>
+
+
+
+
+
+  <title>java内存模型 | 咖啡杯里的茶</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">咖啡杯里的茶</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="咖啡杯的里茶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咖啡杯里的茶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java内存模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T19:56:44+08:00">
+                2020-06-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T22:13:01+08:00">
+                2020-06-06
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="java/jvm/java/jvm/java内存模型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h1><p><code>java</code>内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而<code>java</code>内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。</p>
+<p><a href="https://gwei11.gitee.io/2020/04/23/java/jvm/jvm/#more" target="_blank" rel="noopener">jvm</a></p>
+<p>对于<code>java</code>内存模型我们主要需要了解以下几个内容：</p>
+<ul>
+<li>硬件内存架构</li>
+<li>线程和<code>jvm</code></li>
+<li><code>java</code>内存模型</li>
+<li><code>java</code>内存模型对并发编程的支持</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="硬件内存架构"><a href="#硬件内存架构" class="headerlink" title="硬件内存架构"></a>硬件内存架构</h1><blockquote>
+<p>物理机遇到的并发问题与虚拟机中的情况有很多相似之处，物理机对并发的处理方案对虚拟机的实现也有相当大的参考意义</p>
+</blockquote>
+<p><img src="/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163052739.png" alt="image-20200425163052739"></p>
+<p>如上图所示，在计算机模型中主要是有五个部分来组成的，其中<strong>处理器</strong>和<strong>控制器</strong>合起来就是我们所示的<code>cpu</code></p>
+<p>运算器的运算速度都是很快的，但是我们的数据存储不可能所有数据都存放在寄存器中，所以数据的<code>io</code>操作都是很有必要 的，这样就不能充分利用<code>cpu</code>的运算能力，此时就需要<strong>加上读写速度和处理器运算速度差不多的的高速缓存</strong>来作为<strong>内存和处理器之间</strong>的缓冲。将运算需要使用的数据复制到缓存中，让运算能快速进行，当运算结束后再从缓存同步回内存之中，这样处理器就无须等待缓慢的内存读写了。</p>
+<h2 id="缓存一致性问题"><a href="#缓存一致性问题" class="headerlink" title="缓存一致性问题"></a>缓存一致性问题</h2><p>上面加上了缓存可以解决内存的读写速度赶不上处理器的运算速度问题，但是又出现了另外一个问题。<strong>缓存一致性问题</strong></p>
+<p>因为 在多处理器中，每一个处理器都有自己的高速缓存，但是内存是只有一个。对于缓存一致性问题在硬件层面主要有两个解决方式</p>
+<ul>
+<li><p>总线加锁</p>
+<ul>
+<li>所谓的总线加锁就每一次都会锁定一个<code>cpu</code>，只有这个锁定的<code>cpu</code>才可以执行，其余的<code>cpu</code>是不能执行的。这种方式会降低<code>cpu</code>的吞吐量。</li>
+</ul>
+</li>
+<li><p>使用缓存一致性协议，所谓使用缓存一致性协议也就是在缓存和主内存之间加上一个访问规则，通过这种规则来解决缓存一致性问题。</p>
+</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163335781.png" alt="image-20200425163335781"></p>
+<p>这里的<strong>缓存一致性其实是一个协议</strong>，是处理缓存一致性问题的一个协议(也可以任认为是处理缓存一致性问题的一个理论基础)。</p>
+<h1 id="java内存模型-java-memory-mode"><a href="#java内存模型-java-memory-mode" class="headerlink" title="java内存模型(java memory mode)"></a>java内存模型(java memory mode)</h1><h2 id="什么是java内存模型-JMM规范"><a href="#什么是java内存模型-JMM规范" class="headerlink" title="什么是java内存模型(JMM规范)"></a>什么是<code>java</code>内存模型(JMM规范)</h2><p><strong><code>java</code>内存模型其实也是一个理论上的东西，是一个规范，这个规范的主要目的是定义程序中各种变量的访问规则，也就是关注的是虚拟机中把变量值存储到内存和从内存中取出变量值这样的底层细节。</strong>此处的变量和<code>java</code>编程中的变量是不同的，这里的变量包含了实例字段，静态字段和构成数组对象的元素，但是不包括局部变量和方法参数。（上面这段话是《深入理解java虚拟机》这本书中的）</p>
+<p><code>jvm</code>将内存组织结构主要划分为两个部分</p>
+<ul>
+<li>主内存</li>
+<li>工作内存</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425164144343.png" alt="image-20200425164144343"></p>
+<h3 id="主内存"><a href="#主内存" class="headerlink" title="主内存"></a>主内存</h3><ul>
+<li>主要包含本地方法区和堆</li>
+<li>所有变量都要存储在主内存中，这些变量对于所有线程都是共享的</li>
+</ul>
+<h3 id="工作内存"><a href="#工作内存" class="headerlink" title="工作内存"></a>工作内存</h3><ul>
+<li>每一个线程都有自己独立工作的地方，也就是工作内存</li>
+<li>工作内存中保存的是主内存中某些变量的拷贝，线程堆变量的所有操作都必须在工作内存中进行，不能直接操作主内存</li>
+<li><strong>如果是基本数据类型，那么直接分配到工作内存，如果是引用类型，引用的地址存在在工作空间中，但是具体的对象是存在在堆中(也就是主内存中)，是可以共享的</strong></li>
+</ul>
+<p><img src="/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png" alt="什么是java内存模型"></p>
+<p>看上图，之所以存在<code>java</code>内存模型一说是因为<code>java</code>虚拟机的工作机制。当有多个线程的时候，每一个线程可以操作的数据有两种类型</p>
+<ul>
+<li>线程私有的数据，也就是这个数据就算改变了也不会影响其余线程，比如说局部变量就是线程私有的数据</li>
+<li>线程共享的数据，这样的数据多个线程都可以访问，就会出现线程安全的问题</li>
+</ul>
+<p>因为线程操作的数据有不同类型，所以在<code>java</code>中一个线程去操作数据的时候不是在主内存中直接操作，其实还有一个属于线程自己的内存(工作内存)，当操作线程私有的数据比较好理解，直接在工作内存中完成就可以咯，如果是操作共享的数据，那么就在主内存中拿一份数据到自己工作内存中操作，操作完了再将数据给到主内存中。</p>
+<h2 id="内存结构和内存模型的关系"><a href="#内存结构和内存模型的关系" class="headerlink" title="内存结构和内存模型的关系"></a>内存结构和内存模型的关系</h2><p>上面说了什么是<code>java</code>的内存模型，知道<code>java</code>内存模型是一个规范，定义的是程序中变量的访问规则，那么这个内存模型和我们平时所有的内存结构有什么关系呢？先看一下<code>java</code>内存结构</p>
+<h3 id="java内存结构"><a href="#java内存结构" class="headerlink" title="java内存结构"></a>java内存结构</h3><p><code>java</code>中内存结构主要是有五个部分</p>
+<ul>
+<li>程序计数器</li>
+<li>堆</li>
+<li>虚拟机栈<ul>
+<li>存放方法运行时所需的数据，成为栈帧</li>
+</ul>
+</li>
+<li>本地方法栈</li>
+<li>方法区<ul>
+<li>存储运行时常量池、已被虚拟机加载的类信息、常量、静态变量，即时编译后的代码等</li>
+</ul>
+</li>
+</ul>
+<p>上面<code>java</code>的五个部分其实就是根据<code>JMM</code>规范(<code>java</code>内存模型)来划分的一个内存结构。</p>
+<h1 id="并发编程的三个特性"><a href="#并发编程的三个特性" class="headerlink" title="并发编程的三个特性"></a>并发编程的三个特性</h1><h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><p>执行的操作不可分割，可以理解为就是一步操作，因为只有一步所以肯定是不能分割的</p>
+<h2 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h2><p>线程都是有自己的工作空间的，每一个线程都只能操作自己工作空间的数据，别的线程是看不到自己线程的工作空间的数据的</p>
+<h2 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h2><p>程序中代码的顺序不一定就是在<code>cpu</code>中执行的顺序，因为存在两种重排</p>
+<ul>
+<li>编译重排序(编译期)</li>
+<li>指令重排序(运行期)</li>
+</ul>
+<h1 id="JMM规范是如何保证并发编程的三个特征的呢"><a href="#JMM规范是如何保证并发编程的三个特征的呢" class="headerlink" title="JMM规范是如何保证并发编程的三个特征的呢"></a>JMM规范是如何保证并发编程的三个特征的呢</h1><h2 id="JMM和原子性"><a href="#JMM和原子性" class="headerlink" title="JMM和原子性"></a><code>JMM</code>和原子性</h2><h3 id="原子性案例1"><a href="#原子性案例1" class="headerlink" title="原子性案例1"></a>原子性案例1</h3><p><code>X = 10</code>这样一个操作具有原子性么？</p>
+<ul>
+<li>如果<code>X</code>是私有数据，是分配到工作空间的，那么就是有原子性的，因为只有一个写的操作</li>
+<li>如果<code>X</code>是共享的数据，就是在主内存中，这样就需要先在主内存中读取(复制)到工作空间中，修改完成后再将数据通过到主内存中，这样就是两步，也就是没有原子性</li>
+</ul>
+<h3 id="原子性案例2"><a href="#原子性案例2" class="headerlink" title="原子性案例2"></a>原子性案例2</h3><p><code>i++</code>这个操作具有原子性么？</p>
+<p><code>i++</code>这个操作其实是需要分为下面这几个步骤的</p>
+<ul>
+<li>读取<code>i</code>的值</li>
+<li>将<code>i</code>的值加一</li>
+<li>将修改后的值赋值给<code>i</code></li>
+</ul>
+<p>可以看到每一步都是原子操作，但是这三个原子操作合在一起之后去不是原子操作了</p>
+<h3 id="JMM如何保证原子性的"><a href="#JMM如何保证原子性的" class="headerlink" title="JMM如何保证原子性的"></a>JMM如何保证原子性的</h3><ul>
+<li>使用<code>Synchronized</code>关键字</li>
+<li>使用<code>JUC</code>的<code>lock</code>和<code>unlock</code>关键字</li>
+</ul>
+<h2 id="JMM和可见性"><a href="#JMM和可见性" class="headerlink" title="JMM和可见性"></a><code>JMM</code>和可见性</h2><p>线程是不能操作主内存中的数据的，只能操作自己的工作空间的数据，所以需要数据时会先去工作空间找，如果找到了就会使用工作空间中的数据，找不到才会从主内存中找，但是如果一个线程在工作空间找到了，不过这个数据在别的线程中已经修改了，并且刷新到主内中了，由于当前线程的工作空间中有这个数据，没有在主内存中拿，这样当前线程拿到的就不是最新的数据。<code>JMM</code>是如何解决这个问题的呢？</p>
+<h3 id="JMM如何保证可见性的"><a href="#JMM如何保证可见性的" class="headerlink" title="JMM如何保证可见性的"></a><code>JMM</code>如何保证可见性的</h3><ul>
+<li><code>Volatile</code>关键字，使用这个关键字后，当线程需要使用这个关键字修饰的数据时，每一次都会从主内存中去找数据，而不是从工作空间中找。</li>
+<li><code>JUC</code>  可以使用<code>JUC</code>的<code>lock</code>和<code>unlock</code></li>
+</ul>
+<h2 id="JMM和有序性-重排序"><a href="#JMM和有序性-重排序" class="headerlink" title="JMM和有序性(重排序)"></a><code>JMM</code>和有序性(重排序)</h2><p>对于有序性问题可以使用下面两种方式来解决</p>
+<ul>
+<li>使用<code>Volatile</code>关键字</li>
+<li>使用<code>Synchronized</code>来加锁</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/微信支付.jpg" alt="咖啡杯的里茶 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/支付宝支付.jpg" alt="咖啡杯的里茶 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    咖啡杯的里茶
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" title="java内存模型">http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/jvm/" rel="tag"><i class="fa fa-tag"></i> jvm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E5%8D%9A%E5%AE%A2/hexo/githubPags/" rel="next" title="githubPag自定义域名以及两台电脑使用hexo">
+                <i class="fa fa-chevron-left"></i> githubPag自定义域名以及两台电脑使用hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="prev" title="策略模式">
+                策略模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">咖啡杯的里茶</p>
+              <p class="site-description motion-element" itemprop="description">不积跬步无以至千里</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件内存架构"><span class="nav-number">2.</span> <span class="nav-text">硬件内存架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存一致性问题"><span class="nav-number">2.1.</span> <span class="nav-text">缓存一致性问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java内存模型-java-memory-mode"><span class="nav-number">3.</span> <span class="nav-text">java内存模型(java memory mode)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是java内存模型-JMM规范"><span class="nav-number">3.1.</span> <span class="nav-text">什么是java内存模型(JMM规范)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主内存"><span class="nav-number">3.1.1.</span> <span class="nav-text">主内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作内存"><span class="nav-number">3.1.2.</span> <span class="nav-text">工作内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构和内存模型的关系"><span class="nav-number">3.2.</span> <span class="nav-text">内存结构和内存模型的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存结构"><span class="nav-number">3.2.1.</span> <span class="nav-text">java内存结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发编程的三个特性"><span class="nav-number">4.</span> <span class="nav-text">并发编程的三个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子性"><span class="nav-number">4.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可见性"><span class="nav-number">4.2.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序性"><span class="nav-number">4.3.</span> <span class="nav-text">有序性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM规范是如何保证并发编程的三个特征的呢"><span class="nav-number">5.</span> <span class="nav-text">JMM规范是如何保证并发编程的三个特征的呢</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM和原子性"><span class="nav-number">5.1.</span> <span class="nav-text">JMM和原子性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性案例1"><span class="nav-number">5.1.1.</span> <span class="nav-text">原子性案例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性案例2"><span class="nav-number">5.1.2.</span> <span class="nav-text">原子性案例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM如何保证原子性的"><span class="nav-number">5.1.3.</span> <span class="nav-text">JMM如何保证原子性的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM和可见性"><span class="nav-number">5.2.</span> <span class="nav-text">JMM和可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM如何保证可见性的"><span class="nav-number">5.2.1.</span> <span class="nav-text">JMM如何保证可见性的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM和有序性-重排序"><span class="nav-number">5.3.</span> <span class="nav-text">JMM和有序性(重排序)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咖啡杯的里茶</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">37.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://咖啡杯里的茶.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/';
+          this.page.identifier = 'java/jvm/java/jvm/java内存模型/';
+          this.page.title = 'java内存模型';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://咖啡杯里的茶.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '8XkyNmWXOmKklNGNNf4hDun4-gzGzoHsz',
+        appKey: 'N6tHd8zrPJnfjBVavYgtBOLQ',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
