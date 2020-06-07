@@ -82,20 +82,20 @@
 <meta name="description" content="主要内容java内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而java内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。 jvm 对于java内存模型我们主要需要了解以下几个内容：  硬件内存架构 线程和jvm java内存模型 java内存模型对并发编程的支持">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java内存模型">
-<meta property="og:url" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:url" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="咖啡杯里的茶">
 <meta property="og:description" content="主要内容java内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而java内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。 jvm 对于java内存模型我们主要需要了解以下几个内容：  硬件内存架构 线程和jvm java内存模型 java内存模型对并发编程的支持">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163052739.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163335781.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425164144343.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png">
-<meta property="article:published_time" content="2020-06-06T11:56:44.181Z">
-<meta property="article:modified_time" content="2020-06-06T14:13:01.480Z">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163052739.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163335781.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425164144343.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200423233046759.png">
+<meta property="article:published_time" content="2020-06-07T10:57:41.429Z">
+<meta property="article:modified_time" content="2020-06-07T10:57:41.429Z">
 <meta property="article:author" content="咖啡杯的里茶">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163052739.png">
+<meta name="twitter:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/image-20200425163052739.png">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://www.personalstudy.ltd/java/jvm/java/jvm/java内存模型/"/>
+  <link rel="canonical" href="https://www.personalstudy.ltd/java/jvm/java/jvm/java内存模型/"/>
 
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="咖啡杯的里茶">
@@ -331,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T19:56:44+08:00">
-                2020-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T18:57:41+08:00">
+                2020-06-07
               </time>
             
 
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T22:13:01+08:00">
-                2020-06-06
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-07T18:57:41+08:00">
+                2020-06-07
               </time>
             
           </span>
@@ -608,7 +608,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" title="java内存模型">http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</a>
+    <a href="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" title="java内存模型">https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -638,8 +638,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/%E5%8D%9A%E5%AE%A2/hexo/githubPags/" rel="next" title="githubPag自定义域名以及两台电脑使用hexo">
-                <i class="fa fa-chevron-left"></i> githubPag自定义域名以及两台电脑使用hexo
+              <a href="/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="设计模式">
+                <i class="fa fa-chevron-left"></i> 设计模式
               </a>
             
           </div>
@@ -648,8 +648,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E7%9A%84%E4%B8%83%E7%A7%8D%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="prev" title="多线程下的七种单例模式">
-                多线程下的七种单例模式 <i class="fa fa-chevron-right"></i>
+              <a href="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" rel="prev" title="java垃圾回收机制">
+                java垃圾回收机制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -971,7 +971,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/';
+          this.page.url = 'https://www.personalstudy.ltd/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/';
           this.page.identifier = 'java/jvm/java/jvm/java内存模型/';
           this.page.title = 'java内存模型';
         };

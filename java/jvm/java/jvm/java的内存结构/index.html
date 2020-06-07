@@ -82,30 +82,30 @@
 <meta name="description" content="jvm的内存结构java内存结构主要划分为五大部分  线程私有的三个 程序计数器 虚拟机栈 本地方法栈   线程共享的两个 堆 方法区">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jvm的内存结构">
-<meta property="og:url" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:url" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="咖啡杯里的茶">
 <meta property="og:description" content="jvm的内存结构java内存结构主要划分为五大部分  线程私有的三个 程序计数器 虚拟机栈 本地方法栈   线程共享的两个 堆 方法区">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423222321549.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423223432569.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423223835220.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423223943229.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423224013817.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423224155411.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229090947417-1587653003528.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229095538249.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229110457271.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229111044049.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229111447635.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229111632554.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229113833612.png">
-<meta property="og:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229114102103.png">
-<meta property="article:published_time" content="2020-06-06T11:56:44.191Z">
-<meta property="article:modified_time" content="2020-06-06T14:13:01.481Z">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423222321549.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423223432569.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423223835220.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423223943229.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423224013817.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423224155411.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229090947417-1587653003528.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229095538249.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229110457271.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229111044049.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229111447635.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229111632554.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229113833612.png">
+<meta property="og:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200229114102103.png">
+<meta property="article:published_time" content="2020-06-07T10:57:41.461Z">
+<meta property="article:modified_time" content="2020-06-07T10:57:41.461Z">
 <meta property="article:author" content="咖啡杯的里茶">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423222321549.png">
+<meta name="twitter:image" content="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/image-20200423222321549.png">
 
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://www.personalstudy.ltd/java/jvm/java/jvm/java的内存结构/"/>
+  <link rel="canonical" href="https://www.personalstudy.ltd/java/jvm/java/jvm/java的内存结构/"/>
 
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="咖啡杯的里茶">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T19:56:44+08:00">
-                2020-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T18:57:41+08:00">
+                2020-06-07
               </time>
             
 
@@ -357,8 +357,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-06T22:13:01+08:00">
-                2020-06-06
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-07T18:57:41+08:00">
+                2020-06-07
               </time>
             
           </span>
@@ -755,7 +755,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" title="jvm的内存结构">http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</a>
+    <a href="https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" title="jvm的内存结构">https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -785,8 +785,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/java/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/" rel="next" title="java中boolean类型属性定义为什么不要使用is开头">
-                <i class="fa fa-chevron-left"></i> java中boolean类型属性定义为什么不要使用is开头
+              <a href="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" rel="next" title="java垃圾回收机制">
+                <i class="fa fa-chevron-left"></i> java垃圾回收机制
               </a>
             
           </div>
@@ -795,8 +795,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" rel="prev" title="java垃圾回收机制">
-                java垃圾回收机制 <i class="fa fa-chevron-right"></i>
+              <a href="/java/jvm/java/jvm/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" rel="prev" title="对象的内存布局">
+                对象的内存布局 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1118,7 +1118,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/';
+          this.page.url = 'https://www.personalstudy.ltd/java/jvm/java/jvm/java%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/';
           this.page.identifier = 'java/jvm/java/jvm/java的内存结构/';
           this.page.title = 'jvm的内存结构';
         };
