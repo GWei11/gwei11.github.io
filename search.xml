@@ -2362,4 +2362,18 @@
         <tag>maven</tag>
       </tags>
   </entry>
+  <entry>
+    <title>github下载速度慢的解决方式</title>
+    <url>/tools/git/tools/other/github%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>将项目地址中的<code>github.com</code>更换一下为<code>github.com.cnpmjs.org</code>即可</p>
+]]></content>
+      <categories>
+        <category>tools</category>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
 </search>
