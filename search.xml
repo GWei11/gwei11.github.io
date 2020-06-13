@@ -81,21 +81,6 @@
       </tags>
   </entry>
   <entry>
-    <title>连接mysql数据库的配置</title>
-    <url>/datasource/mysql/datasource/mysql/%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;property</span> <span class="string">name="driverClassName" value="com.mysql.jdbc.Driver"/&gt;</span></span><br><span class="line"><span class="meta">&lt;property</span> <span class="string">name="url" value="jdbc:mysql://localhost:3306/spring"/&gt;</span></span><br><span class="line"><span class="meta">&lt;property</span> <span class="string">name="username" value="root"/&gt;</span></span><br><span class="line"><span class="meta">&lt;property</span> <span class="string">name="password" value="admin"/&gt;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>datasource</category>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>datasource</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java中boolean类型属性定义为什么不要使用is开头</title>
     <url>/java/java/base/java%E4%B8%ADboolean%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81is%E5%BC%80%E5%A4%B4/</url>
     <content><![CDATA[<h1 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h1><p><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/success-isSuccess-and-bollean-Bollean" target="_blank" rel="noopener">参考地址</a></p>
@@ -120,6 +105,21 @@
       </categories>
       <tags>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>连接mysql数据库的配置</title>
+    <url>/datasource/mysql/datasource/mysql/%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;property</span> <span class="string">name="driverClassName" value="com.mysql.jdbc.Driver"/&gt;</span></span><br><span class="line"><span class="meta">&lt;property</span> <span class="string">name="url" value="jdbc:mysql://localhost:3306/spring"/&gt;</span></span><br><span class="line"><span class="meta">&lt;property</span> <span class="string">name="username" value="root"/&gt;</span></span><br><span class="line"><span class="meta">&lt;property</span> <span class="string">name="password" value="admin"/&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>datasource</category>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>datasource</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -362,62 +362,6 @@
       </tags>
   </entry>
   <entry>
-    <title>策略模式</title>
-    <url>/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>策略模式是一种定义一系列算法的方法，从概念上来看，所有这些算法完成的都是相同的工作，只是实现不同，它可以以相同的方式调用所有的算法，减少了各种算法类与使用算法类之间的耦合。</p>
-<a id="more"></a>
-
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>比如我们平时买东西付款方式可以用多种</p>
-<ul>
-<li>支付宝支付</li>
-<li>微信支付</li>
-<li>银联支付</li>
-<li>京东白条支付</li>
-</ul>
-<p>现在来看一下平时我们代码应该如何写。</p>
-<h2 id="不使用策略模式"><a href="#不使用策略模式" class="headerlink" title="不使用策略模式"></a>不使用策略模式</h2><h3 id="支付订单类"><a href="#支付订单类" class="headerlink" title="支付订单类"></a>支付订单类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> designmode.strategypattern.normal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> designmode.strategypattern.MsgResult;</span><br><span class="line"><span class="keyword">import</span> designmode.strategypattern.PayStrategy;</span><br><span class="line"><span class="keyword">import</span> designmode.strategypattern.Payment;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Tom.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NormalOrder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String uid;</span><br><span class="line">    <span class="keyword">private</span> String orderId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> amount;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NormalOrder</span><span class="params">(String uid, String orderId, <span class="keyword">double</span> amount)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.uid = uid;</span><br><span class="line">        <span class="keyword">this</span>.orderId = orderId;</span><br><span class="line">        <span class="keyword">this</span>.amount = amount;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">pay</span><span class="params">(String payKey)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"京东"</span>.equals(payKey)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"使用京东支付，支付成功"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"支付宝"</span>.equals(payKey)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"使用支付宝支付，支付成功"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"微信"</span>.equals(payKey)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"使用微信支付,支付成功"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"支付方式错误"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> designmode.strategypattern.normal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NormalOrderTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        NormalOrder order = <span class="keyword">new</span> NormalOrder(<span class="string">"1"</span>, <span class="string">"13424123432"</span>, <span class="number">33.22</span>);</span><br><span class="line">        System.out.println(order.pay(<span class="string">"支付宝"</span>));</span><br><span class="line">        System.out.println(order.pay(<span class="string">"微信"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>加上后面还有别的支付方式，我们就一直需要修改<code>NormalOrder</code>类的<code>pay</code>方法，需要在里面不断的加上判断，去修改支付逻辑，这就违背了开闭原则。</p>
-<h2 id="使用策略模式"><a href="#使用策略模式" class="headerlink" title="使用策略模式"></a>使用策略模式</h2><p>先看一下使用策略模式的<code>UML</code>类图</p>
-<p><img src="/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/image-20200510204800618.png" alt="image-20200510204800618"></p>
-<p>从上面的类图中可以看到主体是分为三类</p>
-<ul>
-<li><code>payment</code>接口或抽象类和具体的支付方式<ul>
-<li>因为支付都有相似的功能，比如支付类型，判断该支付类型下账号的余额等，所以需要有一个接口或者抽象类，然后具体的支付方式来实现或者继承这个接口或抽象类。</li>
-</ul>
-</li>
-<li>具体策略，这里就是<code>PayStrategy</code>类，这个类的作用是给上层客户端来调用，获取具体的支付方式</li>
-<li><code>order</code>类就是订单类，可以认为是客户端类</li>
-</ul>
-<p><a href="https://gitee.com/Gwei11/code/tree/master/javabase/strategypattern" target="_blank" rel="noopener">策略模式代码</a></p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计模式</title>
-    <url>/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>java</category>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java内存模型</title>
     <url>/java/jvm/java/jvm/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<h1 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h1><p><code>java</code>内存模型实际上是一个抽象的概念，是一套规范，而不是一个实际的东西，而<code>java</code>内存结构就是根据这一套规范来进行划分的。可以先看另一篇文章。</p>
@@ -534,152 +478,59 @@
       </tags>
   </entry>
   <entry>
-    <title>java垃圾回收机制</title>
-    <url>/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="什么是jvm"><a href="#什么是jvm" class="headerlink" title="什么是jvm"></a>什么是jvm</h1><p><code>java Virtual Machine</code>也就是<code>java</code>程序运行的环境(<code>java</code>二进制字节码的运行环境)</p>
-<h2 id="使用jvm的优势"><a href="#使用jvm的优势" class="headerlink" title="使用jvm的优势"></a>使用jvm的优势</h2><ul>
-<li><p>使用<code>java</code>的程序员都知道，<code>java</code>是一次编写，处处运行的，那么为什么可以做到一次编写，处处运行呢？</p>
-<p>  <a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/object-oriented/platform-independent" target="_blank" rel="noopener">java是如何实现平台无关的</a></p>
-</li>
-<li><p>自动内存管理，有垃圾回收功能</p>
-</li>
-</ul>
+    <title>策略模式</title>
+    <url>/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>策略模式是一种定义一系列算法的方法，从概念上来看，所有这些算法完成的都是相同的工作，只是实现不同，它可以以相同的方式调用所有的算法，减少了各种算法类与使用算法类之间的耦合。</p>
 <a id="more"></a>
 
-<h2 id="jdk、jre、jvm的区别"><a href="#jdk、jre、jvm的区别" class="headerlink" title="jdk、jre、jvm的区别"></a><code>jdk</code>、<code>jre</code>、<code>jvm</code>的区别</h2><p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20200423222219450.png" alt="image-20200423222219450"></p>
-<h3 id="堆内存诊断工具"><a href="#堆内存诊断工具" class="headerlink" title="堆内存诊断工具"></a>堆内存诊断工具</h3><ul>
-<li><code>jps</code>工具<ul>
-<li>查看当前系统中有哪些<code>java</code>进程</li>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>比如我们平时买东西付款方式可以用多种</p>
+<ul>
+<li>支付宝支付</li>
+<li>微信支付</li>
+<li>银联支付</li>
+<li>京东白条支付</li>
+</ul>
+<p>现在来看一下平时我们代码应该如何写。</p>
+<h2 id="不使用策略模式"><a href="#不使用策略模式" class="headerlink" title="不使用策略模式"></a>不使用策略模式</h2><h3 id="支付订单类"><a href="#支付订单类" class="headerlink" title="支付订单类"></a>支付订单类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> designmode.strategypattern.normal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> designmode.strategypattern.MsgResult;</span><br><span class="line"><span class="keyword">import</span> designmode.strategypattern.PayStrategy;</span><br><span class="line"><span class="keyword">import</span> designmode.strategypattern.Payment;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Tom.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NormalOrder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String uid;</span><br><span class="line">    <span class="keyword">private</span> String orderId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> amount;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NormalOrder</span><span class="params">(String uid, String orderId, <span class="keyword">double</span> amount)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.uid = uid;</span><br><span class="line">        <span class="keyword">this</span>.orderId = orderId;</span><br><span class="line">        <span class="keyword">this</span>.amount = amount;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">pay</span><span class="params">(String payKey)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"京东"</span>.equals(payKey)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"使用京东支付，支付成功"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"支付宝"</span>.equals(payKey)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"使用支付宝支付，支付成功"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"微信"</span>.equals(payKey)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"使用微信支付,支付成功"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"支付方式错误"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> designmode.strategypattern.normal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NormalOrderTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        NormalOrder order = <span class="keyword">new</span> NormalOrder(<span class="string">"1"</span>, <span class="string">"13424123432"</span>, <span class="number">33.22</span>);</span><br><span class="line">        System.out.println(order.pay(<span class="string">"支付宝"</span>));</span><br><span class="line">        System.out.println(order.pay(<span class="string">"微信"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>加上后面还有别的支付方式，我们就一直需要修改<code>NormalOrder</code>类的<code>pay</code>方法，需要在里面不断的加上判断，去修改支付逻辑，这就违背了开闭原则。</p>
+<h2 id="使用策略模式"><a href="#使用策略模式" class="headerlink" title="使用策略模式"></a>使用策略模式</h2><p>先看一下使用策略模式的<code>UML</code>类图</p>
+<p><img src="/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/image-20200510204800618.png" alt="image-20200510204800618"></p>
+<p>从上面的类图中可以看到主体是分为三类</p>
+<ul>
+<li><code>payment</code>接口或抽象类和具体的支付方式<ul>
+<li>因为支付都有相似的功能，比如支付类型，判断该支付类型下账号的余额等，所以需要有一个接口或者抽象类，然后具体的支付方式来实现或者继承这个接口或抽象类。</li>
 </ul>
 </li>
-<li><code>jmap</code>工具<ul>
-<li>查看某一个时刻堆内存占用情形</li>
+<li>具体策略，这里就是<code>PayStrategy</code>类，这个类的作用是给上层客户端来调用，获取具体的支付方式</li>
+<li><code>order</code>类就是订单类，可以认为是客户端类</li>
 </ul>
-</li>
-<li><code>jconsole</code>工具<ul>
-<li>图形界面，多功能的检测工具，可以连续检测</li>
-</ul>
-</li>
-</ul>
-<h4 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h4><p><strong>注：</strong>下面我所有的命令都是在<code>idea</code>的<code>terminal</code>窗口执行的，其实只要配置了jdk环境变量，就可以在任意位置开启<code>cmd</code>窗口来执行也是一样的。</p>
-<p>该工具的作用是查看当前系统中有那些<code>java</code>进程。就拿上面的案例代码来看，该命令是在<code>idea</code>中<code>local</code>窗口输入的。</p>
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20200423223652867.png" alt="image-20200423223652867"></p>
-<p>使用<code>jps</code>命令可以查看到当前程序的进程<code>id</code>是8152</p>
-<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><p>当我们思考<code>GC</code>(<code>Garbage Collection</code>)是需要思考三件事情：</p>
-<ol>
-<li>哪些内存需要回收</li>
-<li>什么时候回收</li>
-<li>如何回收</li>
-</ol>
-<p>内存结构中的<strong>程序计数器</strong>，<strong>虚拟机栈</strong>，<strong>本地方法栈</strong>三个区域是随着线程而生的，栈中的栈帧随着方法进入和退出执行入栈和出栈操作，每一个栈帧中分配多少内存基本上是在类结构确定下来的时候就已经知道的(虽然在运行期间会由<code>JIT</code>编译器进行一些优化，不过大体上可以认为在编译期间就知道需要分配多少内存)，程序计数器是唯一个没有规定内存泄漏的区域，所以这几个区域是不用考虑内存回收的问题。<code>java</code>堆和方法区不一样，一个接口中多个实现类需要的内存可能不同，一个方法中的多个分支需要的内存也不一样，我们只有在程序处于运行的时候才知道需要创建哪些对象，这部分内存的分配和回收都是动态的，垃圾收集器所关注的就是这部分内存(<strong>堆内存</strong>)。</p>
-<h2 id="如何判断垃圾可以回收"><a href="#如何判断垃圾可以回收" class="headerlink" title="如何判断垃圾可以回收"></a>如何判断垃圾可以回收</h2><h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0<br>的对象就是不可能再被使用的。</p>
-<p>但是<code>java</code>虚拟机不是使用这种方式来判断的，因为这种方式比较难以解决的一个问题就是<strong>循环引用</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceCountingGC</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> Object instance = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _1MB = <span class="number">1024</span>*<span class="number">1024</span>;</span><br><span class="line">  <span class="comment">// 该成员变量的作用是占用一点内存，可以在gc日志中判断对象是否被回收过</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">byte</span>[] bigSize = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span>*_1MB];</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testGC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ReferenceCountingGC objA = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">    ReferenceCountingGC objB = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">    objA.instance = objB;</span><br><span class="line">    objB.instance = objA;</span><br><span class="line">    objA = <span class="keyword">null</span>;</span><br><span class="line">    objB = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 下面的代码执行后，如果是通过引用计数法来判断对象是否可以回收的话，这两个对象是不会被回收的</span></span><br><span class="line">    System.gc();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574560215250.png" alt="1574560215250"></p>
-<p>如上图所示，即使执行了<code>objA = null</code>和<code>objB=null</code>,但是实际上他们的实例还是存在者引用，如果按照引用计数法来判断话，这两个对象是不会被回收的，实际上这两个对象是被回收了。所以可以说明<code>java</code>虚拟机不是使用引用计数法来判断对象是否可回收的。</p>
-<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>该算法的基本思路是通过一系列的称为<code>GC Root</code>的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径中称为引用链，当一个对象到<code>GC Root</code>没有任何引用链时(从图论的角度来看，就是从<code>GC Root</code>到这个对象不可达)证明这个对象是不可用的。</p>
-<ul>
-<li><code>java</code>虚拟机中的垃圾回收器采用可达性分析来探索所有存活的对象</li>
-<li>扫描堆中的对象，看是否能够沿着<code>GC Root</code>对象为起点的引用链找到该对象，如果找不到，表示可以回收。</li>
-</ul>
-<h4 id="在java语法中，可作为GC-Root的对象包含以下几种"><a href="#在java语法中，可作为GC-Root的对象包含以下几种" class="headerlink" title="在java语法中，可作为GC Root的对象包含以下几种"></a>在<code>java</code>语法中，可作为<code>GC Root</code>的对象包含以下几种</h4><ul>
-<li>虚拟机栈(栈帧中的本地变量表)中引用的对象</li>
-<li>方法区中<strong>类静态属性</strong>引用的对象</li>
-<li>方法区中常量引用的对象,比如字符串常量池中引用的对象</li>
-<li>本地方法栈中<code>JNI</code>(也就是<code>native</code>方法)中引用的对象。</li>
-<li><code>java</code>虚拟机内部的引用，如基本数据类型对应的<code>Class</code>对象</li>
-<li>所有被同步锁（<code>synchronized</code>关键字）持有的对象</li>
-</ul>
-<h4 id="不可达不一定死亡"><a href="#不可达不一定死亡" class="headerlink" title="不可达不一定死亡"></a>不可达不一定死亡</h4><p>即使是在可达性分析算法中不可达的对象，也不一定都是要被回收的，此时他们暂时处于缓刑阶段，要宣告一个对象死亡，至少需要经历<strong>两次标记过程</strong></p>
-<ul>
-<li>如果对象在进行可达性分析后发现没有与<code>GC Root</code>相连接的引用链，那么将会被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行<code>finalize()</code>方法，当对象没有覆盖<code>finalize()</code>方法时，或者<code>finalize()</code>方法已经被虚拟机调用过，虚拟机将这两种情形视为<strong>“没有必要执行”</strong></li>
-<li>如果该对象判断为有必要执行<code>finalize()</code>方法，那么该对象将中被放置在一个叫做<code>F-Queue</code>队列中，并且在稍后由一个虚拟机自动建立的，优先级低的<code>Finalizer</code>线程去执行它。<code>finalize()</code>方法是对象逃脱死亡命运的最后一次机会，稍后<code>GC</code>将对<code>F-Queue</code>中的对象进行第二次小规模的标记，如果对象在<code>finalize()</code>中成功拯救自己(只要重新与引用链上的任何一个对象建立关联即可，比如将自己(<code>this</code>关键字)赋值给某个类变量或对象的成员变量，那么在第二次标记的时候会被将它移除“<strong>即将回收</strong>”的集合)，如果对象在此时还没有逃脱，那就说明需要被回收了。</li>
-</ul>
-<p><font color="red">注意：这种自救方式并不被推荐，最好不要使用这个方法</font></p>
-<h3 id="五种引用"><a href="#五种引用" class="headerlink" title="五种引用"></a>五种引用</h3><ul>
-<li>强引用</li>
-<li>软引用</li>
-<li>弱引用</li>
-<li>虚引用(存放直接内存地址，便于回收直接内存)</li>
-<li>终结器引用</li>
-</ul>
-<blockquote>
-<ul>
-<li>软引用和弱引用可以联合引用队列来使用，也可以不结合引用队列来使用(之所以需要结合引用队列来使用，是引用软引用和弱引用自身也是需要占有一定的内存的，要想回收他们就需要在引用队列中找到他们才能回收)<ul>
-<li>当发生GC时不一定就与回收软引用，只有当发生GC之后内存还是不足的时候才会回收软引用</li>
-<li>当发生GC的时候弱引用就会被回收掉</li>
-</ul>
-</li>
-<li>虚引用和终结器引用必须结合引用队列来使用</li>
-</ul>
-</blockquote>
-<p>四种引用强度(不包含终结器引用)从大到小分别是：<strong>强引用-&gt;软引用-&gt;弱引用-&gt;虚引用</strong></p>
-<p><strong>参考图</strong>（下图中有两个<code>GC Root</code>， 实线表示强引用）</p>
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574564711687.png" alt></p>
-<h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>强引用表示从<code>GC Root</code>出发可以直接达到的，比如<code>Oeject object = new Object()</code>这类引用就是强引用。只要强引用还在，垃圾回收器就不会回收掉被引用的对象。</p>
-<p>比如上面的<code>A1</code>对象被<code>B</code>对象和<code>C</code>对象都是直接引用到(当然实际上只要有一个强引用就可以算是强引用)，所以是一个强引用。</p>
-<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>软引用用来描述一些还有用但是不是必须的对象，对于软引用关联着的对象，在系统中<strong>将要发生内存溢出异常之前</strong>，将会把这些对象列进回收范围之内进行第二次回收。如果这次回收还是没有足够的内存，才会抛出内存溢出异常，在<code>jdk1.2</code>之后，提供了<code>SoftReference</code>类来实现软引用。</p>
-<p>比如上面的<code>A2</code>对象如果是从<code>C</code>对象的角度来看是一个软件用。（当然从B对象来看是强引用，所以垃圾回收是不会回收该对象的）</p>
-<p><strong>软引用案例：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _4MB = <span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        List&lt;<span class="keyword">byte</span>[]&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> <span class="keyword">byte</span>[_4MB]);</span><br><span class="line">        &#125;</span><br><span class="line">        System.in.read();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置堆内存大小为<code>20M</code></p>
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574567017819.png" alt></p>
-<p>运行程序出现堆内存溢出错误：</p>
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574567090459.png" alt></p>
-<p>将程序修改为软引用的形式来做：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> reference;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.lang.ref.SoftReference;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _4MB = <span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        soft();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">soft</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;SoftReference&lt;<span class="keyword">byte</span>[]&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            SoftReference&lt;<span class="keyword">byte</span>[]&gt; reference = <span class="keyword">new</span> SoftReference&lt;&gt;(<span class="keyword">new</span> <span class="keyword">byte</span>[_4MB]);</span><br><span class="line">            System.out.println(reference.get());</span><br><span class="line">            list.add(reference);</span><br><span class="line">            System.out.println(list.size());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"循环结束"</span>);</span><br><span class="line">        <span class="keyword">for</span> (SoftReference&lt;<span class="keyword">byte</span>[]&gt; ref : list) &#123;</span><br><span class="line">            System.out.println(ref.get());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此时不会出现堆内存溢出错误而且<code>list</code>中前面四个都已经被回收掉了。当然除了配置堆内存大小外还可以配置显示gc回收的虚拟机运行参数；</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-Xmx20m -XX:+PrintGCDetails -verbose:gc</span><br></pre></td></tr></table></figure>
-
-<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用也是用来描述非必须的对象的，但是它的强度比软引用更弱一些，被弱引用关联的软引用只能生存到下一次垃圾收集发生之前，当垃圾收集器工作时，<strong>无论当前内存是否足够，都会回收掉被弱引用关联的对象</strong>，在<code>jdk1.2</code>之后，提供了<code>WeakReference</code>类来实现弱引用。</p>
-<h4 id="软弱引用与引用队列"><a href="#软弱引用与引用队列" class="headerlink" title="软弱引用与引用队列"></a>软弱引用与引用队列</h4><p>软引用与若引用的区别在于他们的回收时机</p>
-<ul>
-<li>软引用是只有当内存空间不足时才会被回收</li>
-<li>弱引用是无论内存空间是否足够都是会被回收的</li>
-</ul>
-<p>从上面的图可以看到，软引用与弱引用可以认为是间接引用，也就是根对象首先强引用一个软引用或弱引用，然后该软引用或弱引用再来引用一个对象，那么当这个对象（比如A2）当被回收时，<code>A2</code>所对应的软引用也是会占有一定的内存的，如果想要回收这个内存空间就需要<code>A2</code>对应的软引用进入到引用队列中，然后在引用队列中进行遍历的时候回收这个内存(对于弱引用也是同样的道理)。</p>
-<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p><strong>软弱引用可以配置引用队列使用，也可以不用配合引用队列来使用，但是虚引用就必须配合引用队列来使用</strong></p>
-<p>虚引用也被称为幽灵引用或幻影引用，他是最弱的一种引用关系，一个对象是否与虚引用存在，完全不会对其生存时间构成影响，也无法通过虚引用来获取一个对象实例，为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通过，在<code>jdk1.2</code>之后，提供了<code>PhantomReference</code>来实现虚引用。</p>
-<p><strong>使用案例：</strong></p>
-<p>当我们使用<code>ByteBuffer</code>时是会创建一个直接内存，同时也会创建一个<code>Cleaner</code>的虚引用，当<code>ByteBuffer</code>被垃圾回收时，它所分配的直接内存是不会被回收的，因为直接内存是不受<code>java</code>虚拟机管理的，此时就需要使用的<code>Cleaner</code>的虚引用了，因为当<code>ByteBuffer</code>回收时，该虚引用就会进入到引用队列，引用队列里面会检测是否有<code>Cleaner</code>虚引用，如果有就会调用<code>clear</code>方法，该方法最终会调用<code>Unsafe.freeMemory()</code>来释放掉这一块直接内存。</p>
-<h4 id="终结器引用"><a href="#终结器引用" class="headerlink" title="终结器引用"></a>终结器引用</h4><p>终结器引用也是需要配合引用队列来使用的。</p>
-<p>每一个对象都有一个终极父类<code>Object</code>，<code>Object</code>类中有一个<code>finalize()</code>方法，如果我们重写了这个方法，那么这个方法的调用时机是什么呢?这就需要使用的终结器引用了。<strong>当没有强引用来关联该对象的时候，虚拟机会帮我们创建终结器匀变速，并终结器就会进入到引用队列(此时该对象还没有被回收)。</strong>有一个优先级很低的线程会检查引用队列中是否有终结器引用，如果有就会根据该终结器引用找到对应对象的<code>finalize()</code>方法。</p>
-<p><font color="red">注意：通过终结器引用来释放资源的方式效率很低，多以一般是不推荐使用finalize()方法了释放资源。</font></p>
-<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><h3 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h3><ul>
-<li>速度快</li>
-<li>会造成内存碎片</li>
-</ul>
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574575683561.png" alt="1574575683561"></p>
-<h3 id="标记整理"><a href="#标记整理" class="headerlink" title="标记整理"></a>标记整理</h3><ul>
-<li>速度慢</li>
-<li>没有内存碎片</li>
-</ul>
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574575714962.png" alt="1574575714962"></p>
-<h3 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h3><ul>
-<li>没有内存碎片</li>
-<li>需要占用双倍的内存空间</li>
-</ul>
-<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574575757476.png" alt="1574575757476"></p>
-<p><code>jvm</code>中并不是只是使用某一种算法，而是在不同的情形下会使用不同的算法，也有可能结合起来使用。</p>
-<h2 id="分代垃圾回收"><a href="#分代垃圾回收" class="headerlink" title="分代垃圾回收"></a>分代垃圾回收</h2><p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574576757717.png" alt="1574576757717"></p>
-<ul>
-<li>对象首先分配在<strong>伊甸园</strong>区域</li>
-<li>新生代空间不足时，触发<code>minor gc</code>,伊甸园和<code>from</code>区存活的对象使用<strong>复制算法</strong>复制到<code>to</code>区，存活的对象年龄加1并且交换<code>from</code>区和<code>to</code>区</li>
-<li><code>minor gc</code>会引发 <code>stop the world</code>,暂停其他用户的线程，等待垃圾回收结束，用户线程才恢复</li>
-<li>当对象寿命超过阈值时，会将对象移入到老年代，最大寿命是15(使用4bit来存储该值，所以最大是15)</li>
-<li>当老年代空间不足，会先尝试触发 <code>minor gc</code>，如果之后空间还是不足，那么会触发<code>full gc</code>,<code>SWT</code>的时间更长。</li>
-</ul>
+<p><a href="https://gitee.com/Gwei11/code/tree/master/javabase/strategypattern" target="_blank" rel="noopener">策略模式代码</a></p>
 ]]></content>
       <categories>
         <category>java</category>
-        <category>jvm</category>
+        <category>设计模式</category>
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>jvm</tag>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式</title>
+    <url>/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/design/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>设计模式</tag>
       </tags>
   </entry>
   <entry>
@@ -936,6 +787,204 @@
       </tags>
   </entry>
   <entry>
+    <title>java垃圾回收机制</title>
+    <url>/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="什么是jvm"><a href="#什么是jvm" class="headerlink" title="什么是jvm"></a>什么是jvm</h1><p><code>java Virtual Machine</code>也就是<code>java</code>程序运行的环境(<code>java</code>二进制字节码的运行环境)</p>
+<h2 id="使用jvm的优势"><a href="#使用jvm的优势" class="headerlink" title="使用jvm的优势"></a>使用jvm的优势</h2><ul>
+<li><p>使用<code>java</code>的程序员都知道，<code>java</code>是一次编写，处处运行的，那么为什么可以做到一次编写，处处运行呢？</p>
+<p>  <a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/object-oriented/platform-independent" target="_blank" rel="noopener">java是如何实现平台无关的</a></p>
+</li>
+<li><p>自动内存管理，有垃圾回收功能</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="jdk、jre、jvm的区别"><a href="#jdk、jre、jvm的区别" class="headerlink" title="jdk、jre、jvm的区别"></a><code>jdk</code>、<code>jre</code>、<code>jvm</code>的区别</h2><p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20200423222219450.png" alt="image-20200423222219450"></p>
+<h3 id="堆内存诊断工具"><a href="#堆内存诊断工具" class="headerlink" title="堆内存诊断工具"></a>堆内存诊断工具</h3><ul>
+<li><code>jps</code>工具<ul>
+<li>查看当前系统中有哪些<code>java</code>进程</li>
+</ul>
+</li>
+<li><code>jmap</code>工具<ul>
+<li>查看某一个时刻堆内存占用情形</li>
+</ul>
+</li>
+<li><code>jconsole</code>工具<ul>
+<li>图形界面，多功能的检测工具，可以连续检测</li>
+</ul>
+</li>
+</ul>
+<h4 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h4><p><strong>注：</strong>下面我所有的命令都是在<code>idea</code>的<code>terminal</code>窗口执行的，其实只要配置了jdk环境变量，就可以在任意位置开启<code>cmd</code>窗口来执行也是一样的。</p>
+<p>该工具的作用是查看当前系统中有那些<code>java</code>进程。就拿上面的案例代码来看，该命令是在<code>idea</code>中<code>local</code>窗口输入的。</p>
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/image-20200423223652867.png" alt="image-20200423223652867"></p>
+<p>使用<code>jps</code>命令可以查看到当前程序的进程<code>id</code>是8152</p>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><p>当我们思考<code>GC</code>(<code>Garbage Collection</code>)是需要思考三件事情：</p>
+<ol>
+<li>哪些内存需要回收</li>
+<li>什么时候回收</li>
+<li>如何回收</li>
+</ol>
+<p>内存结构中的<strong>程序计数器</strong>，<strong>虚拟机栈</strong>，<strong>本地方法栈</strong>三个区域是随着线程而生的，栈中的栈帧随着方法进入和退出执行入栈和出栈操作，每一个栈帧中分配多少内存基本上是在类结构确定下来的时候就已经知道的(虽然在运行期间会由<code>JIT</code>编译器进行一些优化，不过大体上可以认为在编译期间就知道需要分配多少内存)，程序计数器是唯一个没有规定内存泄漏的区域，所以这几个区域是不用考虑内存回收的问题。<code>java</code>堆和方法区不一样，一个接口中多个实现类需要的内存可能不同，一个方法中的多个分支需要的内存也不一样，我们只有在程序处于运行的时候才知道需要创建哪些对象，这部分内存的分配和回收都是动态的，垃圾收集器所关注的就是这部分内存(<strong>堆内存</strong>)。</p>
+<h2 id="如何判断垃圾可以回收"><a href="#如何判断垃圾可以回收" class="headerlink" title="如何判断垃圾可以回收"></a>如何判断垃圾可以回收</h2><h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0<br>的对象就是不可能再被使用的。</p>
+<p>但是<code>java</code>虚拟机不是使用这种方式来判断的，因为这种方式比较难以解决的一个问题就是<strong>循环引用</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceCountingGC</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> Object instance = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _1MB = <span class="number">1024</span>*<span class="number">1024</span>;</span><br><span class="line">  <span class="comment">// 该成员变量的作用是占用一点内存，可以在gc日志中判断对象是否被回收过</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">byte</span>[] bigSize = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span>*_1MB];</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testGC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ReferenceCountingGC objA = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">    ReferenceCountingGC objB = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">    objA.instance = objB;</span><br><span class="line">    objB.instance = objA;</span><br><span class="line">    objA = <span class="keyword">null</span>;</span><br><span class="line">    objB = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 下面的代码执行后，如果是通过引用计数法来判断对象是否可以回收的话，这两个对象是不会被回收的</span></span><br><span class="line">    System.gc();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574560215250.png" alt="1574560215250"></p>
+<p>如上图所示，即使执行了<code>objA = null</code>和<code>objB=null</code>,但是实际上他们的实例还是存在者引用，如果按照引用计数法来判断话，这两个对象是不会被回收的，实际上这两个对象是被回收了。所以可以说明<code>java</code>虚拟机不是使用引用计数法来判断对象是否可回收的。</p>
+<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>该算法的基本思路是通过一系列的称为<code>GC Root</code>的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径中称为引用链，当一个对象到<code>GC Root</code>没有任何引用链时(从图论的角度来看，就是从<code>GC Root</code>到这个对象不可达)证明这个对象是不可用的。</p>
+<ul>
+<li><code>java</code>虚拟机中的垃圾回收器采用可达性分析来探索所有存活的对象</li>
+<li>扫描堆中的对象，看是否能够沿着<code>GC Root</code>对象为起点的引用链找到该对象，如果找不到，表示可以回收。</li>
+</ul>
+<h4 id="在java语法中，可作为GC-Root的对象包含以下几种"><a href="#在java语法中，可作为GC-Root的对象包含以下几种" class="headerlink" title="在java语法中，可作为GC Root的对象包含以下几种"></a>在<code>java</code>语法中，可作为<code>GC Root</code>的对象包含以下几种</h4><ul>
+<li>虚拟机栈(栈帧中的本地变量表)中引用的对象</li>
+<li>方法区中<strong>类静态属性</strong>引用的对象</li>
+<li>方法区中常量引用的对象,比如字符串常量池中引用的对象</li>
+<li>本地方法栈中<code>JNI</code>(也就是<code>native</code>方法)中引用的对象。</li>
+<li><code>java</code>虚拟机内部的引用，如基本数据类型对应的<code>Class</code>对象</li>
+<li>所有被同步锁（<code>synchronized</code>关键字）持有的对象</li>
+</ul>
+<h4 id="不可达不一定死亡"><a href="#不可达不一定死亡" class="headerlink" title="不可达不一定死亡"></a>不可达不一定死亡</h4><p>即使是在可达性分析算法中不可达的对象，也不一定都是要被回收的，此时他们暂时处于缓刑阶段，要宣告一个对象死亡，至少需要经历<strong>两次标记过程</strong></p>
+<ul>
+<li>如果对象在进行可达性分析后发现没有与<code>GC Root</code>相连接的引用链，那么将会被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行<code>finalize()</code>方法，当对象没有覆盖<code>finalize()</code>方法时，或者<code>finalize()</code>方法已经被虚拟机调用过，虚拟机将这两种情形视为<strong>“没有必要执行”</strong></li>
+<li>如果该对象判断为有必要执行<code>finalize()</code>方法，那么该对象将中被放置在一个叫做<code>F-Queue</code>队列中，并且在稍后由一个虚拟机自动建立的，优先级低的<code>Finalizer</code>线程去执行它。<code>finalize()</code>方法是对象逃脱死亡命运的最后一次机会，稍后<code>GC</code>将对<code>F-Queue</code>中的对象进行第二次小规模的标记，如果对象在<code>finalize()</code>中成功拯救自己(只要重新与引用链上的任何一个对象建立关联即可，比如将自己(<code>this</code>关键字)赋值给某个类变量或对象的成员变量，那么在第二次标记的时候会被将它移除“<strong>即将回收</strong>”的集合)，如果对象在此时还没有逃脱，那就说明需要被回收了。</li>
+</ul>
+<p><font color="red">注意：这种自救方式并不被推荐，最好不要使用这个方法</font></p>
+<h3 id="五种引用"><a href="#五种引用" class="headerlink" title="五种引用"></a>五种引用</h3><ul>
+<li>强引用</li>
+<li>软引用</li>
+<li>弱引用</li>
+<li>虚引用(存放直接内存地址，便于回收直接内存)</li>
+<li>终结器引用</li>
+</ul>
+<blockquote>
+<ul>
+<li>软引用和弱引用可以联合引用队列来使用，也可以不结合引用队列来使用(之所以需要结合引用队列来使用，是引用软引用和弱引用自身也是需要占有一定的内存的，要想回收他们就需要在引用队列中找到他们才能回收)<ul>
+<li>当发生GC时不一定就与回收软引用，只有当发生GC之后内存还是不足的时候才会回收软引用</li>
+<li>当发生GC的时候弱引用就会被回收掉</li>
+</ul>
+</li>
+<li>虚引用和终结器引用必须结合引用队列来使用</li>
+</ul>
+</blockquote>
+<p>四种引用强度(不包含终结器引用)从大到小分别是：<strong>强引用-&gt;软引用-&gt;弱引用-&gt;虚引用</strong></p>
+<p><strong>参考图</strong>（下图中有两个<code>GC Root</code>， 实线表示强引用）</p>
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574564711687.png" alt></p>
+<h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>强引用表示从<code>GC Root</code>出发可以直接达到的，比如<code>Oeject object = new Object()</code>这类引用就是强引用。只要强引用还在，垃圾回收器就不会回收掉被引用的对象。</p>
+<p>比如上面的<code>A1</code>对象被<code>B</code>对象和<code>C</code>对象都是直接引用到(当然实际上只要有一个强引用就可以算是强引用)，所以是一个强引用。</p>
+<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>软引用用来描述一些还有用但是不是必须的对象，对于软引用关联着的对象，在系统中<strong>将要发生内存溢出异常之前</strong>，将会把这些对象列进回收范围之内进行第二次回收。如果这次回收还是没有足够的内存，才会抛出内存溢出异常，在<code>jdk1.2</code>之后，提供了<code>SoftReference</code>类来实现软引用。</p>
+<p>比如上面的<code>A2</code>对象如果是从<code>C</code>对象的角度来看是一个软件用。（当然从B对象来看是强引用，所以垃圾回收是不会回收该对象的）</p>
+<p><strong>软引用案例：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _4MB = <span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        List&lt;<span class="keyword">byte</span>[]&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> <span class="keyword">byte</span>[_4MB]);</span><br><span class="line">        &#125;</span><br><span class="line">        System.in.read();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置堆内存大小为<code>20M</code></p>
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574567017819.png" alt></p>
+<p>运行程序出现堆内存溢出错误：</p>
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574567090459.png" alt></p>
+<p>将程序修改为软引用的形式来做：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> reference;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.lang.ref.SoftReference;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _4MB = <span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        soft();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">soft</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;SoftReference&lt;<span class="keyword">byte</span>[]&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            SoftReference&lt;<span class="keyword">byte</span>[]&gt; reference = <span class="keyword">new</span> SoftReference&lt;&gt;(<span class="keyword">new</span> <span class="keyword">byte</span>[_4MB]);</span><br><span class="line">            System.out.println(reference.get());</span><br><span class="line">            list.add(reference);</span><br><span class="line">            System.out.println(list.size());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"循环结束"</span>);</span><br><span class="line">        <span class="keyword">for</span> (SoftReference&lt;<span class="keyword">byte</span>[]&gt; ref : list) &#123;</span><br><span class="line">            System.out.println(ref.get());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时不会出现堆内存溢出错误而且<code>list</code>中前面四个都已经被回收掉了。当然除了配置堆内存大小外还可以配置显示gc回收的虚拟机运行参数；</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-Xmx20m -XX:+PrintGCDetails -verbose:gc</span><br></pre></td></tr></table></figure>
+
+<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用也是用来描述非必须的对象的，但是它的强度比软引用更弱一些，被弱引用关联的软引用只能生存到下一次垃圾收集发生之前，当垃圾收集器工作时，<strong>无论当前内存是否足够，都会回收掉被弱引用关联的对象</strong>，在<code>jdk1.2</code>之后，提供了<code>WeakReference</code>类来实现弱引用。</p>
+<h4 id="软弱引用与引用队列"><a href="#软弱引用与引用队列" class="headerlink" title="软弱引用与引用队列"></a>软弱引用与引用队列</h4><p>软引用与若引用的区别在于他们的回收时机</p>
+<ul>
+<li>软引用是只有当内存空间不足时才会被回收</li>
+<li>弱引用是无论内存空间是否足够都是会被回收的</li>
+</ul>
+<p>从上面的图可以看到，软引用与弱引用可以认为是间接引用，也就是根对象首先强引用一个软引用或弱引用，然后该软引用或弱引用再来引用一个对象，那么当这个对象（比如A2）当被回收时，<code>A2</code>所对应的软引用也是会占有一定的内存的，如果想要回收这个内存空间就需要<code>A2</code>对应的软引用进入到引用队列中，然后在引用队列中进行遍历的时候回收这个内存(对于弱引用也是同样的道理)。</p>
+<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p><strong>软弱引用可以配置引用队列使用，也可以不用配合引用队列来使用，但是虚引用就必须配合引用队列来使用</strong></p>
+<p>虚引用也被称为幽灵引用或幻影引用，他是最弱的一种引用关系，一个对象是否与虚引用存在，完全不会对其生存时间构成影响，也无法通过虚引用来获取一个对象实例，为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通过，在<code>jdk1.2</code>之后，提供了<code>PhantomReference</code>来实现虚引用。</p>
+<p><strong>使用案例：</strong></p>
+<p>当我们使用<code>ByteBuffer</code>时是会创建一个直接内存，同时也会创建一个<code>Cleaner</code>的虚引用，当<code>ByteBuffer</code>被垃圾回收时，它所分配的直接内存是不会被回收的，因为直接内存是不受<code>java</code>虚拟机管理的，此时就需要使用的<code>Cleaner</code>的虚引用了，因为当<code>ByteBuffer</code>回收时，该虚引用就会进入到引用队列，引用队列里面会检测是否有<code>Cleaner</code>虚引用，如果有就会调用<code>clear</code>方法，该方法最终会调用<code>Unsafe.freeMemory()</code>来释放掉这一块直接内存。</p>
+<h4 id="终结器引用"><a href="#终结器引用" class="headerlink" title="终结器引用"></a>终结器引用</h4><p>终结器引用也是需要配合引用队列来使用的。</p>
+<p>每一个对象都有一个终极父类<code>Object</code>，<code>Object</code>类中有一个<code>finalize()</code>方法，如果我们重写了这个方法，那么这个方法的调用时机是什么呢?这就需要使用的终结器引用了。<strong>当没有强引用来关联该对象的时候，虚拟机会帮我们创建终结器匀变速，并终结器就会进入到引用队列(此时该对象还没有被回收)。</strong>有一个优先级很低的线程会检查引用队列中是否有终结器引用，如果有就会根据该终结器引用找到对应对象的<code>finalize()</code>方法。</p>
+<p><font color="red">注意：通过终结器引用来释放资源的方式效率很低，多以一般是不推荐使用finalize()方法了释放资源。</font></p>
+<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><h3 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h3><ul>
+<li>速度快</li>
+<li>会造成内存碎片</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574575683561.png" alt="1574575683561"></p>
+<h3 id="标记整理"><a href="#标记整理" class="headerlink" title="标记整理"></a>标记整理</h3><ul>
+<li>速度慢</li>
+<li>没有内存碎片</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574575714962.png" alt="1574575714962"></p>
+<h3 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h3><ul>
+<li>没有内存碎片</li>
+<li>需要占用双倍的内存空间</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574575757476.png" alt="1574575757476"></p>
+<p><code>jvm</code>中并不是只是使用某一种算法，而是在不同的情形下会使用不同的算法，也有可能结合起来使用。</p>
+<h2 id="分代垃圾回收"><a href="#分代垃圾回收" class="headerlink" title="分代垃圾回收"></a>分代垃圾回收</h2><p><img src="/java/jvm/java/jvm/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/1574576757717.png" alt="1574576757717"></p>
+<ul>
+<li>对象首先分配在<strong>伊甸园</strong>区域</li>
+<li>新生代空间不足时，触发<code>minor gc</code>,伊甸园和<code>from</code>区存活的对象使用<strong>复制算法</strong>复制到<code>to</code>区，存活的对象年龄加1并且交换<code>from</code>区和<code>to</code>区</li>
+<li><code>minor gc</code>会引发 <code>stop the world</code>,暂停其他用户的线程，等待垃圾回收结束，用户线程才恢复</li>
+<li>当对象寿命超过阈值时，会将对象移入到老年代，最大寿命是15(使用4bit来存储该值，所以最大是15)</li>
+<li>当老年代空间不足，会先尝试触发 <code>minor gc</code>，如果之后空间还是不足，那么会触发<code>full gc</code>,<code>SWT</code>的时间更长。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>jvm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对象的内存布局</title>
+    <url>/java/jvm/java/jvm/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</url>
+    <content><![CDATA[<h1 id="对象是如何创建出来的"><a href="#对象是如何创建出来的" class="headerlink" title="对象是如何创建出来的"></a>对象是如何创建出来的</h1><p>一个对象的创建肯定主要有以下几步</p>
+<ol>
+<li>划分内存</li>
+<li>将分配的内存空间初始化为0值(不包括对象头)</li>
+<li>对对象进行设置，比如将这个对象和类进行关联等</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="划分内存的方式"><a href="#划分内存的方式" class="headerlink" title="划分内存的方式"></a>划分内存的方式</h2><p>上面说创建对象的第一步就是划分内存，划分内存的主要方式有两种</p>
+<ul>
+<li>指针碰撞<ul>
+<li>假设可用内存都是连接在一起的(也就是一整块的)，那么当需要使用内存空间时只需要将指针移动一下位置就可以划分出一块内存</li>
+</ul>
+</li>
+<li>空闲列表<ul>
+<li>如果内存空间不是整齐的，那么剩余的内存肯定是有一张表来记录的，这就是空间列表的模式</li>
+</ul>
+</li>
+</ul>
+<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p>这里指定是<code>HotSpot</code>虚拟机中的对象的内存布局。</p>
+<p>一个对象在堆中包含三个部分</p>
+<ul>
+<li>对象头<ul>
+<li>第一类是用于存储对象自身的运行时数据，如哈希码（<code>HashCode</code>）、<code>GC</code>分代年龄、锁状态标志、线程持有的锁、偏向线程<code>ID</code>、偏向时间戳等。<ul>
+<li>在32位和64位的虚拟机中分别是32和64个<code>bit</code></li>
+<li>对象头里的信息是与对象自身定义的数据无关的额外存储成本</li>
+<li>比如在32个比特存储空间中的25个比特用于存储对象哈希码，4个比特用于存储对象分代年龄，2个比特用于存储锁标志位，1个比特固定为0</li>
+</ul>
+</li>
+<li>对象头的第二部分是存储类型指针，即<strong>对象指向它的类型元数据的指针</strong>。</li>
+</ul>
+</li>
+<li>实例数据</li>
+<li>填充的数据</li>
+</ul>
+<p><img src="/java/jvm/java/jvm/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/image-20200426080215086.png" alt="image-20200426080215086"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>jvm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>类加载器</title>
     <url>/java/jvm/java/jvm/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
     <content><![CDATA[<h1 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h1><ul>
@@ -1099,55 +1148,6 @@
       </tags>
   </entry>
   <entry>
-    <title>对象的内存布局</title>
-    <url>/java/jvm/java/jvm/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</url>
-    <content><![CDATA[<h1 id="对象是如何创建出来的"><a href="#对象是如何创建出来的" class="headerlink" title="对象是如何创建出来的"></a>对象是如何创建出来的</h1><p>一个对象的创建肯定主要有以下几步</p>
-<ol>
-<li>划分内存</li>
-<li>将分配的内存空间初始化为0值(不包括对象头)</li>
-<li>对对象进行设置，比如将这个对象和类进行关联等</li>
-</ol>
-<a id="more"></a>
-
-<h2 id="划分内存的方式"><a href="#划分内存的方式" class="headerlink" title="划分内存的方式"></a>划分内存的方式</h2><p>上面说创建对象的第一步就是划分内存，划分内存的主要方式有两种</p>
-<ul>
-<li>指针碰撞<ul>
-<li>假设可用内存都是连接在一起的(也就是一整块的)，那么当需要使用内存空间时只需要将指针移动一下位置就可以划分出一块内存</li>
-</ul>
-</li>
-<li>空闲列表<ul>
-<li>如果内存空间不是整齐的，那么剩余的内存肯定是有一张表来记录的，这就是空间列表的模式</li>
-</ul>
-</li>
-</ul>
-<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p>这里指定是<code>HotSpot</code>虚拟机中的对象的内存布局。</p>
-<p>一个对象在堆中包含三个部分</p>
-<ul>
-<li>对象头<ul>
-<li>第一类是用于存储对象自身的运行时数据，如哈希码（<code>HashCode</code>）、<code>GC</code>分代年龄、锁状态标志、线程持有的锁、偏向线程<code>ID</code>、偏向时间戳等。<ul>
-<li>在32位和64位的虚拟机中分别是32和64个<code>bit</code></li>
-<li>对象头里的信息是与对象自身定义的数据无关的额外存储成本</li>
-<li>比如在32个比特存储空间中的25个比特用于存储对象哈希码，4个比特用于存储对象分代年龄，2个比特用于存储锁标志位，1个比特固定为0</li>
-</ul>
-</li>
-<li>对象头的第二部分是存储类型指针，即<strong>对象指向它的类型元数据的指针</strong>。</li>
-</ul>
-</li>
-<li>实例数据</li>
-<li>填充的数据</li>
-</ul>
-<p><img src="/java/jvm/java/jvm/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/image-20200426080215086.png" alt="image-20200426080215086"></p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>jvm</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>jvm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>类的加载过程</title>
     <url>/java/jvm/java/jvm/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h1><blockquote>
@@ -1267,6 +1267,42 @@
       </tags>
   </entry>
   <entry>
+    <title>synchronized关键字的用法</title>
+    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/synchronized/</url>
+    <content><![CDATA[<p>对于<code>synchronized</code>我们都知道是同步代码的作用，使用了<code>synchronized</code>关键字后，就是对其修饰的方法或代码块进行加锁，这样就能保证同一时间只能有一个线程访问到被其修饰的方法或代码块。</p>
+<p><code>synchronized</code>可以修饰的情形有以下几种</p>
+<ul>
+<li>静态方法</li>
+<li>成员方法</li>
+<li>代码块</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="修饰静态方法"><a href="#修饰静态方法" class="headerlink" title="修饰静态方法"></a>修饰静态方法</h1><p>假设现在有一个静态方法如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">testStaticMehotd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    TimeUnit.SECONDS.sleep(<span class="number">2L</span>);</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" is runing"</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException var1) &#123;</span><br><span class="line">    var1.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>javap</code>命令将这个类反编译后看一下这个方法的二进制命令</p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/synchronized/image-20200425221815727.png" alt="image-20200425221815727"></p>
+<h1 id="修饰代码块"><a href="#修饰代码块" class="headerlink" title="修饰代码块"></a>修饰代码块</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCodeBlockTwo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Class var1 = SynchronizedTwo<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">  <span class="keyword">synchronized</span>(SynchronizedTwo<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      TimeUnit.SECONDS.sleep(<span class="number">2L</span>);</span><br><span class="line">      System.out.println(Thread.currentThread().getName() + <span class="string">" is runing"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException var4) &#123;</span><br><span class="line">      var4.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样使用<code>javap</code>命令来反编译看一下</p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/synchronized/image-20200425222256643.png" alt="image-20200425222256643"></p>
+<h1 id="对方法和代码块加锁的不同机制"><a href="#对方法和代码块加锁的不同机制" class="headerlink" title="对方法和代码块加锁的不同机制"></a>对方法和代码块加锁的不同机制</h1><p>其实经过上面两个截图能说看，<code>synchronized</code>对方法加锁和对代码块就锁的机制是不同的。</p>
+<ul>
+<li>对代码块使用<code>synchronized</code>加锁是使用了<code>Monitorenter</code>和<code>Monitorexit</code>指令来实现的</li>
+<li>对方法加锁使用<code>ACC_SYNCHRONIZED</code>标识符来实现的</li>
+</ul>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>多线程</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>动态代理和使用jdk自带的HSDB查看被代理的类的代码</title>
     <url>/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/java/proxy/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
     <content><![CDATA[<h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><p><a href="https://gitee.com/Gwei11/code/tree/master/javabase/proxy/proxy-demo" target="_blank" rel="noopener">动态代理示例代码</a></p>
@@ -1340,56 +1376,6 @@
       </tags>
   </entry>
   <entry>
-    <title>join方法详解</title>
-    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/join%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="join的使用"><a href="#join的使用" class="headerlink" title="join的使用"></a>join的使用</h1><h2 id="正常情形"><a href="#正常情形" class="headerlink" title="正常情形"></a>正常情形</h2><p><code>join</code>的目的是让调用线程等待被调用的线程执行完成之后再继续。</p>
-<ul>
-<li>对于<code>join</code>方法需要注意的是谁等待谁<ul>
-<li>调用<code>join</code>方法所在的线程需要等待调用<code>join</code>方法的对象线程执行完毕</li>
-</ul>
-</li>
-<li>下面代码案例中<code>thread.join()</code>和<code>thread2.join()</code>都是在<code>main</code>线程中调用的，所以是<code>main</code>线程要等其他线程，那么这里的其他线程是哪个线程呢？就是调用<code>join</code>的<code>thread</code>和<code>thread2</code>线程</li>
-</ul>
-<a id="more"></a>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JoinDemo joinDemo = <span class="keyword">new</span> JoinDemo();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(joinDemo);</span><br><span class="line">        Thread thread2 = <span class="keyword">new</span> Thread(joinDemo);</span><br><span class="line">        thread.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thread.join();</span><br><span class="line">            thread2.join();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面是正常的情形，也就是说<code>main</code>线程确实是等到另外两个线程执行完毕之后才执行的。</p>
-<h2 id="中断情形"><a href="#中断情形" class="headerlink" title="中断情形"></a>中断情形</h2><p>下面演示的是在子线程中中断了主线程，这样虽然主线程中调用了子线程的<code>join</code>方法，但是也有可能是主线程先执行完。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemoInterrupt</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取主线程的引用</span></span><br><span class="line">        Thread threadMain = Thread.currentThread();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 中断主线程</span></span><br><span class="line">                threadMain.interrupt();</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thread.join();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/join%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/image-20200505111440561.png" alt="image-20200505111440561"></p>
-<p>从上面截图可以看到实际上是主线程先执行完的。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>上面中断的情形显然是不对，那么应该如何解决呢？其实在主线程被中断之后，应该通知子线程，通知子线程的方式就是中断子线程。所以代码也很简单，就是在上面的点啊基础上加一行代码即可。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemoInterrupt</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取主线程的引用</span></span><br><span class="line">        Thread threadMain = Thread.currentThread();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 中断主线程</span></span><br><span class="line">                threadMain.interrupt();</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thread.join();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="comment">// 中断子线程</span></span><br><span class="line">            thread.interrupt();</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码就加一一句<code>thread.interrupt();</code>这是中断子线程，但是需要注意的是不代表加上这一句话之后，子线程一定会先执行完。因为当调用<code>join</code>的线程被中断之后实际上是已经不会继续等其他线程执行完了。</p>
-<h1 id="join的原理"><a href="#join的原理" class="headerlink" title="join的原理"></a>join的原理</h1><p>我们来看一下<code>join</code>方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> base = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">long</span> now = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (millis &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (millis == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (isAlive()) &#123;</span><br><span class="line">                wait(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (isAlive()) &#123;</span><br><span class="line">                <span class="keyword">long</span> delay = millis - now;</span><br><span class="line">                <span class="keyword">if</span> (delay &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                wait(delay);</span><br><span class="line">                now = System.currentTimeMillis() - base;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面是<code>join</code>方法的源码，可以看出来实际上底层调用的就是<code>wait</code>，但是我们调用<code>wait</code>的时候是需要<code>notify</code>或者<code>notifyAll</code>方法来唤醒的，但是这里没有看到任何的<code>notify</code>方法的身影啊。其实这是因为每一个线程执行完成之后都会调用当前线程的<code>notify</code>方法。这是线程底层做的事情。</p>
-<h1 id="join的替代方式"><a href="#join的替代方式" class="headerlink" title="join的替代方式"></a>join的替代方式</h1><p>上面说每一个线程执行完成后都会调用当前线程的<code>notify</code>方法，那么我们是不是就可以使用<code>wait</code>方法来替换<code>join</code>方法呢？请看下面代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemoInterrupt</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取主线程的引用</span></span><br><span class="line">        Thread threadMain = Thread.currentThread();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//thread.join();</span></span><br><span class="line">            <span class="keyword">synchronized</span> (thread) &#123;</span><br><span class="line">                thread.wait();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>执行结果和正常情形的执行结果是一样的。我们所做的就是将<code>thread.join()</code>方法替换为了</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (thread) &#123;</span><br><span class="line">  thread.wait();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>这里使用了<code>synchronized</code>是因为<code>wait</code>方法必须在同步代码块中使用</li>
-<li>这里的锁对象<code>thread</code>就是子线程的名称，这里需要注意的是替换后要想达到一样的效果这里的锁对象就必须是被等待线程的引用，因为上面说每一个线程执行完成后都会调用当前线程的<code>notify</code>方法，<code>wait</code>和<code>notify</code>必须是在同一个锁上面才会生效。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>多线程</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java反射</title>
     <url>/java/%E5%8F%8D%E5%B0%84/java/%E5%8F%8D%E5%B0%84/%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h1 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h1><p>将类的各个组成部分封装成其他的对象，就是反射机制</p>
@@ -1458,31 +1444,99 @@
       </tags>
   </entry>
   <entry>
-    <title>synchronized关键字的用法</title>
-    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/synchronized/</url>
-    <content><![CDATA[<p>对于<code>synchronized</code>我们都知道是同步代码的作用，使用了<code>synchronized</code>关键字后，就是对其修饰的方法或代码块进行加锁，这样就能保证同一时间只能有一个线程访问到被其修饰的方法或代码块。</p>
-<p><code>synchronized</code>可以修饰的情形有以下几种</p>
+    <title>join方法详解</title>
+    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/join%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="join的使用"><a href="#join的使用" class="headerlink" title="join的使用"></a>join的使用</h1><h2 id="正常情形"><a href="#正常情形" class="headerlink" title="正常情形"></a>正常情形</h2><p><code>join</code>的目的是让调用线程等待被调用的线程执行完成之后再继续。</p>
 <ul>
-<li>静态方法</li>
-<li>成员方法</li>
-<li>代码块</li>
+<li>对于<code>join</code>方法需要注意的是谁等待谁<ul>
+<li>调用<code>join</code>方法所在的线程需要等待调用<code>join</code>方法的对象线程执行完毕</li>
+</ul>
+</li>
+<li>下面代码案例中<code>thread.join()</code>和<code>thread2.join()</code>都是在<code>main</code>线程中调用的，所以是<code>main</code>线程要等其他线程，那么这里的其他线程是哪个线程呢？就是调用<code>join</code>的<code>thread</code>和<code>thread2</code>线程</li>
 </ul>
 <a id="more"></a>
 
-<h1 id="修饰静态方法"><a href="#修饰静态方法" class="headerlink" title="修饰静态方法"></a>修饰静态方法</h1><p>假设现在有一个静态方法如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">testStaticMehotd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    TimeUnit.SECONDS.sleep(<span class="number">2L</span>);</span><br><span class="line">    System.out.println(Thread.currentThread().getName() + <span class="string">" is runing"</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException var1) &#123;</span><br><span class="line">    var1.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        JoinDemo joinDemo = <span class="keyword">new</span> JoinDemo();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(joinDemo);</span><br><span class="line">        Thread thread2 = <span class="keyword">new</span> Thread(joinDemo);</span><br><span class="line">        thread.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thread.join();</span><br><span class="line">            thread2.join();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>使用<code>javap</code>命令将这个类反编译后看一下这个方法的二进制命令</p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/synchronized/image-20200425221815727.png" alt="image-20200425221815727"></p>
-<h1 id="修饰代码块"><a href="#修饰代码块" class="headerlink" title="修饰代码块"></a>修饰代码块</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCodeBlockTwo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Class var1 = SynchronizedTwo<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">  <span class="keyword">synchronized</span>(SynchronizedTwo<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      TimeUnit.SECONDS.sleep(<span class="number">2L</span>);</span><br><span class="line">      System.out.println(Thread.currentThread().getName() + <span class="string">" is runing"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException var4) &#123;</span><br><span class="line">      var4.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面是正常的情形，也就是说<code>main</code>线程确实是等到另外两个线程执行完毕之后才执行的。</p>
+<h2 id="中断情形"><a href="#中断情形" class="headerlink" title="中断情形"></a>中断情形</h2><p>下面演示的是在子线程中中断了主线程，这样虽然主线程中调用了子线程的<code>join</code>方法，但是也有可能是主线程先执行完。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemoInterrupt</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取主线程的引用</span></span><br><span class="line">        Thread threadMain = Thread.currentThread();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 中断主线程</span></span><br><span class="line">                threadMain.interrupt();</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thread.join();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>同样使用<code>javap</code>命令来反编译看一下</p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/synchronized/image-20200425222256643.png" alt="image-20200425222256643"></p>
-<h1 id="对方法和代码块加锁的不同机制"><a href="#对方法和代码块加锁的不同机制" class="headerlink" title="对方法和代码块加锁的不同机制"></a>对方法和代码块加锁的不同机制</h1><p>其实经过上面两个截图能说看，<code>synchronized</code>对方法加锁和对代码块就锁的机制是不同的。</p>
+<p>执行结果</p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/join%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/image-20200505111440561.png" alt="image-20200505111440561"></p>
+<p>从上面截图可以看到实际上是主线程先执行完的。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>上面中断的情形显然是不对，那么应该如何解决呢？其实在主线程被中断之后，应该通知子线程，通知子线程的方式就是中断子线程。所以代码也很简单，就是在上面的点啊基础上加一行代码即可。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemoInterrupt</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取主线程的引用</span></span><br><span class="line">        Thread threadMain = Thread.currentThread();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 中断主线程</span></span><br><span class="line">                threadMain.interrupt();</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thread.join();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="comment">// 中断子线程</span></span><br><span class="line">            thread.interrupt();</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码就加一一句<code>thread.interrupt();</code>这是中断子线程，但是需要注意的是不代表加上这一句话之后，子线程一定会先执行完。因为当调用<code>join</code>的线程被中断之后实际上是已经不会继续等其他线程执行完了。</p>
+<h1 id="join的原理"><a href="#join的原理" class="headerlink" title="join的原理"></a>join的原理</h1><p>我们来看一下<code>join</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> base = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">long</span> now = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (millis &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (millis == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (isAlive()) &#123;</span><br><span class="line">                wait(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (isAlive()) &#123;</span><br><span class="line">                <span class="keyword">long</span> delay = millis - now;</span><br><span class="line">                <span class="keyword">if</span> (delay &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                wait(delay);</span><br><span class="line">                now = System.currentTimeMillis() - base;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是<code>join</code>方法的源码，可以看出来实际上底层调用的就是<code>wait</code>，但是我们调用<code>wait</code>的时候是需要<code>notify</code>或者<code>notifyAll</code>方法来唤醒的，但是这里没有看到任何的<code>notify</code>方法的身影啊。其实这是因为每一个线程执行完成之后都会调用当前线程的<code>notify</code>方法。这是线程底层做的事情。</p>
+<h1 id="join的替代方式"><a href="#join的替代方式" class="headerlink" title="join的替代方式"></a>join的替代方式</h1><p>上面说每一个线程执行完成后都会调用当前线程的<code>notify</code>方法，那么我们是不是就可以使用<code>wait</code>方法来替换<code>join</code>方法呢？请看下面代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> testjoin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JoinDemoInterrupt</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取主线程的引用</span></span><br><span class="line">        Thread threadMain = Thread.currentThread();</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"执行完毕"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//thread.join();</span></span><br><span class="line">            <span class="keyword">synchronized</span> (thread) &#123;</span><br><span class="line">                thread.wait();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"子线程都执行完了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果和正常情形的执行结果是一样的。我们所做的就是将<code>thread.join()</code>方法替换为了</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (thread) &#123;</span><br><span class="line">  thread.wait();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>对代码块使用<code>synchronized</code>加锁是使用了<code>Monitorenter</code>和<code>Monitorexit</code>指令来实现的</li>
-<li>对方法加锁使用<code>ACC_SYNCHRONIZED</code>标识符来实现的</li>
+<li>这里使用了<code>synchronized</code>是因为<code>wait</code>方法必须在同步代码块中使用</li>
+<li>这里的锁对象<code>thread</code>就是子线程的名称，这里需要注意的是替换后要想达到一样的效果这里的锁对象就必须是被等待线程的引用，因为上面说每一个线程执行完成后都会调用当前线程的<code>notify</code>方法，<code>wait</code>和<code>notify</code>必须是在同一个锁上面才会生效。</li>
 </ul>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>多线程</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>查看线程状态</title>
+    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/</url>
+    <content><![CDATA[<p>这里主要是介绍<code>jdk</code>自带的工具来查看线程状态</p>
+<h1 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h1><ol>
+<li><code>new</code><ol>
+<li>比如使用<code>new Thread()</code>方式创建一个线程</li>
+</ol>
+</li>
+<li><code>runnable</code><ol>
+<li>对于<code>runnable</code>有两种理解<ol>
+<li>一种是正在运行的，也就是拿到了<code>cpu</code>执行权</li>
+<li>一种是可运行的，也就是在调用线程的<code>start()</code>方法后，就表示可运行，但是想要真正的运行还需要拿到<code>cpu</code>的执行权</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>blocked</code><ol>
+<li>从<code>runnable</code>状态去获取锁失败的时候就会是<code>blocked</code>状态</li>
+</ol>
+</li>
+<li><code>waiting</code></li>
+<li><code>timed waiting</code></li>
+<li><code>TERMINATED</code></li>
+</ol>
+<a id="more"></a>
+
+<h2 id="线程不同状态间切换"><a href="#线程不同状态间切换" class="headerlink" title="线程不同状态间切换"></a>线程不同状态间切换</h2><p>不同状态间切换需要记住两点</p>
+<ol>
+<li><code>new</code>状态和<code>runnable</code>状态是一定会经历的，并且是最先经历的两个阶段</li>
+<li>其余的四个状态都是和<code>runnable</code>状态来进行交互的</li>
+</ol>
+<p><strong>在网上找了一个线程状态切换图</strong></p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200429233508762.png" alt="image-20200429233508762"></p>
+<h2 id="图解说明"><a href="#图解说明" class="headerlink" title="图解说明"></a>图解说明</h2><p><font color="red">上面的图其实还不是很正确,因为从<strong>等待状态可以直接进入阻塞状态</strong>，因为上面图中显示从waiting到Runnable的方式有notify或notifyAll等方法，但是如果是多个线程在等待同一个锁，那么当没有获取到锁的线程就会陷入到阻塞状态(也可以认为依然是等待状态)，当然上面的图对于一个线程来说是正确的。还有一点就是到终止状态的不仅仅是执行完成，如果是出现了异常也可以直接从其余的状态进入到终止状态。</font></p>
+<h1 id="使用jconsole查看线程状态"><a href="#使用jconsole查看线程状态" class="headerlink" title="使用jconsole查看线程状态"></a>使用jconsole查看线程状态</h1><p><code>jconsole</code>在<code>jdk</code>的<code>bin</code>目录下，我们直接打开</p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220414500.png" alt="image-20200425220414500"></p>
+<p>找到我们自己的线程进行连接</p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220541675.png" alt="image-20200425220541675"></p>
+<p>如上图所示，可以看到线程，当点击某一个线程的时候可以看到线程的状态，还可以检测死锁。</p>
+<h1 id="使用jstack查看线程状态"><a href="#使用jstack查看线程状态" class="headerlink" title="使用jstack查看线程状态"></a>使用jstack查看线程状态</h1><h2 id="使用jps查找pid"><a href="#使用jps查找pid" class="headerlink" title="使用jps查找pid"></a>使用jps查找pid</h2><p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220654461.png" alt="image-20200425220654461"></p>
+<h2 id="打开jstack"><a href="#打开jstack" class="headerlink" title="打开jstack"></a>打开jstack</h2><p><code>jstack</code>也是在<code>jdk</code>的<code>bin</code>目录下，不过我们可以直接打开<code>cmd</code>来执行(前提条件是配置了<code>java</code>环境变量)</p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220854097.png" alt="image-20200425220854097"></p>
+<p>如图所示可以通过<code>jstack</code>命令可以看到线程的状态。</p>
 ]]></content>
       <categories>
         <category>java</category>
@@ -1661,99 +1715,6 @@
       </tags>
   </entry>
   <entry>
-    <title>实现多线程的两种方式</title>
-    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="线程到底有几种创建方式"><a href="#线程到底有几种创建方式" class="headerlink" title="线程到底有几种创建方式"></a>线程到底有几种创建方式</h1><p>如果在网上搜一下线程创建的方式，结果可能如下：</p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200501204634470.png" alt="image-20200501204634470"></p>
-<a id="more"></a>
-
-<p>有的说是三种，有的说是四种，还有的两种或者六种，那么到底是几种呢，我们看一下<code>oracle</code>的<code>javase</code>文档就知道了。</p>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html" target="_blank" rel="noopener">官方文档</a></p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200501204851978.png" alt="image-20200501204851978"></p>
-<p>现在通过官方文档知道到底是有几种了吧？答案就是<strong>两种</strong>，那么到底是哪两种呢？</p>
-<ul>
-<li>通过继承<code>Thread</code>来来创建线程</li>
-<li>通过实现<code>Runnable</code>接口来创建线程</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> createthread;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoWayToCreateThread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        One one = <span class="keyword">new</span> One();</span><br><span class="line">        one.start();</span><br><span class="line">        Two two = <span class="keyword">new</span> Two();</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Two()).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">One</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"通过继承Threa来创建线程"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Two</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"通过实现Runnable接口的方式来实现一个线程"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建线程的本质"><a href="#创建线程的本质" class="headerlink" title="创建线程的本质"></a>创建线程的本质</h2><p>上面写了线程创建的两种方式，线程创建中其实都是执行<code>run</code>方法，只不过使用继承<code>Thread</code>类的时候是执行<code>Thread</code>类中<code>run</code>方法，如果是实现<code>Runnable</code>接口，则是执行<code>Runnable</code>接口中的<code>run</code>方法。</p>
-<p><font color="red">注:无论是使用Thread还是Runnable，启动线程都是使用需要Thread，所以其实都是调用Thread类的run方法</font></p>
-<p>看一下<code>Thread</code>的<code>run</code>方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Runnable target;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">    target.run();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所以如果是使用<code>Runnable</code>的形式实际上是将我们实现<code>Runnable</code>的类传到<code>Thread</code>类中，然后调用<code>run</code>方法的时候就是调用我们的<code>run</code>方法。如果是继承<code>Thread</code>类的话我们自己的类也会重写<code>run</code>方法，子类重写父类的方法，只会调用子类的方法，所以<code>Thread</code>类中<code>run</code>方法就不会执行。</p>
-<h2 id="两种方式同时使用"><a href="#两种方式同时使用" class="headerlink" title="两种方式同时使用"></a>两种方式同时使用</h2><p>上面说有两种方式可以创建线程，那么如果我们将两种方式一起使用，会是怎么个情形呢？请看下面代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> createthread;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseTwoWayTogather</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"使用实现Runnable的方式来创建线程"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"使用继承Thread的方式来创建线程"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面通过匿名内部类的方式将两种创建线程的方式同时使用，那么打印的结果会是什么呢？</p>
-<p>结果是： <strong>使用继承Thread的方式来创建线程</strong>？<strong>why</strong></p>
-<p>上面已经说了创建线程的本质是执行<code>Thread</code>类中<code>run</code>，如果两种方式同时使用，那么子类中重写了父类方法，父类方法就不会继续执行，所以此时执行的是子类的<code>run</code>方法，这样<code>Thread</code>类中的<code>run</code>方法就不会执行，所以也就不会是通过实现<code>Runnable</code>的方式来创建线程。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>多线程</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>查看线程状态</title>
-    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/</url>
-    <content><![CDATA[<p>这里主要是介绍<code>jdk</code>自带的工具来查看线程状态</p>
-<h1 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h1><ol>
-<li><code>new</code><ol>
-<li>比如使用<code>new Thread()</code>方式创建一个线程</li>
-</ol>
-</li>
-<li><code>runnable</code><ol>
-<li>对于<code>runnable</code>有两种理解<ol>
-<li>一种是正在运行的，也就是拿到了<code>cpu</code>执行权</li>
-<li>一种是可运行的，也就是在调用线程的<code>start()</code>方法后，就表示可运行，但是想要真正的运行还需要拿到<code>cpu</code>的执行权</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><code>blocked</code><ol>
-<li>从<code>runnable</code>状态去获取锁失败的时候就会是<code>blocked</code>状态</li>
-</ol>
-</li>
-<li><code>waiting</code></li>
-<li><code>timed waiting</code></li>
-<li><code>TERMINATED</code></li>
-</ol>
-<a id="more"></a>
-
-<h2 id="线程不同状态间切换"><a href="#线程不同状态间切换" class="headerlink" title="线程不同状态间切换"></a>线程不同状态间切换</h2><p>不同状态间切换需要记住两点</p>
-<ol>
-<li><code>new</code>状态和<code>runnable</code>状态是一定会经历的，并且是最先经历的两个阶段</li>
-<li>其余的四个状态都是和<code>runnable</code>状态来进行交互的</li>
-</ol>
-<p><strong>在网上找了一个线程状态切换图</strong></p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200429233508762.png" alt="image-20200429233508762"></p>
-<h2 id="图解说明"><a href="#图解说明" class="headerlink" title="图解说明"></a>图解说明</h2><p><font color="red">上面的图其实还不是很正确,因为从<strong>等待状态可以直接进入阻塞状态</strong>，因为上面图中显示从waiting到Runnable的方式有notify或notifyAll等方法，但是如果是多个线程在等待同一个锁，那么当没有获取到锁的线程就会陷入到阻塞状态(也可以认为依然是等待状态)，当然上面的图对于一个线程来说是正确的。还有一点就是到终止状态的不仅仅是执行完成，如果是出现了异常也可以直接从其余的状态进入到终止状态。</font></p>
-<h1 id="使用jconsole查看线程状态"><a href="#使用jconsole查看线程状态" class="headerlink" title="使用jconsole查看线程状态"></a>使用jconsole查看线程状态</h1><p><code>jconsole</code>在<code>jdk</code>的<code>bin</code>目录下，我们直接打开</p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220414500.png" alt="image-20200425220414500"></p>
-<p>找到我们自己的线程进行连接</p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220541675.png" alt="image-20200425220541675"></p>
-<p>如上图所示，可以看到线程，当点击某一个线程的时候可以看到线程的状态，还可以检测死锁。</p>
-<h1 id="使用jstack查看线程状态"><a href="#使用jstack查看线程状态" class="headerlink" title="使用jstack查看线程状态"></a>使用jstack查看线程状态</h1><h2 id="使用jps查找pid"><a href="#使用jps查找pid" class="headerlink" title="使用jps查找pid"></a>使用jps查找pid</h2><p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220654461.png" alt="image-20200425220654461"></p>
-<h2 id="打开jstack"><a href="#打开jstack" class="headerlink" title="打开jstack"></a>打开jstack</h2><p><code>jstack</code>也是在<code>jdk</code>的<code>bin</code>目录下，不过我们可以直接打开<code>cmd</code>来执行(前提条件是配置了<code>java</code>环境变量)</p>
-<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/image-20200425220854097.png" alt="image-20200425220854097"></p>
-<p>如图所示可以通过<code>jstack</code>命令可以看到线程的状态。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>多线程</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>线程如何处理未捕获异常</title>
     <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%9C%AA%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/</url>
     <content><![CDATA[<h1 id="子线程异常不影响父线程"><a href="#子线程异常不影响父线程" class="headerlink" title="子线程异常不影响父线程"></a>子线程异常不影响父线程</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> uncaughtexception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UncaughtExceptionDemo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> UncaughtExceptionDemo()).start();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1796,6 +1757,109 @@
       <tags>
         <tag>java</tag>
         <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线程池</title>
+    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+        <category>多线程</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>实现多线程的两种方式</title>
+    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="线程到底有几种创建方式"><a href="#线程到底有几种创建方式" class="headerlink" title="线程到底有几种创建方式"></a>线程到底有几种创建方式</h1><p>如果在网上搜一下线程创建的方式，结果可能如下：</p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200501204634470.png" alt="image-20200501204634470"></p>
+<a id="more"></a>
+
+<p>有的说是三种，有的说是四种，还有的两种或者六种，那么到底是几种呢，我们看一下<code>oracle</code>的<code>javase</code>文档就知道了。</p>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/index.html" target="_blank" rel="noopener">官方文档</a></p>
+<p><img src="/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20200501204851978.png" alt="image-20200501204851978"></p>
+<p>现在通过官方文档知道到底是有几种了吧？答案就是<strong>两种</strong>，那么到底是哪两种呢？</p>
+<ul>
+<li>通过继承<code>Thread</code>来来创建线程</li>
+<li>通过实现<code>Runnable</code>接口来创建线程</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> createthread;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoWayToCreateThread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        One one = <span class="keyword">new</span> One();</span><br><span class="line">        one.start();</span><br><span class="line">        Two two = <span class="keyword">new</span> Two();</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Two()).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">One</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"通过继承Threa来创建线程"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Two</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"通过实现Runnable接口的方式来实现一个线程"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建线程的本质"><a href="#创建线程的本质" class="headerlink" title="创建线程的本质"></a>创建线程的本质</h2><p>上面写了线程创建的两种方式，线程创建中其实都是执行<code>run</code>方法，只不过使用继承<code>Thread</code>类的时候是执行<code>Thread</code>类中<code>run</code>方法，如果是实现<code>Runnable</code>接口，则是执行<code>Runnable</code>接口中的<code>run</code>方法。</p>
+<p><font color="red">注:无论是使用Thread还是Runnable，启动线程都是使用需要Thread，所以其实都是调用Thread类的run方法</font></p>
+<p>看一下<code>Thread</code>的<code>run</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Runnable target;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">    target.run();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以如果是使用<code>Runnable</code>的形式实际上是将我们实现<code>Runnable</code>的类传到<code>Thread</code>类中，然后调用<code>run</code>方法的时候就是调用我们的<code>run</code>方法。如果是继承<code>Thread</code>类的话我们自己的类也会重写<code>run</code>方法，子类重写父类的方法，只会调用子类的方法，所以<code>Thread</code>类中<code>run</code>方法就不会执行。</p>
+<h2 id="两种方式同时使用"><a href="#两种方式同时使用" class="headerlink" title="两种方式同时使用"></a>两种方式同时使用</h2><p>上面说有两种方式可以创建线程，那么如果我们将两种方式一起使用，会是怎么个情形呢？请看下面代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> createthread;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseTwoWayTogather</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"使用实现Runnable的方式来创建线程"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"使用继承Thread的方式来创建线程"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面通过匿名内部类的方式将两种创建线程的方式同时使用，那么打印的结果会是什么呢？</p>
+<p>结果是： <strong>使用继承Thread的方式来创建线程</strong>？<strong>why</strong></p>
+<p>上面已经说了创建线程的本质是执行<code>Thread</code>类中<code>run</code>，如果两种方式同时使用，那么子类中重写了父类方法，父类方法就不会继续执行，所以此时执行的是子类的<code>run</code>方法，这样<code>Thread</code>类中的<code>run</code>方法就不会执行，所以也就不会是通过实现<code>Runnable</code>的方式来创建线程。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>多线程</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>exception和error</title>
+    <url>/java/%E5%BC%82%E5%B8%B8/java/%E5%BC%82%E5%B8%B8/exception%E5%92%8Cerror/</url>
+    <content><![CDATA[<h1 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h1><p><code>Throwable</code>是<code>Exception</code>和<code>error</code>的父类。而<code>Exception</code>和<code>error</code>的作用不同，这里的两个不同的子类体现的是异常中分类的思想。</p>
+<p><img src="/java/%E5%BC%82%E5%B8%B8/java/%E5%BC%82%E5%B8%B8/exception%E5%92%8Cerror/image-20200303201919251.png" alt="image-20200303201919251"></p>
+<p>如上图所示，<code>Exception</code>和<code>Error</code>的分类依据是对于会出现问题带代码我们是否应该捕获。</p>
+<a id="more"></a>
+
+<h1 id="应该捕获-Exception"><a href="#应该捕获-Exception" class="headerlink" title="应该捕获(Exception)"></a>应该捕获(Exception)</h1><p>对于<code>Exception</code>我们是应该捕获的，不过<code>Exception</code>中也可以进行分类，分类的一句是是否能检查，也就是该异常是在编译器就知道还是在运行时才能知道。</p>
+<h2 id="checked"><a href="#checked" class="headerlink" title="checked"></a>checked</h2><p>对于在编译期就可以知道的异常就是可检查的异常，比如<code>ClassNotFoundException</code></p>
+<h2 id="unchecked"><a href="#unchecked" class="headerlink" title="unchecked"></a>unchecked</h2><p>对于在编译期不知道，在运行时可能会出现的异常就是运行时异常，比如</p>
+<ul>
+<li><code>NullPointerException</code></li>
+<li><code>ArrayIndexOutOfBoundException</code></li>
+<li><code>ClassCastException</code></li>
+</ul>
+<h1 id="不能捕获-Error"><a href="#不能捕获-Error" class="headerlink" title="不能捕获(Error)"></a>不能捕获(Error)</h1><p>对于有些错误出现了我们是不能处理的，很多都是<code>jvm</code>虚拟机自身出了问题，对于这样的问题即使我们能捕获也是处理不了的，所以这些不可捕获的类别就通过<code>Error</code>来定义。比如说下面的几个错误</p>
+<ul>
+<li><code>OutOfMemoryError</code></li>
+<li><code>StackOverFlowError</code></li>
+<li><code>NoClassDefFoundError</code></li>
+</ul>
+<h1 id="throw和throws"><a href="#throw和throws" class="headerlink" title="throw和throws"></a>throw和throws</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestThrow</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        one();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">()</span> <span class="keyword">throws</span> ArithmeticException</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"by / zero"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Throw"><a href="#Throw" class="headerlink" title="Throw"></a>Throw</h2><ul>
+<li>作用在方法内，表示抛出具体异常，由方法体内的语句处理。</li>
+<li>具体向外抛出的动作，所以它抛出的是一个异常实体类。若执行了<code>Throw</code>一定是抛出了某种异常。</li>
+</ul>
+<h2 id="Throws"><a href="#Throws" class="headerlink" title="Throws"></a>Throws</h2><ul>
+<li>作用在方法的声明上，表示如果抛出异常，则由该方法的调用者来进行异常处理。</li>
+<li>主要的声明这个方法会抛出会抛出某种类型的异常，让它的使用者知道捕获异常的类型。出现异常是一种可能性，但不一定会发生异常。</li>
+</ul>
+<h1 id="ClassNotFoundException和NoClassDefFoundError"><a href="#ClassNotFoundException和NoClassDefFoundError" class="headerlink" title="ClassNotFoundException和NoClassDefFoundError"></a>ClassNotFoundException和NoClassDefFoundError</h1><ul>
+<li>对于<code>ClassNotFoundException</code>是一个检查异常，比如下面的代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example.classobject;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassObject</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testException</span> <span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">        Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码去加载<code>mysql</code>数据库驱动，如果没有加载到就会出现<strong>类没有找到的异常</strong></p>
+<ul>
+<li><code>NoClassDefFoundError</code>是<code>Error</code>，这里说明是可以代码可以通过编译，但是实际运行的是在发现找不到编译后的<code>class</code>就会出现这个错误.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>异常</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>异常</tag>
       </tags>
   </entry>
   <entry>
@@ -1846,110 +1910,6 @@
       <tags>
         <tag>java</tag>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线程池</title>
-    <url>/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>java</category>
-        <category>多线程</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>枚举</title>
-    <url>/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/</url>
-    <content><![CDATA[<h1 id="基本的枚举定义"><a href="#基本的枚举定义" class="headerlink" title="基本的枚举定义"></a>基本的枚举定义</h1><p><code>enum</code> 的全称为 <code>enumeration</code>， 是 <code>JDK 1.5</code>  中引入的新特性，存放在 <code>java.lang</code> 包中。</p>
-<p>定义：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumMain &#123;</span><br><span class="line">	MON, TUE, WED, THU, FRI, SAT, SUN;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<p>输出枚举值代码:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (EnumMain e : EnumMain.values()) &#123;</span><br><span class="line">            System.out.println(e.toString());</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="enum对象基本方法"><a href="#enum对象基本方法" class="headerlink" title="enum对象基本方法"></a>enum对象基本方法</h1><ul>
-<li><p><code>int compareTo(E o)</code>    该方法用来比较枚举与指定对象的顺序</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//值为6，表明SUN在MON后面六位</span></span><br><span class="line">	System.out.println(EnumMain.SUN.compareTo(EnumMain.MON));</span><br><span class="line">	<span class="comment">//值为-2，表明tue比thu小两位(tue在thu前面两位)</span></span><br><span class="line">	System.out.println(EnumMain.TUE.compareTo(EnumMain.THU));</span><br><span class="line">	<span class="comment">//值为0，表示二者是一样的</span></span><br><span class="line">	System.out.println(EnumMain.MON.compareTo(EnumMain.MON));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  需要注意的是这里比较的值是有大小和正负的，不是说后面的与前面的相比结果就是1，也有可能是其他正数，具体结果是几就需要看后面的枚举是在前面的枚举<strong>后几位</strong></p>
-</li>
-<li><p><code>Class&lt;E&gt; ``**getDeclaringClass**()</code>返回与枚举常量的枚举类型相对应的<code>class</code>对象</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">		 System.out.println(<span class="string">"getDeclaringClass(): "</span> + enumMain.getDeclaringClass().getName());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  输出的结果是类的全路径: <code>getDeclaringClass(): top.twolovelypig.EnumMain</code></p>
-</li>
-<li><p><code>String name()</code>返回此枚举常量的名称</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">	System.out.println(<span class="string">"name(): "</span> + enumMain.name());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  输出结果是: <code>name(): FRI</code></p>
-</li>
-<li><p><code>int ordinal()</code> 返回枚举常量的序数(初始常量序数为0)</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">	System.out.println(<span class="string">"ordinal(): "</span> + enumMain.ordinal());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  输出结果是4，因为<code>FRI</code>是第五个，初始常量序数是0，所以输出结果是4</p>
-</li>
-<li><p><code>String toString()</code> 返回枚举常量的名称</p>
-</li>
-</ul>
-<h1 id="给enum自定义属性和方法-带参数的enum"><a href="#给enum自定义属性和方法-带参数的enum" class="headerlink" title="给enum自定义属性和方法(带参数的enum)"></a>给enum自定义属性和方法(带参数的enum)</h1><p><code>enum</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumMain &#123; </span><br><span class="line">	MON(<span class="string">"星期一"</span>, <span class="number">1</span>), </span><br><span class="line">	TUE(<span class="string">"星期二"</span>, <span class="number">2</span>), </span><br><span class="line">	WED(<span class="string">"星期三"</span>, <span class="number">3</span>), </span><br><span class="line">	THU(<span class="string">"星期四"</span>, <span class="number">4</span>), </span><br><span class="line">	FRI(<span class="string">"星期五"</span>, <span class="number">5</span>), </span><br><span class="line">	SAT(<span class="string">"星期六"</span>, <span class="number">6</span>), </span><br><span class="line">	SUN(<span class="string">"星期天"</span>,<span class="number">7</span>);</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 成员变量  </span></span><br><span class="line">    <span class="keyword">private</span> String name;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EnumMain</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 普通方法  根据index获取name</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getNameByIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">for</span> (EnumMain c : EnumMain.values()) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (c.getIndex() == index) &#123;  </span><br><span class="line">                <span class="keyword">return</span> c.name;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 普通方法  根据index获取name</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getIndexByName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">for</span> (EnumMain c : EnumMain.values()) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (c.name.equals(name)) &#123;</span><br><span class="line">                <span class="keyword">return</span> c.index;</span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// get set 方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> index;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面代码中<code>getIndexByName()</code>方法中需要注意<code>c.name</code>与<code>c.getName()</code>的区别，<code>c.name</code>获取的是中文比如<strong>星期三</strong>，而<code>c.getName()</code>的结果是<strong>FRI</strong>。</p>
-<p>测试代码，根据名称获取索引，根据索引获取名称等:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">		<span class="comment">//普通get方法		输出结果是5</span></span><br><span class="line">		System.out.println(enumMain.getIndex());</span><br><span class="line">		<span class="comment">//普通getName()方法		输出结果是星期五</span></span><br><span class="line">		System.out.println(enumMain.getName());</span><br><span class="line">		<span class="comment">//根据index获取name		输出结果是星期三</span></span><br><span class="line">		System.out.println(EnumMain.getNameByIndex(<span class="number">3</span>));</span><br><span class="line">		<span class="comment">//根据name获取index		输出结果是3</span></span><br><span class="line">		System.out.println(EnumMain.getIndexByName(<span class="string">"星期三"</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="对枚举的理解"><a href="#对枚举的理解" class="headerlink" title="对枚举的理解"></a>对枚举的理解</h1><p>==可能不好理解的就是上面具有参数的枚举，其实只需要记住一点，<strong>java中一切皆对象</strong>，可以把枚举页当做一个类，这样来看的话上面的代码可以写成下面这样==:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumMain</span> </span>&#123; 	</span><br><span class="line">    <span class="comment">// 成员变量  </span></span><br><span class="line">    <span class="keyword">private</span> String name;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EnumMain</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// get set 方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> index;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于上面的类比较好理解吧，就是具有两个属性而已，然后呢就是一个私有构造方法以及get/set方法。而对于枚举中的这些声明</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">MON(<span class="string">"星期一"</span>, <span class="number">1</span>), </span><br><span class="line">TUE(<span class="string">"星期二"</span>, <span class="number">2</span>), </span><br><span class="line">WED(<span class="string">"星期三"</span>, <span class="number">3</span>), </span><br><span class="line">THU(<span class="string">"星期四"</span>, <span class="number">4</span>), </span><br><span class="line">FRI(<span class="string">"星期五"</span>, <span class="number">5</span>), </span><br><span class="line">SAT(<span class="string">"星期六"</span>, <span class="number">6</span>), </span><br><span class="line">SUN(<span class="string">"星期天"</span>,<span class="number">7</span>);</span><br></pre></td></tr></table></figure>
-
-<p>其实就是该枚举类的对象，每一个声明都是一个对象，也就是这里其实有七个对象，此时简单理解枚举与类的区别就是枚举中对象是数量固定，相当于在一开始就实例化了几个固定的对象而已。然后后面哪些根据<code>key</code>获取<code>name</code>，以及根据<code>name</code>获取<code>key</code>都是自己加的一些方法而已。</p>
-<h1 id="enumMap"><a href="#enumMap" class="headerlink" title="enumMap"></a>enumMap</h1><p><strong>以下内容来自《java编程的逻辑》这本书。</strong></p>
-<blockquote>
-<p>如果需要一个Map的实现类，并且建的类型为枚举类型，可以使用HashMap,但应该使用一个专门的实现类EnumMap。因为枚举类型有两个特征:</p>
-<ul>
-<li>枚举所有可能的值时有限的并且是预定义的</li>
-<li>所有的枚举值有一个顺序</li>
-</ul>
-<p>这两个特征可以更为高效的实现Map接口。</p>
-</blockquote>
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>比如有一批关于衣服的记录，想要通过尺寸统计衣服的数量，定义一个简单的枚举类<code>Size</code>；都表示衣服的尺寸。</p>
-<p><code>Size</code>枚举:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Size&#123;</span><br><span class="line">    SMALL, MEDIUM, LARGE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Clothes</code>类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clothes</span></span>&#123;</span><br><span class="line">    String id;</span><br><span class="line">    Size size;</span><br><span class="line">    <span class="comment">//get与set</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>按尺寸统计数量:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;Size, Integer&gt; <span class="title">countBySize</span><span class="params">(List&lt;Clothes&gt; clothes)</span></span>&#123;</span><br><span class="line">    Map&lt;Size, Integer&gt; map = <span class="keyword">new</span> EnumMap(Size<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="keyword">for</span>(Clothes c : clothes)&#123;</span><br><span class="line">        Size size = c.getSize();</span><br><span class="line">        Integer count = map.get(size);</span><br><span class="line">        <span class="keyword">if</span>(count != <span class="keyword">null</span>)&#123;</span><br><span class="line">            map.put(size, count+<span class="number">1</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            map.put(size, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>==需要注意EnumMap的构造方法==</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Size, Integer&gt; map = <span class="keyword">new</span> EnumMap(Size<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
-
-<p><code>EnumMap</code>需要传递一个<strong>类型</strong>信息，<code>Size.class</code>表示枚举类<code>Size</code>的运行时信息，需要这个参数是因为<code>EnumMap</code>要知道具体的枚举类是什么。</p>
-<p>测试代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Clothes&gt; clothes = Arrays.asList(</span><br><span class="line">	<span class="keyword">new</span> Clothes[]&#123;</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c001"</span>, Size.SMALL),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c002"</span>, Size.MEDIUM),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c003"</span>, Size.LARGE),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c004"</span>, Size.SMALL),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c005"</span>, Size.MEDIUM),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c006"</span>, Size.LARGE)</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line">System.out.println(countBySize(clothes));</span><br></pre></td></tr></table></figure>
-
-<p>需要说明的是，<code>EnumMap</code>是保证顺序的，输出是按照键在枚举中的顺序的。</p>
-<h2 id="enum的另外两个构造方法"><a href="#enum的另外两个构造方法" class="headerlink" title="enum的另外两个构造方法"></a>enum的另外两个构造方法</h2><p>除了以上介绍的构造方法，EnumMap还有两个构造方法，可以接受一个键值匹配的EnumMap或普通Map，如下所示：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EnumMap</span><span class="params">(EnumMap&lt;K, ? extends V&gt; m)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EnumMap</span><span class="params">(Map&lt;K, ? extends V&gt; m)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>比如:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Size,Integer&gt; hashMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">hashMap.put(Size.LARGE, <span class="number">2</span>);</span><br><span class="line">hashMap.put(Size.SMALL, <span class="number">1</span>);</span><br><span class="line">Map&lt;Size, Integer&gt; enumMap = <span class="keyword">new</span> EnumMap&lt;&gt;(hashMap);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>java</category>
-        <category>枚举</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>枚举</tag>
       </tags>
   </entry>
   <entry>
@@ -2017,57 +1977,6 @@
 <li>如果该对象判断为有必要执行<code>finalize()</code>方法，那么该对象将中被放置在一个叫做<code>F-Queue</code>队列中，并且在稍后由一个虚拟机自动建立的，优先级低的<code>Finalizer</code>线程去执行它。<code>finalize()</code>方法是对象逃脱死亡命运的最后一次机会，稍后<code>GC</code>将对<code>F-Queue</code>中的对象进行第二次小规模的标记，如果对象在<code>finalize()</code>中成功拯救自己(只要重新与引用链上的任何一个对象建立关联即可，比如将自己(<code>this</code>关键字)赋值给某个类变量或对象的成员变量，那么在第二次标记的时候会被将它移除“<strong>即将回收</strong>”的集合)，如果对象在此时还没有逃脱，那就说明需要被回收了。</li>
 </ul>
 <p>所以<code>finalize</code>可以用于对象自救，但是这种方式最好不要使用，效率很低。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>异常</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>异常</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>exception和error</title>
-    <url>/java/%E5%BC%82%E5%B8%B8/java/%E5%BC%82%E5%B8%B8/exception%E5%92%8Cerror/</url>
-    <content><![CDATA[<h1 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h1><p><code>Throwable</code>是<code>Exception</code>和<code>error</code>的父类。而<code>Exception</code>和<code>error</code>的作用不同，这里的两个不同的子类体现的是异常中分类的思想。</p>
-<p><img src="/java/%E5%BC%82%E5%B8%B8/java/%E5%BC%82%E5%B8%B8/exception%E5%92%8Cerror/image-20200303201919251.png" alt="image-20200303201919251"></p>
-<p>如上图所示，<code>Exception</code>和<code>Error</code>的分类依据是对于会出现问题带代码我们是否应该捕获。</p>
-<a id="more"></a>
-
-<h1 id="应该捕获-Exception"><a href="#应该捕获-Exception" class="headerlink" title="应该捕获(Exception)"></a>应该捕获(Exception)</h1><p>对于<code>Exception</code>我们是应该捕获的，不过<code>Exception</code>中也可以进行分类，分类的一句是是否能检查，也就是该异常是在编译器就知道还是在运行时才能知道。</p>
-<h2 id="checked"><a href="#checked" class="headerlink" title="checked"></a>checked</h2><p>对于在编译期就可以知道的异常就是可检查的异常，比如<code>ClassNotFoundException</code></p>
-<h2 id="unchecked"><a href="#unchecked" class="headerlink" title="unchecked"></a>unchecked</h2><p>对于在编译期不知道，在运行时可能会出现的异常就是运行时异常，比如</p>
-<ul>
-<li><code>NullPointerException</code></li>
-<li><code>ArrayIndexOutOfBoundException</code></li>
-<li><code>ClassCastException</code></li>
-</ul>
-<h1 id="不能捕获-Error"><a href="#不能捕获-Error" class="headerlink" title="不能捕获(Error)"></a>不能捕获(Error)</h1><p>对于有些错误出现了我们是不能处理的，很多都是<code>jvm</code>虚拟机自身出了问题，对于这样的问题即使我们能捕获也是处理不了的，所以这些不可捕获的类别就通过<code>Error</code>来定义。比如说下面的几个错误</p>
-<ul>
-<li><code>OutOfMemoryError</code></li>
-<li><code>StackOverFlowError</code></li>
-<li><code>NoClassDefFoundError</code></li>
-</ul>
-<h1 id="throw和throws"><a href="#throw和throws" class="headerlink" title="throw和throws"></a>throw和throws</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestThrow</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        one();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">()</span> <span class="keyword">throws</span> ArithmeticException</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"by / zero"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Throw"><a href="#Throw" class="headerlink" title="Throw"></a>Throw</h2><ul>
-<li>作用在方法内，表示抛出具体异常，由方法体内的语句处理。</li>
-<li>具体向外抛出的动作，所以它抛出的是一个异常实体类。若执行了<code>Throw</code>一定是抛出了某种异常。</li>
-</ul>
-<h2 id="Throws"><a href="#Throws" class="headerlink" title="Throws"></a>Throws</h2><ul>
-<li>作用在方法的声明上，表示如果抛出异常，则由该方法的调用者来进行异常处理。</li>
-<li>主要的声明这个方法会抛出会抛出某种类型的异常，让它的使用者知道捕获异常的类型。出现异常是一种可能性，但不一定会发生异常。</li>
-</ul>
-<h1 id="ClassNotFoundException和NoClassDefFoundError"><a href="#ClassNotFoundException和NoClassDefFoundError" class="headerlink" title="ClassNotFoundException和NoClassDefFoundError"></a>ClassNotFoundException和NoClassDefFoundError</h1><ul>
-<li>对于<code>ClassNotFoundException</code>是一个检查异常，比如下面的代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example.classobject;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassObject</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testException</span> <span class="params">()</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">        Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码去加载<code>mysql</code>数据库驱动，如果没有加载到就会出现<strong>类没有找到的异常</strong></p>
-<ul>
-<li><code>NoClassDefFoundError</code>是<code>Error</code>，这里说明是可以代码可以通过编译，但是实际运行的是在发现找不到编译后的<code>class</code>就会出现这个错误.</li>
-</ul>
 ]]></content>
       <categories>
         <category>java</category>
@@ -2206,23 +2115,94 @@
       </tags>
   </entry>
   <entry>
-    <title>idea下编译spring源码</title>
-    <url>/tools/idea/tools/idea/idea%E4%B8%8B%E7%BC%96%E8%AF%91spring%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<p>步骤</p>
-<ol>
-<li>下载<code>spring</code>源码</li>
-<li>切换阿里云的源</li>
-</ol>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">	repositories &#123;</span><br><span class="line">		maven &#123; url <span class="string">'https://maven.aliyun.com/nexus/content/groups/public/'</span> &#125;</span><br><span class="line">		maven&#123; url <span class="string">'https://maven.aliyun.com/nexus/content/repositories/jcenter'</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>枚举</title>
+    <url>/java/%E6%9E%9A%E4%B8%BE/java/%E6%9E%9A%E4%B8%BE/%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h1 id="基本的枚举定义"><a href="#基本的枚举定义" class="headerlink" title="基本的枚举定义"></a>基本的枚举定义</h1><p><code>enum</code> 的全称为 <code>enumeration</code>， 是 <code>JDK 1.5</code>  中引入的新特性，存放在 <code>java.lang</code> 包中。</p>
+<p>定义：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumMain &#123;</span><br><span class="line">	MON, TUE, WED, THU, FRI, SAT, SUN;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-]]></content>
+<a id="more"></a>
+
+<p>输出枚举值代码:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (EnumMain e : EnumMain.values()) &#123;</span><br><span class="line">            System.out.println(e.toString());</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="enum对象基本方法"><a href="#enum对象基本方法" class="headerlink" title="enum对象基本方法"></a>enum对象基本方法</h1><ul>
+<li><p><code>int compareTo(E o)</code>    该方法用来比较枚举与指定对象的顺序</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//值为6，表明SUN在MON后面六位</span></span><br><span class="line">	System.out.println(EnumMain.SUN.compareTo(EnumMain.MON));</span><br><span class="line">	<span class="comment">//值为-2，表明tue比thu小两位(tue在thu前面两位)</span></span><br><span class="line">	System.out.println(EnumMain.TUE.compareTo(EnumMain.THU));</span><br><span class="line">	<span class="comment">//值为0，表示二者是一样的</span></span><br><span class="line">	System.out.println(EnumMain.MON.compareTo(EnumMain.MON));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  需要注意的是这里比较的值是有大小和正负的，不是说后面的与前面的相比结果就是1，也有可能是其他正数，具体结果是几就需要看后面的枚举是在前面的枚举<strong>后几位</strong></p>
+</li>
+<li><p><code>Class&lt;E&gt; ``**getDeclaringClass**()</code>返回与枚举常量的枚举类型相对应的<code>class</code>对象</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">		 System.out.println(<span class="string">"getDeclaringClass(): "</span> + enumMain.getDeclaringClass().getName());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  输出的结果是类的全路径: <code>getDeclaringClass(): top.twolovelypig.EnumMain</code></p>
+</li>
+<li><p><code>String name()</code>返回此枚举常量的名称</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">	System.out.println(<span class="string">"name(): "</span> + enumMain.name());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  输出结果是: <code>name(): FRI</code></p>
+</li>
+<li><p><code>int ordinal()</code> 返回枚举常量的序数(初始常量序数为0)</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">	System.out.println(<span class="string">"ordinal(): "</span> + enumMain.ordinal());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  输出结果是4，因为<code>FRI</code>是第五个，初始常量序数是0，所以输出结果是4</p>
+</li>
+<li><p><code>String toString()</code> 返回枚举常量的名称</p>
+</li>
+</ul>
+<h1 id="给enum自定义属性和方法-带参数的enum"><a href="#给enum自定义属性和方法-带参数的enum" class="headerlink" title="给enum自定义属性和方法(带参数的enum)"></a>给enum自定义属性和方法(带参数的enum)</h1><p><code>enum</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumMain &#123; </span><br><span class="line">	MON(<span class="string">"星期一"</span>, <span class="number">1</span>), </span><br><span class="line">	TUE(<span class="string">"星期二"</span>, <span class="number">2</span>), </span><br><span class="line">	WED(<span class="string">"星期三"</span>, <span class="number">3</span>), </span><br><span class="line">	THU(<span class="string">"星期四"</span>, <span class="number">4</span>), </span><br><span class="line">	FRI(<span class="string">"星期五"</span>, <span class="number">5</span>), </span><br><span class="line">	SAT(<span class="string">"星期六"</span>, <span class="number">6</span>), </span><br><span class="line">	SUN(<span class="string">"星期天"</span>,<span class="number">7</span>);</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 成员变量  </span></span><br><span class="line">    <span class="keyword">private</span> String name;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EnumMain</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 普通方法  根据index获取name</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getNameByIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">for</span> (EnumMain c : EnumMain.values()) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (c.getIndex() == index) &#123;  </span><br><span class="line">                <span class="keyword">return</span> c.name;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 普通方法  根据index获取name</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getIndexByName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">for</span> (EnumMain c : EnumMain.values()) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (c.name.equals(name)) &#123;</span><br><span class="line">                <span class="keyword">return</span> c.index;</span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// get set 方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> index;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中<code>getIndexByName()</code>方法中需要注意<code>c.name</code>与<code>c.getName()</code>的区别，<code>c.name</code>获取的是中文比如<strong>星期三</strong>，而<code>c.getName()</code>的结果是<strong>FRI</strong>。</p>
+<p>测试代码，根据名称获取索引，根据索引获取名称等:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		EnumMain enumMain = EnumMain.FRI;</span><br><span class="line">		<span class="comment">//普通get方法		输出结果是5</span></span><br><span class="line">		System.out.println(enumMain.getIndex());</span><br><span class="line">		<span class="comment">//普通getName()方法		输出结果是星期五</span></span><br><span class="line">		System.out.println(enumMain.getName());</span><br><span class="line">		<span class="comment">//根据index获取name		输出结果是星期三</span></span><br><span class="line">		System.out.println(EnumMain.getNameByIndex(<span class="number">3</span>));</span><br><span class="line">		<span class="comment">//根据name获取index		输出结果是3</span></span><br><span class="line">		System.out.println(EnumMain.getIndexByName(<span class="string">"星期三"</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="对枚举的理解"><a href="#对枚举的理解" class="headerlink" title="对枚举的理解"></a>对枚举的理解</h1><p>==可能不好理解的就是上面具有参数的枚举，其实只需要记住一点，<strong>java中一切皆对象</strong>，可以把枚举页当做一个类，这样来看的话上面的代码可以写成下面这样==:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.twolovelypig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumMain</span> </span>&#123; 	</span><br><span class="line">    <span class="comment">// 成员变量  </span></span><br><span class="line">    <span class="keyword">private</span> String name;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EnumMain</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// get set 方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> index;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上面的类比较好理解吧，就是具有两个属性而已，然后呢就是一个私有构造方法以及get/set方法。而对于枚举中的这些声明</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">MON(<span class="string">"星期一"</span>, <span class="number">1</span>), </span><br><span class="line">TUE(<span class="string">"星期二"</span>, <span class="number">2</span>), </span><br><span class="line">WED(<span class="string">"星期三"</span>, <span class="number">3</span>), </span><br><span class="line">THU(<span class="string">"星期四"</span>, <span class="number">4</span>), </span><br><span class="line">FRI(<span class="string">"星期五"</span>, <span class="number">5</span>), </span><br><span class="line">SAT(<span class="string">"星期六"</span>, <span class="number">6</span>), </span><br><span class="line">SUN(<span class="string">"星期天"</span>,<span class="number">7</span>);</span><br></pre></td></tr></table></figure>
+
+<p>其实就是该枚举类的对象，每一个声明都是一个对象，也就是这里其实有七个对象，此时简单理解枚举与类的区别就是枚举中对象是数量固定，相当于在一开始就实例化了几个固定的对象而已。然后后面哪些根据<code>key</code>获取<code>name</code>，以及根据<code>name</code>获取<code>key</code>都是自己加的一些方法而已。</p>
+<h1 id="enumMap"><a href="#enumMap" class="headerlink" title="enumMap"></a>enumMap</h1><p><strong>以下内容来自《java编程的逻辑》这本书。</strong></p>
+<blockquote>
+<p>如果需要一个Map的实现类，并且建的类型为枚举类型，可以使用HashMap,但应该使用一个专门的实现类EnumMap。因为枚举类型有两个特征:</p>
+<ul>
+<li>枚举所有可能的值时有限的并且是预定义的</li>
+<li>所有的枚举值有一个顺序</li>
+</ul>
+<p>这两个特征可以更为高效的实现Map接口。</p>
+</blockquote>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>比如有一批关于衣服的记录，想要通过尺寸统计衣服的数量，定义一个简单的枚举类<code>Size</code>；都表示衣服的尺寸。</p>
+<p><code>Size</code>枚举:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Size&#123;</span><br><span class="line">    SMALL, MEDIUM, LARGE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Clothes</code>类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clothes</span></span>&#123;</span><br><span class="line">    String id;</span><br><span class="line">    Size size;</span><br><span class="line">    <span class="comment">//get与set</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按尺寸统计数量:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;Size, Integer&gt; <span class="title">countBySize</span><span class="params">(List&lt;Clothes&gt; clothes)</span></span>&#123;</span><br><span class="line">    Map&lt;Size, Integer&gt; map = <span class="keyword">new</span> EnumMap(Size<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="keyword">for</span>(Clothes c : clothes)&#123;</span><br><span class="line">        Size size = c.getSize();</span><br><span class="line">        Integer count = map.get(size);</span><br><span class="line">        <span class="keyword">if</span>(count != <span class="keyword">null</span>)&#123;</span><br><span class="line">            map.put(size, count+<span class="number">1</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            map.put(size, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>==需要注意EnumMap的构造方法==</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Size, Integer&gt; map = <span class="keyword">new</span> EnumMap(Size<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>EnumMap</code>需要传递一个<strong>类型</strong>信息，<code>Size.class</code>表示枚举类<code>Size</code>的运行时信息，需要这个参数是因为<code>EnumMap</code>要知道具体的枚举类是什么。</p>
+<p>测试代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Clothes&gt; clothes = Arrays.asList(</span><br><span class="line">	<span class="keyword">new</span> Clothes[]&#123;</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c001"</span>, Size.SMALL),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c002"</span>, Size.MEDIUM),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c003"</span>, Size.LARGE),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c004"</span>, Size.SMALL),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c005"</span>, Size.MEDIUM),</span><br><span class="line">        <span class="keyword">new</span> Clothes(<span class="string">"c006"</span>, Size.LARGE)</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line">System.out.println(countBySize(clothes));</span><br></pre></td></tr></table></figure>
+
+<p>需要说明的是，<code>EnumMap</code>是保证顺序的，输出是按照键在枚举中的顺序的。</p>
+<h2 id="enum的另外两个构造方法"><a href="#enum的另外两个构造方法" class="headerlink" title="enum的另外两个构造方法"></a>enum的另外两个构造方法</h2><p>除了以上介绍的构造方法，EnumMap还有两个构造方法，可以接受一个键值匹配的EnumMap或普通Map，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EnumMap</span><span class="params">(EnumMap&lt;K, ? extends V&gt; m)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EnumMap</span><span class="params">(Map&lt;K, ? extends V&gt; m)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>比如:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Size,Integer&gt; hashMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">hashMap.put(Size.LARGE, <span class="number">2</span>);</span><br><span class="line">hashMap.put(Size.SMALL, <span class="number">1</span>);</span><br><span class="line">Map&lt;Size, Integer&gt; enumMap = <span class="keyword">new</span> EnumMap&lt;&gt;(hashMap);</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>tools</category>
-        <category>idea</category>
+        <category>java</category>
+        <category>枚举</category>
       </categories>
       <tags>
-        <tag>tools</tag>
-        <tag>idea</tag>
+        <tag>java</tag>
+        <tag>枚举</tag>
       </tags>
   </entry>
   <entry>
@@ -2246,6 +2226,26 @@
 <p><img src="/tools/idea/tools/idea/idea%E4%B8%ADspringMVC%E9%A1%B9%E7%9B%AE%E7%83%AD%E9%83%A8%E7%BD%B2/image-20200308080812456.png" alt="image-20200308080812456"></p>
 <p>然后如图所示，需要将标红的两个位置都修改成<code>update classes and resources</code>，如果上一步部署的时候选择的是不带有<code>exploded</code>，那么这里<code>On update action</code>是不会有<code>Update classes and resources</code>这个选择的。</p>
 <h1 id="以debug模式启动"><a href="#以debug模式启动" class="headerlink" title="以debug模式启动"></a>以debug模式启动</h1><p>经过亲自使用，发现上面的都配置以后，如果没有以<code>debug</code>模式启动的话，那些<code>jsp，js</code>等资源确实是可以自动更新，但是<code>java</code>文件修改后没有自动更新，所以需要以<code>debug</code>模式启动，不过尝试的结果是不仅仅要以<code>debug</code>模式启动，还需要在修改的地方去打上断点，以调试的模式走过修改部分的代码才起了作用。</p>
+]]></content>
+      <categories>
+        <category>tools</category>
+        <category>idea</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+        <tag>idea</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>idea下编译spring源码</title>
+    <url>/tools/idea/tools/idea/idea%E4%B8%8B%E7%BC%96%E8%AF%91spring%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p>步骤</p>
+<ol>
+<li>下载<code>spring</code>源码</li>
+<li>切换阿里云的源</li>
+</ol>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">	repositories &#123;</span><br><span class="line">		maven &#123; url <span class="string">'https://maven.aliyun.com/nexus/content/groups/public/'</span> &#125;</span><br><span class="line">		maven&#123; url <span class="string">'https://maven.aliyun.com/nexus/content/repositories/jcenter'</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>tools</category>
@@ -2287,6 +2287,26 @@
       </tags>
   </entry>
   <entry>
+    <title>如何下载spring官方文档</title>
+    <url>/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>首先进入<code>spring</code>官网，从官网中进入<code>spring</code>的<code>github</code>地址</p>
+<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606171950949.png" alt="image-20200606171950949"></p>
+<p>点击上面截图中的连接后，继续找到下图的位置</p>
+<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172101929.png" alt="image-20200606172101929"></p>
+<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172238097.png" alt="image-20200606172238097"></p>
+<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172315653.png" alt="image-20200606172315653"></p>
+<p>在这里面找到自己需要的版本去下载<code>document</code>即可。</p>
+]]></content>
+      <categories>
+        <category>tools</category>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>idea使用手册</title>
     <url>/tools/idea/tools/idea/idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
     <content><![CDATA[<h1 id="idea中不能创建jsp文件解决方式"><a href="#idea中不能创建jsp文件解决方式" class="headerlink" title="idea中不能创建jsp文件解决方式"></a>idea中不能创建jsp文件解决方式</h1><p>在<code>idea</code>中对于一个<code>web</code>项目有时候在<code>webapp/WEB-INF</code>下右键创建<code>jsp</code>文件时并没有该选项。如图所示：</p>
@@ -2323,26 +2343,6 @@
       <tags>
         <tag>tools</tag>
         <tag>idea</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何下载spring官方文档</title>
-    <url>/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>首先进入<code>spring</code>官网，从官网中进入<code>spring</code>的<code>github</code>地址</p>
-<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606171950949.png" alt="image-20200606171950949"></p>
-<p>点击上面截图中的连接后，继续找到下图的位置</p>
-<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172101929.png" alt="image-20200606172101929"></p>
-<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172238097.png" alt="image-20200606172238097"></p>
-<p><img src="/tools/spring/tools/idea/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDspring%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/image-20200606172315653.png" alt="image-20200606172315653"></p>
-<p>在这里面找到自己需要的版本去下载<code>document</code>即可。</p>
-]]></content>
-      <categories>
-        <category>tools</category>
-        <category>spring</category>
-      </categories>
-      <tags>
-        <tag>tools</tag>
-        <tag>spring</tag>
       </tags>
   </entry>
   <entry>
