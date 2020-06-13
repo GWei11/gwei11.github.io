@@ -4,6 +4,7 @@ categories:
   - 博客
 tags:
   - hexo
+date: 2019-06-11
 abbrlink: d835680a
 ---
 # githubPag自定义域名
