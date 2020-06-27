@@ -2395,4 +2395,106 @@
         <tag>oracle</tag>
       </tags>
   </entry>
+  <entry>
+    <title>linux下安装工具</title>
+    <url>/linux/linux/linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<h1 id="替换源"><a href="#替换源" class="headerlink" title="替换源"></a>替换源</h1><p><a href="http://mirrors.163.com/.help/centos.html" target="_blank" rel="noopener">http://mirrors.163.com/.help/centos.html</a></p>
+<p>上面地址是163的地址，我们可以进去按照操作步骤来即可。但是有一点需要注意，如果安装的<code>centos</code>系统是最小版本的，那么有一些工具可能没有安装，比如下面的第三步需要使用<code>wget</code>命令，所以如果没有安装的话需要先安装<code>wget</code>工具</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>备份数据  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo.backup</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入目录 <code>cd /etc/yum.repos.d/</code></p>
+</li>
+</ol>
+<a id="more"></a>
+
+<ol start="3">
+<li>下载对应<code>repo</code>地址,这里选择自己对应的<code>centos</code>版本，然后右键，复制链接地址，在<code>centos</code>的<code>terminal</code>窗口中执行<code>wget</code> 上面复制的地址即可。</li>
+</ol>
+<p><img src="/linux/linux/linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7/image-20200626144718621.png" alt="image-20200626144718621"></p>
+<p><img src="/linux/linux/linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7/image-20200626144911119.png" alt="image-20200626144911119"></p>
+<ol start="4">
+<li><p>执行下面两个命令即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装apache"><a href="#安装apache" class="headerlink" title="安装apache"></a>安装apache</h1><ol>
+<li>安装</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install httpd</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>启动</p>
+<p>下面的命令是针对<code>root</code>用户的，如果不是<code>root</code>用户，需要在前面加上<code>sudo</code></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service httpd start</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>停止服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service httpd stop</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><ol>
+<li>将<code>nginx</code>源添加的<code>centos</code>中</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -Uvh http:&#x2F;&#x2F;nginx.org&#x2F;packages&#x2F;centos&#x2F;7&#x2F;noarch&#x2F;RPMS&#x2F;nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用下面命令安装</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install nginx</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><code>nginx</code>基本命令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service nginx start     -- 启动nginx</span><br><span class="line">service nginx stop		-- 停止nginx</span><br><span class="line">service nginx reload	-- 重启nginx</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装java环境"><a href="#安装java环境" class="headerlink" title="安装java环境"></a>安装java环境</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install java-1.8.0-openjdk.*</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h1><ol>
+<li><p>首先进入<code>zookeeper</code>官网，找到想要下载的版本的下载地址(地址有多个，自己选择一个即可)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;apache&#x2F;zookeeper&#x2F;zookeeper-3.4.14&#x2F;zookeeper-3.4.14.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><img src="/linux/linux/linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7/image-20200626224044462.png" alt="image-20200626224044462"></p>
+</li>
+<li><p>在<code>centos</code>终端中执行下面的命令来下载软件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;apache&#x2F;zookeeper&#x2F;zookeeper-3.4.14&#x2F;zookeeper-3.4.14.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后解压这个下载下来的安装包（你在哪个位置下载的哪个安装包，就需要先进入哪个位置，才能使用解压命令）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf tar -zxvf zookeeper-3.4.14.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入解压的<code>zookeeper-3.4.14/conf</code>目录中，将<code>zoo_sample.cfg</code>拷贝一份为 <code>zoo.cfg</code>，使用<code>vim</code>命令修改文件里面的内容，主要添加<code>dataDir</code>和<code>dataLogDir</code></p>
+<p><img src="/linux/linux/linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7/image-20200627091624708.png" alt="image-20200627091624708"></p>
+</li>
+</ol>
+<h2 id="在window环境中搭建集群环境"><a href="#在window环境中搭建集群环境" class="headerlink" title="在window环境中搭建集群环境"></a>在window环境中搭建集群环境</h2><ol>
+<li><p>将下载的<code>zookeeper</code>安装包复制到多个目录中</p>
+<p><img src="/linux/linux/linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7/image-20200627174916683.png" alt="image-20200627174916683"></p>
+</li>
+<li><p>每一个目录下面的<code>conf</code>目录下有一个<code>zoo_sample.cfg</code>配置文件，我们复制一份将名称修改为<code>zoo.cfg</code>,里面内容如下（这是其中一个的配置）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tickTime&#x3D;2000</span><br><span class="line">initLimit&#x3D;10</span><br><span class="line">syncLimit&#x3D;5</span><br><span class="line"># dataDir和dataLogDir需要自己配置，这里data和log两个目录是自己创建的</span><br><span class="line">dataDir&#x3D;D:\\config\\zookeeper\\apache-zookeeper1-3.5.8\\data</span><br><span class="line">dataLogDir&#x3D;D:\\config\\zookeeper\\apache-zookeeper1-3.5.8\\log</span><br><span class="line">clientPort&#x3D;2181</span><br><span class="line">quorumListenOnAllIPs&#x3D;true</span><br><span class="line"># 下面就是集群的配置，这里相当于是配置三台服务器</span><br><span class="line">server.1&#x3D;192.168.56.1:2222:2223</span><br><span class="line">server.2&#x3D;192.168.56.1:3336:4338</span><br><span class="line">server.3&#x3D;192.168.56.1:4444:4445</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面配置的server.1后面的数字1就是服务器标识，这里一共配置了三台服务器，由于都是本地配置，所以ip地址就是自己电脑的ip，clientPort需要配置成不一样的，比如第一个是2181，另外两个可以是2182和2183</li>
+<li>上面配置的的dataDir目录和dataLogDir目录需要自己创建</li>
+<li>在每一个zookeeper压缩包中的<code>data</code>目录中创建一个<code>myid</code>文件，里面只需要填写一个数字，这里的数字需要和server.id中的数字id保持一致,另外两台同样配置即可。</li>
+</ul>
+<p><img src="/linux/linux/linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7/image-20200627175607984.png" alt="image-20200627175607984"></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
 </search>
